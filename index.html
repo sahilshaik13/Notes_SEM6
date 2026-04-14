@@ -1,0 +1,206 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+.container { padding: 1rem 0; }
+.top-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; align-items: center; }
+.top-bar span { font-size: 13px; color: var(--color-text-secondary); margin-right: 4px; }
+.tab-btn { font-size: 13px; padding: 5px 14px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: transparent; color: var(--color-text-secondary); cursor: pointer; transition: all .15s; }
+.tab-btn.active { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-primary); font-weight: 500; }
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
+.topic-pill { font-size: 11px; padding: 3px 10px; border-radius: 20px; border: 0.5px solid var(--color-border-tertiary); cursor: pointer; transition: all .15s; background: transparent; color: var(--color-text-secondary); }
+.topic-pill.active { border-color: var(--color-border-primary); font-weight: 500; }
+.topic-pill[data-topic="arch"] { color: #3266ad; border-color: #3266ad40; }
+.topic-pill[data-topic="arch"].active { background: #e6f1fb; }
+.topic-pill[data-topic="proto"] { color: #0f6e56; border-color: #0f6e5640; }
+.topic-pill[data-topic="proto"].active { background: #e1f5ee; }
+.topic-pill[data-topic="data"] { color: #854f0b; border-color: #854f0b40; }
+.topic-pill[data-topic="data"].active { background: #faeeda; }
+.topic-pill[data-topic="routing"] { color: #534ab7; border-color: #534ab740; }
+.topic-pill[data-topic="routing"].active { background: #eeedfe; }
+.topic-pill[data-topic="devices"] { color: #993c1d; border-color: #993c1d40; }
+.topic-pill[data-topic="devices"].active { background: #faece7; }
+.topic-pill[data-topic="security"] { color: #a32d2d; border-color: #a32d2d40; }
+.topic-pill[data-topic="security"].active { background: #fcebeb; }
+.topic-pill[data-topic="service"] { color: #3b6d11; border-color: #3b6d1140; }
+.topic-pill[data-topic="service"].active { background: #eaf3de; }
+.topic-pill[data-topic="ipv6"] { color: #185fa5; border-color: #185fa540; }
+.topic-pill[data-topic="ipv6"].active { background: #e6f1fb; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 12px 14px; transition: border-color .15s, opacity .2s; cursor: pointer; }
+.card:hover { border-color: var(--color-border-secondary); }
+.card.dimmed { opacity: 0.3; }
+.card.highlighted { border-color: var(--color-border-primary); }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.q-label { font-size: 11px; color: var(--color-text-secondary); font-weight: 500; }
+.priority { display: flex; gap: 2px; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-border-tertiary); }
+.dot.on.high { background: #e24b4a; }
+.dot.on.med { background: #ef9f27; }
+.dot.on.low { background: #639922; }
+.q-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.5; margin-bottom: 10px; }
+.tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tag { font-size: 10px; padding: 2px 7px; border-radius: 20px; border: 0.5px solid; }
+.tag[data-topic="arch"] { color: #3266ad; border-color: #3266ad50; background: #e6f1fb60; }
+.tag[data-topic="proto"] { color: #0f6e56; border-color: #0f6e5650; background: #e1f5ee60; }
+.tag[data-topic="data"] { color: #854f0b; border-color: #854f0b50; background: #faeeda60; }
+.tag[data-topic="routing"] { color: #534ab7; border-color: #534ab750; background: #eeedfe60; }
+.tag[data-topic="devices"] { color: #993c1d; border-color: #993c1d50; background: #faece760; }
+.tag[data-topic="security"] { color: #a32d2d; border-color: #a32d2d50; background: #fcebeb60; }
+.tag[data-topic="service"] { color: #3b6d11; border-color: #3b6d1150; background: #eaf3de60; }
+.tag[data-topic="ipv6"] { color: #185fa5; border-color: #185fa550; background: #e6f1fb60; }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 1.25rem; font-size: 12px; color: var(--color-text-secondary); }
+.legend-item { display: flex; align-items: center; gap: 5px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.section-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 8px; letter-spacing: 0.04em; text-transform: uppercase; }
+.overlap-note { font-size: 12px; color: var(--color-text-secondary); margin-top: 1.25rem; padding: 10px 14px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); }
+</style>
+
+<div class="container">
+  <h2 class="sr-only">IoT question relativity and study priority map across Units I, II, and III</h2>
+
+  <div class="top-bar">
+    <span>Unit:</span>
+    <button class="tab-btn active" data-unit="all">All</button>
+    <button class="tab-btn" data-unit="1">Unit I</button>
+    <button class="tab-btn" data-unit="2">Unit II</button>
+    <button class="tab-btn" data-unit="3">Unit III</button>
+  </div>
+
+  <div class="section-label">Filter by shared topic</div>
+  <div class="filter-bar">
+    <button class="topic-pill" data-topic="arch">Architecture</button>
+    <button class="topic-pill" data-topic="proto">Protocols</button>
+    <button class="topic-pill" data-topic="data">Data</button>
+    <button class="topic-pill" data-topic="routing">Routing</button>
+    <button class="topic-pill" data-topic="devices">Devices</button>
+    <button class="topic-pill" data-topic="security">Security</button>
+    <button class="topic-pill" data-topic="service">Services</button>
+    <button class="topic-pill" data-topic="ipv6">IPv6</button>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#e24b4a"></div> High priority (appears in 4+ questions)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ef9f27"></div> Medium priority (2-3 questions)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#639922"></div> Lower priority (standalone)</div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="overlap-note" id="overlap-note">
+    Click any card to highlight related questions. Click a topic pill to filter by shared concept.
+  </div>
+</div>
+
+<script>
+const questions = [
+  { id:"U1Q1",  unit:1, label:"Unit I · Q1",  priority:"med",  text:"Need for IoT and its evolution", topics:["service","devices"] },
+  { id:"U1Q2",  unit:1, label:"Unit I · Q2",  priority:"high", text:"Design principles of IoT architecture", topics:["arch","security"] },
+  { id:"U1Q3",  unit:1, label:"Unit I · Q3",  priority:"high", text:"Building blocks of an IoT system", topics:["arch","devices","data"] },
+  { id:"U1Q4",  unit:1, label:"Unit I · Q4",  priority:"high", text:"IoT capabilities: sensing, actuation, communication", topics:["devices","proto"] },
+  { id:"U1Q5",  unit:1, label:"Unit I · Q5",  priority:"high", text:"Role of devices and gateways in IoT", topics:["devices","arch","security"] },
+  { id:"U1Q6",  unit:1, label:"Unit I · Q6",  priority:"med",  text:"M2M communication vs IoT", topics:["proto","devices"] },
+  { id:"U1Q7",  unit:1, label:"Unit I · Q7",  priority:"high", text:"Local area and wide area networking in IoT", topics:["proto","arch"] },
+  { id:"U1Q8",  unit:1, label:"Unit I · Q8",  priority:"high", text:"Data management in IoT and its challenges", topics:["data","security"] },
+  { id:"U1Q9",  unit:1, label:"Unit I · Q9",  priority:"med",  text:"Business processes in IoT", topics:["service","data"] },
+  { id:"U1Q10", unit:1, label:"Unit I · Q10", priority:"low",  text:"Everything as a Service (XaaS) in IoT", topics:["service"] },
+  { id:"U1Q11", unit:1, label:"Unit I · Q11", priority:"high", text:"IoT analytics and decision making", topics:["data","service"] },
+  { id:"U1Q12", unit:1, label:"Unit I · Q12", priority:"med",  text:"Knowledge management in IoT", topics:["data","service"] },
+  { id:"U2Q1",  unit:2, label:"Unit II · Q1", priority:"high", text:"State-of-the-art IoT architecture and components", topics:["arch","devices","security"] },
+  { id:"U2Q2",  unit:2, label:"Unit II · Q2", priority:"high", text:"IoT Reference Model in detail", topics:["arch","data"] },
+  { id:"U2Q3",  unit:2, label:"Unit II · Q3", priority:"high", text:"IoT Reference Architecture: all views", topics:["arch","security","data"] },
+  { id:"U2Q4",  unit:2, label:"Unit II · Q4", priority:"high", text:"Functional view of IoT architecture", topics:["arch","devices"] },
+  { id:"U2Q5",  unit:2, label:"Unit II · Q5", priority:"high", text:"Information view and deployment view", topics:["arch","data"] },
+  { id:"U2Q6",  unit:2, label:"Unit II · Q6", priority:"med",  text:"Real-world design constraints in IoT", topics:["devices","security","proto"] },
+  { id:"U2Q7",  unit:2, label:"Unit II · Q7", priority:"med",  text:"Technical design constraints in IoT hardware", topics:["devices","security"] },
+  { id:"U2Q8",  unit:2, label:"Unit II · Q8", priority:"high", text:"Data representation and visualization in IoT", topics:["data","arch"] },
+  { id:"U2Q9",  unit:2, label:"Unit II · Q9", priority:"med",  text:"Interaction and remote control mechanisms", topics:["proto","arch","devices"] },
+  { id:"U3Q1",  unit:3, label:"Unit III · Q1", priority:"high", text:"PHY and MAC layer technologies in IoT", topics:["proto"] },
+  { id:"U3Q2",  unit:3, label:"Unit III · Q2", priority:"high", text:"IEEE 802.11 vs IEEE 802.15 comparison", topics:["proto"] },
+  { id:"U3Q3",  unit:3, label:"Unit III · Q3", priority:"high", text:"WirelessHART, Z-Wave, and BLE", topics:["proto","devices","security"] },
+  { id:"U3Q4",  unit:3, label:"Unit III · Q4", priority:"med",  text:"Zigbee Smart Energy and DASH7 protocols", topics:["proto","security"] },
+  { id:"U3Q5",  unit:3, label:"Unit III · Q5", priority:"high", text:"IPv4, IPv6, and need for IPv6 in IoT", topics:["ipv6","proto"] },
+  { id:"U3Q6",  unit:3, label:"Unit III · Q6", priority:"high", text:"6LoWPAN architecture and features", topics:["ipv6","proto","arch"] },
+  { id:"U3Q7",  unit:3, label:"Unit III · Q7", priority:"med",  text:"6TiSCH and its role in industrial IoT", topics:["proto","routing","security"] },
+  { id:"U3Q8",  unit:3, label:"Unit III · Q8", priority:"high", text:"RPL routing protocol and its operation", topics:["routing","proto","ipv6"] },
+  { id:"U3Q9",  unit:3, label:"Unit III · Q9", priority:"high", text:"Short notes: ND, DHCP, ICMP, CORPL, CARP", topics:["ipv6","routing","proto"] },
+];
+
+function priorityDots(p) {
+  const levels = { high: 3, med: 2, low: 1 };
+  const n = levels[p];
+  return [1,2,3].map(i => `<div class="dot ${i<=n?'on':''} ${p}"></div>`).join('');
+}
+
+function renderCards(filterUnit, filterTopic) {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  questions.forEach(q => {
+    const showUnit = filterUnit === 'all' || q.unit === parseInt(filterUnit);
+    const showTopic = !filterTopic || q.topics.includes(filterTopic);
+    const card = document.createElement('div');
+    card.className = 'card' + (!showUnit || !showTopic ? ' dimmed' : '');
+    card.dataset.id = q.id;
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="q-label">${q.label}</span>
+        <div class="priority">${priorityDots(q.priority)}</div>
+      </div>
+      <div class="q-text">${q.text}</div>
+      <div class="tags">${q.topics.map(t => `<span class="tag" data-topic="${t}">${topicLabel(t)}</span>`).join('')}</div>
+    `;
+    card.addEventListener('click', () => highlightRelated(q.id, q.topics));
+    grid.appendChild(card);
+  });
+}
+
+function topicLabel(t) {
+  const map = { arch:'Architecture', proto:'Protocols', data:'Data', routing:'Routing', devices:'Devices', security:'Security', service:'Services', ipv6:'IPv6' };
+  return map[t] || t;
+}
+
+function highlightRelated(id, topics) {
+  const all = document.querySelectorAll('.card');
+  let related = [];
+  all.forEach(c => {
+    const q = questions.find(q => q.id === c.dataset.id);
+    const isRelated = q && q.topics.some(t => topics.includes(t));
+    c.classList.remove('highlighted','dimmed');
+    if (isRelated) { c.classList.add('highlighted'); related.push(q.label); }
+    else if (q.id !== id) { c.classList.add('dimmed'); }
+  });
+  const note = document.getElementById('overlap-note');
+  const clicked = questions.find(q => q.id === id);
+  note.textContent = `"${clicked.text}" shares topics with ${related.length - 1} other question(s). Studying this topic covers content from: ${related.filter(l => l !== clicked.label).join(', ')}.`;
+}
+
+let activeUnit = 'all';
+let activeTopic = null;
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeUnit = btn.dataset.unit;
+    renderCards(activeUnit, activeTopic);
+  });
+});
+
+document.querySelectorAll('.topic-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    const topic = pill.dataset.topic;
+    if (activeTopic === topic) {
+      activeTopic = null;
+      document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
+    } else {
+      activeTopic = topic;
+      document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+    }
+    renderCards(activeUnit, activeTopic);
+  });
+});
+
+renderCards('all', null);
+</script>
