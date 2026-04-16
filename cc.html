@@ -1,619 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crypto Currency – Complete Answer Guide</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f5f4f0;
-      color: #1a1a1a;
-      font-size: 14px
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none
-    }
-
-    /* Layout */
-    .layout {
-      display: flex;
-      min-height: 100vh
-    }
-
-    .sidebar {
-      width: 260px;
-      background: #1a1a2e;
-      color: #e0e0e0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      overflow-y: auto;
-      z-index: 100;
-      flex-shrink: 0
-    }
-
-    .main {
-      margin-left: 260px;
-      padding: 0;
-      flex: 1
-    }
-
-    /* Sidebar */
-    .sidebar-header {
-      padding: 20px 16px 12px;
-      border-bottom: 1px solid #2d2d4e
-    }
-
-    .sidebar-header h1 {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: .5px;
-      text-transform: uppercase
-    }
-
-    .sidebar-header p {
-      font-size: 11px;
-      color: #888;
-      margin-top: 3px
-    }
-
-    .nav-section {
-      padding: 10px 0
-    }
-
-    .nav-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #555;
-      padding: 6px 16px 4px
-    }
-
-    .nav-item {
-      display: block;
-      padding: 7px 16px;
-      font-size: 12px;
-      color: #bbb;
-      cursor: pointer;
-      transition: all .15s;
-      border-left: 2px solid transparent
-    }
-
-    .nav-item:hover {
-      color: #fff;
-      background: #2d2d4e;
-      border-left-color: #6c63ff
-    }
-
-    .nav-item.active {
-      color: #fff;
-      background: #2d2d4e;
-      border-left-color: #6c63ff
-    }
-
-    /* Top bar */
-    .topbar {
-      background: #fff;
-      border-bottom: 1px solid #e0ddd5;
-      padding: 16px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 50
-    }
-
-    .topbar h2 {
-      font-size: 15px;
-      font-weight: 600;
-      color: #1a1a1a
-    }
-
-    .topbar .meta {
-      font-size: 11px;
-      color: #888
-    }
-
-    /* Content sections */
-    .section {
-      display: none;
-      padding: 28px 32px 48px
-    }
-
-    .section.active {
-      display: block
-    }
-
-    /* Cards */
-    .card {
-      background: #fff;
-      border-radius: 10px;
-      border: 1px solid #e5e2d8;
-      margin-bottom: 20px;
-      overflow: hidden
-    }
-
-    .card-header {
-      padding: 14px 20px;
-      background: #f8f7f4;
-      border-bottom: 1px solid #e5e2d8;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer
-    }
-
-    .card-header .q-badge {
-      background: #1a1a2e;
-      color: #fff;
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: 12px;
-      font-weight: 600
-    }
-
-    .card-header .marks-badge {
-      background: #e8f5e9;
-      color: #2e7d32;
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: 12px;
-      font-weight: 600
-    }
-
-    .card-header .btl-badge {
-      background: #e3f2fd;
-      color: #1565c0;
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: 12px;
-      font-weight: 600
-    }
-
-    .card-header h3 {
-      font-size: 13px;
-      font-weight: 600;
-      flex: 1;
-      color: #1a1a1a
-    }
-
-    .card-header .toggle {
-      font-size: 16px;
-      color: #888;
-      transition: transform .2s
-    }
-
-    .card-header.open .toggle {
-      transform: rotate(180deg)
-    }
-
-    .card-body {
-      padding: 20px;
-      display: none
-    }
-
-    .card-body.open {
-      display: block
-    }
-
-    /* Answer content */
-    .answer-intro {
-      font-size: 13px;
-      line-height: 1.8;
-      color: #333;
-      margin-bottom: 14px;
-      padding: 12px 14px;
-      background: #fafaf7;
-      border-left: 3px solid #6c63ff;
-      border-radius: 0 6px 6px 0
-    }
-
-    ul.pts {
-      padding-left: 0;
-      list-style: none;
-      margin-bottom: 14px
-    }
-
-    ul.pts li {
-      padding: 6px 0 6px 20px;
-      font-size: 13px;
-      line-height: 1.7;
-      color: #333;
-      border-bottom: 1px dashed #f0ede5;
-      position: relative
-    }
-
-    ul.pts li:last-child {
-      border-bottom: none
-    }
-
-    ul.pts li::before {
-      content: "▸";
-      position: absolute;
-      left: 0;
-      color: #6c63ff;
-      font-size: 11px;
-      top: 8px
-    }
-
-    ul.pts li strong {
-      color: #1a1a1a
-    }
-
-    /* Tables */
-    .tbl-wrap {
-      overflow-x: auto;
-      margin: 14px 0
-    }
-
-    table.cmp {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12.5px
-    }
-
-    table.cmp thead th {
-      background: #1a1a2e;
-      color: #fff;
-      padding: 9px 12px;
-      text-align: left;
-      font-weight: 600;
-      font-size: 11px;
-      letter-spacing: .3px
-    }
-
-    table.cmp thead th:first-child {
-      border-radius: 6px 0 0 0
-    }
-
-    table.cmp thead th:last-child {
-      border-radius: 0 6px 0 0
-    }
-
-    table.cmp tbody tr:nth-child(even) {
-      background: #f8f7f4
-    }
-
-    table.cmp tbody tr:hover {
-      background: #f0efeb
-    }
-
-    table.cmp tbody td {
-      padding: 8px 12px;
-      border-bottom: 1px solid #eae7df;
-      color: #333;
-      line-height: 1.5
-    }
-
-    table.cmp tbody td:first-child {
-      font-weight: 600;
-      color: #1a1a2e;
-      width: 140px
-    }
-
-    /* Flowchart */
-    .flow {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      margin: 16px 0
-    }
-
-    .flow-step {
-      background: #f0efff;
-      border: 1.5px solid #6c63ff;
-      border-radius: 8px;
-      padding: 8px 20px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #1a1a1a;
-      text-align: center;
-      min-width: 220px;
-      max-width: 320px
-    }
-
-    .flow-step.start {
-      background: #1a1a2e;
-      color: #fff;
-      border-color: #1a1a2e
-    }
-
-    .flow-step.end {
-      background: #2e7d32;
-      color: #fff;
-      border-color: #2e7d32
-    }
-
-    .flow-step.decision {
-      background: #fff8e1;
-      border-color: #f9a825;
-      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-      padding: 16px 28px
-    }
-
-    .flow-arrow {
-      font-size: 18px;
-      color: #6c63ff;
-      line-height: 1;
-      margin: 2px 0
-    }
-
-    .flow-label {
-      font-size: 10px;
-      color: #888;
-      margin-top: -2px;
-      margin-bottom: 2px
-    }
-
-    .flow-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center
-    }
-
-    /* Sub-heading */
-    .sub-h {
-      font-size: 12px;
-      font-weight: 700;
-      color: #1a1a2e;
-      margin: 16px 0 8px;
-      padding-bottom: 4px;
-      border-bottom: 1.5px solid #e5e2d8;
-      text-transform: uppercase;
-      letter-spacing: .5px
-    }
-
-    /* Priority / probability */
-    .priority-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 14px;
-      margin-bottom: 24px
-    }
-
-    .pcard {
-      border-radius: 10px;
-      border: 1px solid #e5e2d8;
-      background: #fff;
-      overflow: hidden
-    }
-
-    .pcard-top {
-      padding: 10px 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center
-    }
-
-    .pcard-top h4 {
-      font-size: 12.5px;
-      font-weight: 600;
-      color: #1a1a1a;
-      flex: 1
-    }
-
-    .pill {
-      font-size: 10px;
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-weight: 700;
-      white-space: nowrap
-    }
-
-    .pill-high {
-      background: #fce4ec;
-      color: #c62828
-    }
-
-    .pill-med {
-      background: #fff8e1;
-      color: #e65100
-    }
-
-    .pill-low {
-      background: #e8f5e9;
-      color: #2e7d32
-    }
-
-    .pcard-body {
-      padding: 8px 14px 12px;
-      font-size: 12px;
-      color: #555;
-      line-height: 1.6;
-      border-top: 1px solid #f0ede5
-    }
-
-    .prob-bar {
-      height: 5px;
-      border-radius: 3px;
-      background: #f0ede5;
-      margin: 6px 0 2px
-    }
-
-    .prob-fill {
-      height: 100%;
-      border-radius: 3px
-    }
-
-    .fill-high {
-      background: #e53935
-    }
-
-    .fill-med {
-      background: #fb8c00
-    }
-
-    .fill-low {
-      background: #43a047
-    }
-
-    /* Section header */
-    .sec-header {
-      margin-bottom: 24px;
-      padding-bottom: 14px;
-      border-bottom: 2px solid #1a1a2e
-    }
-
-    .sec-header h2 {
-      font-size: 19px;
-      font-weight: 700;
-      color: #1a1a2e;
-      margin-bottom: 4px
-    }
-
-    .sec-header p {
-      font-size: 12px;
-      color: #666
-    }
-
-    .exam-meta {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 8px
-    }
-
-    .meta-tag {
-      background: #1a1a2e;
-      color: #fff;
-      font-size: 10px;
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-weight: 600
-    }
-
-    /* OR divider */
-    .or-div {
-      text-align: center;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: #999;
-      margin: 10px 0;
-      text-transform: uppercase
-    }
-
-    /* Note box */
-    .note-box {
-      background: #fffde7;
-      border: 1px solid #f9a825;
-      border-radius: 8px;
-      padding: 12px 16px;
-      margin-bottom: 16px;
-      font-size: 12px;
-      color: #5d4037;
-      line-height: 1.6
-    }
-
-    .note-box strong {
-      color: #e65100
-    }
-
-    /* Scrollbar */
-    .sidebar::-webkit-scrollbar {
-      width: 4px
-    }
-
-    .sidebar::-webkit-scrollbar-thumb {
-      background: #333
-    }
-
-    .sidebar::-webkit-scrollbar-track {
-      background: #1a1a2e
-    }
-
-    @media(max-width:768px) {
-      .sidebar {
-        width: 200px
-      }
-
-      .main {
-        margin-left: 200px
-      }
-
-      .section {
-        padding: 16px
-      }
-
-      .topbar {
-        padding: 12px 16px
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Currency – Complete Answer Guide</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a1a;font-size:14px}
+  a{color:inherit;text-decoration:none}
+  .layout{display:flex;min-height:100vh}
+  .sidebar{width:260px;background:#1a1a2e;color:#e0e0e0;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100}
+  .main{margin-left:260px;padding:0;flex:1}
+  .sidebar-header{padding:20px 16px 12px;border-bottom:1px solid #2d2d4e}
+  .sidebar-header h1{font-size:13px;font-weight:700;color:#fff;letter-spacing:.5px;text-transform:uppercase}
+  .sidebar-header p{font-size:11px;color:#888;margin-top:3px}
+  .nav-section{padding:10px 0}
+  .nav-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#555;padding:6px 16px 4px}
+  .nav-item{display:block;padding:7px 16px;font-size:12px;color:#bbb;cursor:pointer;transition:all .15s;border-left:2px solid transparent}
+  .nav-item:hover,.nav-item.active{color:#fff;background:#2d2d4e;border-left-color:#6c63ff}
+  .topbar{background:#fff;border-bottom:1px solid #e0ddd5;padding:16px 32px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50}
+  .topbar h2{font-size:15px;font-weight:600}
+  .topbar .meta{font-size:11px;color:#888}
+  .section{display:none;padding:28px 32px 48px}
+  .section.active{display:block}
+  .card{background:#fff;border-radius:10px;border:1px solid #e5e2d8;margin-bottom:18px;overflow:hidden}
+  .card-header{padding:13px 18px;background:#f8f7f4;border-bottom:1px solid #e5e2d8;display:flex;align-items:center;gap:8px;cursor:pointer;flex-wrap:wrap}
+  .q-badge{background:#1a1a2e;color:#fff;font-size:10px;padding:3px 8px;border-radius:12px;font-weight:600;white-space:nowrap}
+  .marks-badge{background:#e8f5e9;color:#2e7d32;font-size:10px;padding:3px 8px;border-radius:12px;font-weight:600}
+  .btl-badge{background:#e3f2fd;color:#1565c0;font-size:10px;padding:3px 8px;border-radius:12px;font-weight:600}
+  .cie-tag{background:#fff3e0;color:#e65100;font-size:10px;padding:3px 9px;border-radius:12px;font-weight:700;border:1px solid #ffcc80;white-space:nowrap}
+  .card-header h3{font-size:13px;font-weight:600;flex:1;min-width:200px;color:#1a1a1a}
+  .toggle{font-size:16px;color:#888;transition:transform .2s;margin-left:auto}
+  .card-header.open .toggle{transform:rotate(180deg)}
+  .card-body{padding:20px;display:none}
+  .card-body.open{display:block}
+  .answer-intro{font-size:13px;line-height:1.8;color:#333;margin-bottom:14px;padding:12px 14px;background:#fafaf7;border-left:3px solid #6c63ff;border-radius:0 6px 6px 0}
+  ul.pts{padding-left:0;list-style:none;margin-bottom:14px}
+  ul.pts li{padding:6px 0 6px 20px;font-size:13px;line-height:1.7;color:#333;border-bottom:1px dashed #f0ede5;position:relative}
+  ul.pts li:last-child{border-bottom:none}
+  ul.pts li::before{content:"▸";position:absolute;left:0;color:#6c63ff;font-size:11px;top:8px}
+  ul.pts li strong{color:#1a1a1a}
+  .tbl-wrap{overflow-x:auto;margin:14px 0}
+  table.cmp{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.cmp thead th{background:#1a1a2e;color:#fff;padding:9px 12px;text-align:left;font-weight:600;font-size:11px}
+  table.cmp tbody tr:nth-child(even){background:#f8f7f4}
+  table.cmp tbody tr:hover{background:#f0efeb}
+  table.cmp tbody td{padding:8px 12px;border-bottom:1px solid #eae7df;color:#333;line-height:1.5}
+  table.cmp tbody td:first-child{font-weight:600;color:#1a1a2e;width:130px}
+  .flow{display:flex;flex-direction:column;align-items:center;gap:0;margin:16px 0}
+  .flow-step{background:#f0efff;border:1.5px solid #6c63ff;border-radius:8px;padding:8px 20px;font-size:12px;font-weight:600;color:#1a1a1a;text-align:center;min-width:220px;max-width:340px}
+  .flow-step.start{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
+  .flow-step.end{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .flow-arrow{font-size:18px;color:#6c63ff;line-height:1;margin:2px 0}
+  .sub-h{font-size:12px;font-weight:700;color:#1a1a2e;margin:16px 0 8px;padding-bottom:4px;border-bottom:1.5px solid #e5e2d8;text-transform:uppercase;letter-spacing:.5px}
+  .or-div{text-align:center;font-size:11px;font-weight:700;letter-spacing:2px;color:#999;margin:10px 0;text-transform:uppercase}
+  .note-box{background:#fffde7;border:1px solid #f9a825;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#5d4037;line-height:1.6}
+  .note-box strong{color:#e65100}
+  .sec-header{margin-bottom:24px;padding-bottom:14px;border-bottom:2px solid #1a1a2e}
+  .sec-header h2{font-size:19px;font-weight:700;color:#1a1a2e;margin-bottom:4px}
+  .sec-header p{font-size:12px;color:#666}
+  .exam-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .meta-tag{background:#1a1a2e;color:#fff;font-size:10px;padding:3px 10px;border-radius:12px;font-weight:600}
+  .priority-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;margin-bottom:24px}
+  .pcard{border-radius:10px;border:1px solid #e5e2d8;background:#fff;overflow:hidden}
+  .pcard-top{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .pcard-top h4{font-size:12.5px;font-weight:600;color:#1a1a1a;flex:1}
+  .pill{font-size:10px;padding:3px 10px;border-radius:12px;font-weight:700;white-space:nowrap}
+  .pill-high{background:#fce4ec;color:#c62828}
+  .pill-med{background:#fff8e1;color:#e65100}
+  .pill-low{background:#e8f5e9;color:#2e7d32}
+  .pcard-body{padding:8px 14px 12px;font-size:12px;color:#555;line-height:1.6;border-top:1px solid #f0ede5}
+  .prob-bar{height:5px;border-radius:3px;background:#f0ede5;margin:6px 0 2px}
+  .prob-fill{height:100%;border-radius:3px}
+  .fill-high{background:#e53935}.fill-med{background:#fb8c00}.fill-low{background:#43a047}
+  .sidebar::-webkit-scrollbar{width:4px}
+  .sidebar::-webkit-scrollbar-thumb{background:#333}
+  code{background:#f0efff;padding:1px 5px;border-radius:3px;font-size:12px;color:#4a00e0}
+  @media(max-width:768px){.sidebar{width:200px}.main{margin-left:200px}.section{padding:16px}}
+</style>
 </head>
-
 <body>
+<div class="layout">
 
-  <div class="layout">
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <h1>Crypto Currency</h1>
+    <p>CSB603PC · IOT Branch · Units 1–3</p>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Internal Exams</div>
+    <a class="nav-item active" onclick="show('cie1',this)">📋 CIE-1 (Jan 2026)</a>
+    <a class="nav-item" onclick="show('cie2',this)">📋 CIE-2 (Mar 2026) — CO3 only</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Analysis</div>
+    <a class="nav-item" onclick="show('priority',this)">🎯 Priority & Probability</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Question Bank — All 30 Q&A</div>
+    <a class="nav-item" onclick="show('unit1',this)">📚 Unit I — Q1 to Q10</a>
+    <a class="nav-item" onclick="show('unit2',this)">📚 Unit II — Q11 to Q20</a>
+    <a class="nav-item" onclick="show('unit3',this)">📚 Unit III — Q21 to Q30</a>
+  </div>
+</nav>
 
-    <!-- SIDEBAR -->
-    <nav class="sidebar">
-      <div class="sidebar-header">
-        <h1>Crypto Currency</h1>
-        <p>CSB603PC · IOT Branch</p>
-      </div>
-      <div class="nav-section">
-        <div class="nav-label">Internal Exams</div>
-        <a class="nav-item active" onclick="show('cie1')">📋 CIE-1 (Jan 2026)</a>
-        <a class="nav-item" onclick="show('cie2')">📋 CIE-2 (Mar 2026)</a>
-      </div>
-      <div class="nav-section">
-        <div class="nav-label">Analysis</div>
-        <a class="nav-item" onclick="show('priority')">🎯 Priority & Probability List</a>
-      </div>
-      <div class="nav-section">
-        <div class="nav-label">Question Bank Answers</div>
-        <a class="nav-item" onclick="show('unit1')">📚 Unit I – Blockchain & Crypto</a>
-        <a class="nav-item" onclick="show('unit2')">📚 Unit II – Bitcoin</a>
-        <a class="nav-item" onclick="show('unit3')">📚 Unit III – Ethereum</a>
-      </div>
-    </nav>
+<div class="main">
+<div class="topbar">
+  <h2 id="topbar-title">CIE-1 Examination – January 2026</h2>
+  <span class="meta">NSAKCET · IoT/CSE · Crypto Currency</span>
+</div>
 
-    <!-- MAIN -->
-    <div class="main">
-      <div class="topbar">
-        <h2 id="topbar-title">CIE-1 Examination – January 2026</h2>
-        <span class="meta">NSAKCET · IoT/CSE · Crypto Currency · 60 mins</span>
-      </div>
+<!-- ===================== CIE-1 ===================== -->
+<div class="section active" id="sec-cie1">
+  <div class="sec-header">
+    <h2>CIE-1 Examination — January 2026</h2>
+    <p>Part-A Descriptive · 20 Marks · 5M each · CO1 (Unit 1) & CO2 (Unit 2)</p>
+    <div class="exam-meta"><span class="meta-tag">Branch: CSE-IOT</span><span class="meta-tag">22-01-2026</span><span class="meta-tag">60 mins</span></div>
+  </div>
 
-      <!-- =================== CIE-1 =================== -->
-      <div class="section active" id="sec-cie1">
-        <div class="sec-header">
-          <h2>CIE-1 Examination — January 2026</h2>
-          <p>Part-A Descriptive Questions · 20 Marks total · 5 Marks each</p>
-          <div class="exam-meta">
-            <span class="meta-tag">Branch: CSE-IOT</span>
-            <span class="meta-tag">Date: 22-01-2026</span>
-            <span class="meta-tag">Time: 60 mins</span>
-          </div>
-        </div>
-
-        <!-- Q1a -->
-        <div class="card">
-          <div class="card-header open" onclick="toggle(this)">
-            <span class="q-badge">Q 1(a)</span>
-            <h3>What is the difference between Blockchain and Distributed Ledger Technology (DLT)?</h3>
-            <span class="marks-badge">5M</span><span class="btl-badge">L1</span>
-            <span class="toggle">▼</span>
-          </div>
-          <div class="card-body open">
+  <div class="card">
+    <div class="card-header open" onclick="toggle(this)">
+      <span class="q-badge">Q 1(a) · CO1</span>
+      <h3>What is the difference between Blockchain and Distributed Ledger Technology (DLT)?</h3>
+      <span class="marks-badge">5M</span><span class="btl-badge">L1</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body open">
             <div class="answer-intro">All Blockchains are DLTs, but not all DLTs are Blockchains. Blockchain is a
               specific subset of DLT that organizes data into cryptographically linked blocks, while DLT is the broader
               umbrella technology for any distributed, shared record system.</div>
@@ -681,17 +193,15 @@
                 maintain a copy and changes require network consensus.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <!-- Q1b -->
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q 1(b)</span>
-            <h3>Define Blockchain and explain its types in brief.</h3>
-            <span class="marks-badge">5M</span><span class="btl-badge">L1</span>
-            <span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q 1(b) · CO1</span>
+      <h3>Define Blockchain and explain its types in brief.</h3>
+      <span class="marks-badge">5M</span><span class="btl-badge">L1</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro"><strong>Definition:</strong> Blockchain is a decentralized, distributed, and
               immutable digital ledger that records transactions in a secure and transparent way across a network of
               computers. Data is stored in blocks linked chronologically using cryptographic hashes, making it extremely
@@ -716,19 +226,17 @@
                 all subsequent blocks and gaining network consensus — practically impossible in large networks.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="or-div">— OR —</div>
+  <div class="or-div">— OR —</div>
 
-        <!-- Q2a -->
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q 2(a)</span>
-            <h3>What consensus mechanism does Bitcoin primarily use?</h3>
-            <span class="marks-badge">5M</span><span class="btl-badge">L1</span>
-            <span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q 2(a) · CO2</span>
+      <h3>What consensus mechanism does Bitcoin primarily use?</h3>
+      <span class="marks-badge">5M</span><span class="btl-badge">L1</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">Bitcoin primarily uses <strong>Proof-of-Work (PoW)</strong> as its consensus
               mechanism. It was first described in Satoshi Nakamoto's 2008 whitepaper and remains the foundational
               method by which the Bitcoin network validates transactions and adds new blocks to the blockchain without
@@ -757,17 +265,15 @@
                 security track record.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <!-- Q2b -->
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q 2(b)</span>
-            <h3>What are "Bitcoin Scripts" and what are their applications?</h3>
-            <span class="marks-badge">5M</span><span class="btl-badge">L2</span>
-            <span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q 2(b) · CO2</span>
+      <h3>What are "Bitcoin Scripts" and what are their applications?</h3>
+      <span class="marks-badge">5M</span><span class="btl-badge">L2</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">Bitcoin Script is a simple, stack-based, non-Turing-complete programming language
               embedded in every Bitcoin transaction. It defines the conditions under which funds can be spent. Every
               transaction contains two scripts: the <strong>scriptPubKey</strong> (locking script — sets the spending
@@ -796,17 +302,15 @@
                 blockchain or to permanently "burn" coins.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <!-- Q3a -->
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q 3(a)</span>
-            <h3>Explain the primary function of a "Wallet" in cryptocurrency terminology.</h3>
-            <span class="marks-badge">5M</span><span class="btl-badge">L1</span>
-            <span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q 3(a) · CO1</span>
+      <h3>Explain the primary function of a "Wallet" in cryptocurrency terminology.</h3>
+      <span class="marks-badge">5M</span><span class="btl-badge">L1</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">A cryptocurrency wallet is a digital tool, application, or physical device used to
               securely store the <strong>public and private keys</strong> required to send and receive digital
               currencies. Importantly, it does NOT store actual cryptocurrency — the coins exist on the blockchain. The
@@ -834,17 +338,15 @@
               </li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <!-- Q3b -->
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q 3(b)</span>
-            <h3>Briefly describe what "Zero-Knowledge Systems" are used for.</h3>
-            <span class="marks-badge">5M</span><span class="btl-badge">L6</span>
-            <span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q 3(b) · CO1</span>
+      <h3>Briefly describe what "Zero-Knowledge Systems" are used for.</h3>
+      <span class="marks-badge">5M</span><span class="btl-badge">L6</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">A Zero-Knowledge System is a cryptographic method that allows one party (the
               <strong>prover</strong>) to prove to another party (the <strong>verifier</strong>) that a statement is
               true — without revealing any information beyond the fact that the statement is true. It ensures both
@@ -871,19 +373,17 @@
                 important for future-proofing.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="or-div">— OR —</div>
+  <div class="or-div">— OR —</div>
 
-        <!-- Q4a -->
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q 4(a)</span>
-            <h3>List and explain the stages in a typical Bitcoin transaction lifecycle.</h3>
-            <span class="marks-badge">5M</span><span class="btl-badge">L3</span>
-            <span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q 4(a) · CO2</span>
+      <h3>List and explain the stages in a typical Bitcoin transaction lifecycle.</h3>
+      <span class="marks-badge">5M</span><span class="btl-badge">L3</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">A Bitcoin transaction lifecycle is the complete journey of a transaction from the
               moment a user initiates a transfer until it becomes permanently recorded on the blockchain.</div>
             <div class="sub-h">Transaction Lifecycle Flowchart</div>
@@ -925,17 +425,15 @@
                 infeasible.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <!-- Q4b -->
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q 4(b)</span>
-            <h3>Name two techniques used for Bitcoin scalability and performance improvement.</h3>
-            <span class="marks-badge">5M</span><span class="btl-badge">L6</span>
-            <span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q 4(b) · CO2</span>
+      <h3>Name two techniques used for Bitcoin scalability and performance improvement.</h3>
+      <span class="marks-badge">5M</span><span class="btl-badge">L6</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">Bitcoin's base layer (Layer 1) can only process ~3–7 transactions per second (TPS)
               — far below Visa's ~24,000 TPS. Two major solutions address this scalability problem:</div>
             <div class="sub-h">Technique 1: Segregated Witness (SegWit) — Layer 1 Solution</div>
@@ -962,31 +460,25 @@
                 Bitcoin micropayments (e.g., El Salvador's Bitcoin payments ecosystem).</li>
             </ul>
           </div>
-        </div>
+  </div>
+</div><!-- end CIE-1 -->
 
-      </div><!-- end CIE-1 -->
+<!-- ===================== CIE-2 ===================== -->
+<div class="section" id="sec-cie2">
+  <div class="sec-header">
+    <h2>CIE-2 Examination — March 2026</h2>
+    <p>Showing only CO3 (Unit 3 — Ethereum) questions · Q1 & Q2 only · 5M each part</p>
+    <div class="exam-meta"><span class="meta-tag">Branch: IOT</span><span class="meta-tag">30-03-2026</span><span class="meta-tag">60 mins</span></div>
+  </div>
+  <div class="note-box"><strong>Note:</strong> Q3 (CO4 — Monero/CryptoNote) and Q4 (CO4/CO5 — Zcash/DAO/Parity) are from Units 4 & 5 — excluded from this guide which covers Units 1–3 only.</div>
 
-      <!-- =================== CIE-2 =================== -->
-      <div class="section" id="sec-cie2">
-        <div class="sec-header">
-          <h2>CIE-2 Examination — March 2026</h2>
-          <p>All Questions · 10 Marks total in each set · 5 Marks each part</p>
-          <div class="exam-meta">
-            <span class="meta-tag">Branch: IOT</span>
-            <span class="meta-tag">Date: 30-03-2026</span>
-            <span class="meta-tag">Time: 60 mins</span>
-          </div>
-        </div>
-
-        <!-- Q1a -->
-        <div class="card">
-          <div class="card-header open" onclick="toggle(this)">
-            <span class="q-badge">Q 1(a)</span>
-            <h3>Define Ethereum and state three differences between Ethereum and Bitcoin.</h3>
-            <span class="marks-badge">5M</span><span class="btl-badge">L1</span>
-            <span class="toggle">▼</span>
-          </div>
-          <div class="card-body open">
+  <div class="card">
+    <div class="card-header open" onclick="toggle(this)">
+      <span class="q-badge">Q 1(a) · CO3</span>
+      <h3>Define Ethereum and state three differences between Ethereum and Bitcoin.</h3>
+      <span class="marks-badge">5M</span><span class="btl-badge">L1</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body open">
             <div class="answer-intro"><strong>Definition:</strong> Ethereum is a decentralized, open-source blockchain
               platform that enables the creation and execution of Smart Contracts and Decentralized Applications
               (dApps), with its native cryptocurrency Ether (ETH) used to pay for computation and transactions. While
@@ -1052,17 +544,15 @@
                 collateral to propose and attest to blocks — 99.95% more energy efficient.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <!-- Q1b -->
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q 1(b)</span>
-            <h3>What is MetaMask's Roles in Smart Contracts?</h3>
-            <span class="marks-badge">5M</span><span class="btl-badge">L1</span>
-            <span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q 1(b) · CO3</span>
+      <h3>What is MetaMask's Roles in Smart Contracts?</h3>
+      <span class="marks-badge">5M</span><span class="btl-badge">L1</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">MetaMask is a browser extension and mobile wallet that acts as the critical bridge
               between a user's web browser and the Ethereum blockchain. In the context of smart contracts, it
               simultaneously serves as a <strong>secure key vault, transaction signer, and network provider</strong>.
@@ -1092,19 +582,17 @@
                 proof.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="or-div">— OR —</div>
+  <div class="or-div">— OR —</div>
 
-        <!-- Q2a -->
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q 2(a)</span>
-            <h3>Explain Decentralized Application (DApp)</h3>
-            <span class="marks-badge">5M</span><span class="btl-badge">L2</span>
-            <span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q 2(a) · CO3</span>
+      <h3>Explain Decentralized Application (DApp)</h3>
+      <span class="marks-badge">5M</span><span class="btl-badge">L2</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">A Decentralized Application (DApp) is software that runs on a peer-to-peer
               blockchain network rather than centralized servers. Unlike traditional apps controlled by a single
               company, dApps use smart contracts for backend logic, ensuring no single entity controls the application.
@@ -1142,17 +630,15 @@
                 (NFT marketplace), CryptoKitties (gaming), MakerDAO (stablecoin).</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <!-- Q2b -->
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q 2(b)</span>
-            <h3>Write a short note on ERC-20</h3>
-            <span class="marks-badge">5M</span><span class="btl-badge">L2</span>
-            <span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q 2(b) · CO3</span>
+      <h3>Write a short note on ERC-20</h3>
+      <span class="marks-badge">5M</span><span class="btl-badge">L2</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">ERC-20 (Ethereum Request for Comments 20) is a technical standard that defines a
               set of rules for creating fungible tokens on the Ethereum blockchain. Proposed by Fabian Vogelsteller in
               November 2015, it is the foundation of the vast majority of tokens in the crypto ecosystem — from
@@ -1213,239 +699,63 @@
                 all ERC-20 tokens running on Ethereum.</li>
             </ul>
           </div>
-        </div>
+  </div>
+</div><!-- end CIE-2 -->
 
-        <div class="note-box" style="margin-top:16px">
-          <strong>⚠️ Q3 (CO4) and Q4 (CO4/CO5) from CIE-2 are from Units 4 & 5</strong> — outside the scope of Units
-          1–3. These questions (Monero, CryptoNote, Zcash zk-SNARKs, DAO, Parity) are not included here as per your
-          study scope.
-        </div>
+<!-- ===================== PRIORITY ===================== -->
+<div class="section" id="sec-priority">
+  <div class="sec-header">
+    <h2>Priority & Probability Analysis — Units 1–3</h2>
+    <p>Based on CIE-1 (Jan 2026) CO1/CO2 and CIE-2 (Mar 2026) CO3 patterns</p>
+  </div>
+  <div class="note-box"><strong>Pattern Observations (Units 1–3):</strong> CIE-1 covered Units 1 & 2. CIE-2 Q1 & Q2 covered Unit 3 (CO3). Questions appear in 5M pairs with OR options. SEE likely combines topics from the same unit into 10M questions. Definition + difference tables appear in <em>every</em> paper.</div>
 
-      </div><!-- end CIE-2 -->
+  <div class="sub-h">🔴 HIGH PRIORITY — Very Likely (85–95%)</div>
+  <div class="priority-grid">
+    <div class="pcard"><div class="pcard-top"><h4>Blockchain vs DLT</h4><span class="pill pill-high">95%</span></div><div class="pcard-body">Appeared in CIE-1 Q1(a)+(b). Classic define+compare format. Appears in every paper in some form.<div class="prob-bar"><div class="prob-fill fill-high" style="width:95%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Ethereum vs Bitcoin Comparison</h4><span class="pill pill-high">93%</span></div><div class="pcard-body">Appeared in CIE-2 Q1(a). Almost certain for SEE. Know all 7 comparison rows cold.<div class="prob-bar"><div class="prob-fill fill-high" style="width:93%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Bitcoin Transaction Lifecycle</h4><span class="pill pill-high">90%</span></div><div class="pcard-body">Appeared in CIE-1 Q4(a). Process-based question with flowchart — very predictable format.<div class="prob-bar"><div class="prob-fill fill-high" style="width:90%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Proof-of-Work Mechanism</h4><span class="pill pill-high">88%</span></div><div class="pcard-body">Appeared in CIE-1 Q2(a). Core of Unit 2. Often combined with Bitcoin Block in 10M SEE format.<div class="prob-bar"><div class="prob-fill fill-high" style="width:88%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Smart Contracts — Solidity + MetaMask</h4><span class="pill pill-high">87%</span></div><div class="pcard-body">MetaMask roles in CIE-2 Q1(b). Deployment process (Remix+Sepolia) is ideal 10M SEE question.<div class="prob-bar"><div class="prob-fill fill-high" style="width:87%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Zero-Knowledge Proofs (ZKPs)</h4><span class="pill pill-high">85%</span></div><div class="pcard-body">Appeared in CIE-1 Q3(b). ZKP properties + types + applications likely combined into 10M SEE question.<div class="prob-bar"><div class="prob-fill fill-high" style="width:85%"></div></div></div></div>
+  </div>
 
-      <!-- =================== PRIORITY LIST =================== -->
-      <div class="section" id="sec-priority">
-        <div class="sec-header">
-          <h2>Priority & Probability Analysis</h2>
-          <p>Based on patterns from CIE-1 (Jan 2026) and CIE-2 (Mar 2026) — predicting likely SEE/final exam questions
-          </p>
-        </div>
+  <div class="sub-h">🟠 MEDIUM PRIORITY — Likely (60–80%)</div>
+  <div class="priority-grid">
+    <div class="pcard"><div class="pcard-top"><h4>DApps</h4><span class="pill pill-med">80%</span></div><div class="pcard-body">Appeared in CIE-2 Q2(a). Strong chance it pairs with ERC-20 or Smart Contracts in 10M SEE.<div class="prob-bar"><div class="prob-fill fill-med" style="width:80%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>ERC-20 Token Standard</h4><span class="pill pill-med">78%</span></div><div class="pcard-body">Appeared in CIE-2 Q2(b). 6 functions are easy to memorize — good short-answer and combined material.<div class="prob-bar"><div class="prob-fill fill-med" style="width:78%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Bitcoin Scalability (SegWit + Lightning)</h4><span class="pill pill-med">76%</span></div><div class="pcard-body">Appeared in CIE-1 Q4(b). Layer 1 vs Layer 2 solutions — good SEE long-answer material.<div class="prob-bar"><div class="prob-fill fill-med" style="width:76%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Hashing + Signature Schemes</h4><span class="pill pill-med">72%</span></div><div class="pcard-body">Unit 1 core. Not directly in CIE but very likely combined in SEE. Know SHA-256 + ECDSA flow.<div class="prob-bar"><div class="prob-fill fill-med" style="width:72%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Encryption Schemes (Sym/Asym/Hybrid)</h4><span class="pill pill-med">68%</span></div><div class="pcard-body">Unit 1 topic. AES vs RSA vs ECC comparison. Hybrid encryption (TLS/SSL) is an exam classic.<div class="prob-bar"><div class="prob-fill fill-med" style="width:68%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>PoW vs PoS Comparison</h4><span class="pill pill-med">65%</span></div><div class="pcard-body">Unit 3 comparison table. Very likely if Ethereum question appears without already covering consensus.<div class="prob-bar"><div class="prob-fill fill-med" style="width:65%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Bitcoin Script Execution (P2PKH)</h4><span class="pill pill-med">63%</span></div><div class="pcard-body">Appeared in CIE-1 Q2(b). Step-by-step opcode execution is a good 10M question format.<div class="prob-bar"><div class="prob-fill fill-med" style="width:63%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Bitcoin Network Architecture</h4><span class="pill pill-med">61%</span></div><div class="pcard-body">5-layer system diagram question. Likely as part of a combined Unit 2 long answer in SEE.<div class="prob-bar"><div class="prob-fill fill-med" style="width:61%"></div></div></div></div>
+  </div>
 
-        <div class="note-box">
-          <strong>Pattern Observations (Units 1–3 only):</strong> CIE-1 covered Units 1 & 2 (Blockchain/DLT/Cryptography
-          + Bitcoin). CIE-2 Q1 &amp; Q2 covered Unit 3 (Ethereum — CO3). Questions appear in 5M pairs (a+b) with OR
-          options. SEE likely combines topics from the same unit into 10M questions. Definition + difference tables
-          appear in <em>every</em> paper. Priority below is scoped to Units 1, 2, and 3 only.
-        </div>
+  <div class="sub-h">🟢 LOWER PRIORITY — Possible (40–59%)</div>
+  <div class="priority-grid">
+    <div class="pcard"><div class="pcard-top"><h4>Token Types + ICOs + Wallets</h4><span class="pill pill-low">57%</span></div><div class="pcard-body">Good 2M short answers. Less likely standalone 10M unless combined as "Crypto Terminology" question.<div class="prob-bar"><div class="prob-fill fill-low" style="width:57%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Bitcoin Block Structure + Halving</h4><span class="pill pill-low">54%</span></div><div class="pcard-body">Important but usually appears as sub-point inside a PoW or Transaction answer rather than standalone.<div class="prob-bar"><div class="prob-fill fill-low" style="width:54%"></div></div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Error Handling in Smart Contracts</h4><span class="pill pill-low">50%</span></div><div class="pcard-body">require/revert/assert. Technical but very specific — likely a sub-part (b) question in SEE Unit 3.</div></div></div>
+    <div class="pcard"><div class="pcard-top"><h4>Verifiable Random Functions (VRF)</h4><span class="pill pill-low">43%</span></div><div class="pcard-body">Niche topic. Good for 2M short answers. Unlikely to appear as a full 5M or 10M question.<div class="prob-bar"><div class="prob-fill fill-low" style="width:43%"></div></div></div></div>
+  </div>
+</div><!-- end priority -->
 
-        <div class="sub-h">🔴 HIGH PRIORITY — Very Likely to Appear (Probability: 85–95%)</div>
-        <div class="priority-grid">
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Blockchain vs DLT Differences</h4><span class="pill pill-high">95%</span>
-            </div>
-            <div class="pcard-body">Appeared in CIE-1. Classic "define + difference" format. Always asked in some form.
-              Master the comparison table.<div class="prob-bar">
-                <div class="prob-fill fill-high" style="width:95%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Ethereum vs Bitcoin Comparison</h4><span class="pill pill-high">93%</span>
-            </div>
-            <div class="pcard-body">Appeared in CIE-2. Almost certain to appear in SEE. Know all 7 comparison points
-              cold.<div class="prob-bar">
-                <div class="prob-fill fill-high" style="width:93%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Bitcoin Transaction Lifecycle</h4><span class="pill pill-high">90%</span>
-            </div>
-            <div class="pcard-body">Appeared in CIE-1. Process-based question — very predictable. Draw the flowchart +
-              explain each stage.<div class="prob-bar">
-                <div class="prob-fill fill-high" style="width:90%"></div>
-              </div>
-            </div>
-          </div>
+<!-- ===================== UNIT 1 ===================== -->
+<div class="section" id="sec-unit1">
+  <div class="sec-header">
+    <h2>Unit I — All 10 Questions & Answers</h2>
+    <p>Introduction · Blockchain · DLT · Distributed Computing · Cryptography · VRF · ZKP · Tokens · ICOs · Wallets</p>
+  </div>
 
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Proof-of-Work Mechanism (Bitcoin)</h4><span class="pill pill-high">88%</span>
-            </div>
-            <div class="pcard-body">Appeared in CIE-1 (Q2a). Core concept of Unit 2. Combined with Bitcoin Block or
-              Bitcoin Network in 10M version.<div class="prob-bar">
-                <div class="prob-fill fill-high" style="width:88%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Smart Contracts with Solidity + MetaMask</h4><span class="pill pill-high">87%</span>
-            </div>
-            <div class="pcard-body">MetaMask roles appeared in CIE-2. Deployment process (Remix + Sepolia) is a very
-              practical 10M question.<div class="prob-bar">
-                <div class="prob-fill fill-high" style="width:87%"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Zero-Knowledge Proofs (ZKP / zk-SNARKs)</h4><span class="pill pill-high">85%</span>
-            </div>
-            <div class="pcard-body">ZKP appeared in CIE-1 (Q3b). A combined 10M question on ZKP types, properties, and
-              applications is very likely in SEE. Know zk-SNARKs vs zk-STARKs, the 3 properties, and all applications.
-              <div class="prob-bar">
-                <div class="prob-fill fill-high" style="width:85%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sub-h">🟠 MEDIUM PRIORITY — Likely to Appear (Probability: 60–80%)</div>
-        <div class="priority-grid">
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>DApps (Decentralized Applications)</h4><span class="pill pill-med">80%</span>
-            </div>
-            <div class="pcard-body">Appeared in CIE-2. Strong chance it pairs with ERC-20 or Smart Contracts for a 10M
-              SEE question.<div class="prob-bar">
-                <div class="prob-fill fill-med" style="width:80%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>ERC-20 Token Standard</h4><span class="pill pill-med">78%</span>
-            </div>
-            <div class="pcard-body">Appeared in CIE-2. Highly specific, easy to memorize 6 functions. Good
-              short-answer/combined question material.<div class="prob-bar">
-                <div class="prob-fill fill-med" style="width:78%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Bitcoin Scalability (SegWit + Lightning Network)</h4><span class="pill pill-med">76%</span>
-            </div>
-            <div class="pcard-body">Appeared in CIE-1 (Q4b). Layer 1 vs Layer 2 solutions are very SEE-appropriate long
-              question material.<div class="prob-bar">
-                <div class="prob-fill fill-med" style="width:76%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Cryptographic Hashing + Signature Schemes</h4><span class="pill pill-med">72%</span>
-            </div>
-            <div class="pcard-body">Unit 1 core topic. Likely to appear combined. Know SHA-256 properties + ECDSA
-              signing flow.<div class="prob-bar">
-                <div class="prob-fill fill-med" style="width:72%"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Bitcoin Network Architecture (5 Layers)</h4><span class="pill pill-med">67%</span>
-            </div>
-            <div class="pcard-body">Logical layered system diagram question. Likely as part of a combined Unit 2 long
-              answer.<div class="prob-bar">
-                <div class="prob-fill fill-med" style="width:67%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Encryption Schemes (Symmetric/Asymmetric/Hybrid)</h4><span class="pill pill-med">65%</span>
-            </div>
-            <div class="pcard-body">Unit 1 topic. AES vs RSA vs ECC comparison. Hybrid encryption (TLS/SSL) is an exam
-              favorite.<div class="prob-bar">
-                <div class="prob-fill fill-med" style="width:65%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Proof-of-Work vs Proof-of-Stake Comparison</h4><span class="pill pill-med">64%</span>
-            </div>
-            <div class="pcard-body">Unit 3 table comparison. Likely if Ethereum question appears without already
-              covering consensus.<div class="prob-bar">
-                <div class="prob-fill fill-med" style="width:64%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sub-h">🟢 LOWER PRIORITY — Possible but Less Likely (40–59%)</div>
-        <div class="priority-grid">
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Types of Tokens (Utility/Security/NFT/Governance)</h4><span class="pill pill-low">57%</span>
-            </div>
-            <div class="pcard-body">Good for short answers (2M). Less likely as a standalone 10M question unless
-              combined with ICOs/Wallets.<div class="prob-bar">
-                <div class="prob-fill fill-low" style="width:57%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Bitcoin Block Structure + Halving</h4><span class="pill pill-low">54%</span>
-            </div>
-            <div class="pcard-body">Important concept but usually appears as part of "Bitcoin transactions" or "PoW"
-              answers rather than standalone.<div class="prob-bar">
-                <div class="prob-fill fill-low" style="width:54%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Equihash Mining Algorithm</h4><span class="pill pill-low">47%</span>
-            </div>
-            <div class="pcard-body">Very specific. More likely as a sub-point in a Zcash question than as a standalone
-              question.<div class="prob-bar">
-                <div class="prob-fill fill-low" style="width:47%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard">
-            <div class="pcard-top">
-              <h4>Verifiable Random Functions (VRF)</h4><span class="pill pill-low">43%</span>
-            </div>
-            <div class="pcard-body">Niche topic. Good for 2M short answers. Unlikely to appear as a full 5M or 10M
-              question.<div class="prob-bar">
-                <div class="prob-fill fill-low" style="width:43%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="note-box" style="margin-top:16px">
-          <strong>Quick SEE Strategy:</strong> Master the 8 HIGH PRIORITY topics first — they cover ~70% of expected
-          marks. For each, know: (1) a clean 2-line definition, (2) a comparison table if it's a "difference" topic, (3)
-          a flowchart/diagram if it's a "process" topic, and (4) at least 6 specific bullet points. The "OR" pattern
-          means you only need to answer ONE from each pair — always pick your strongest option.
-        </div>
-      </div>
-
-      <!-- =================== UNIT 1 ANSWERS =================== -->
-      <div class="section" id="sec-unit1">
-        <div class="sec-header">
-          <h2>Question Bank Answers — Unit I</h2>
-          <p>Introduction, Blockchain, DLT, Distributed Computing, Cryptography, Tokens, ICOs, Wallets</p>
-        </div>
-
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q1</span>
-            <h3>Define cryptocurrency & explain types of blockchain with use cases.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q1 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q1</span>
+      <h3>Define cryptocurrency and explain types of blockchain with use cases.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro"><strong>Cryptocurrency:</strong> A digital currency in which transactions are
               verified and records maintained by a decentralized system using cryptography, rather than by a centralized
               authority. Examples: Bitcoin (BTC), Ethereum (ETH), Tether (USDT), XRP.</div>
@@ -1471,15 +781,16 @@
                 rights, or utility within a specific ecosystem.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q2</span>
-            <h3>What is Blockchain? Explain DLT and the relationship between them.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q2 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q2</span>
+      <h3>What is Blockchain? Explain DLT and the relationship between them.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-1 Q1(a) + Q1(b)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro"><strong>Blockchain:</strong> A decentralized, distributed, and immutable digital
               ledger recording transactions across a network of computers in blocks cryptographically linked in
               sequence. <strong>DLT:</strong> Distributed Ledger Technology is any shared, synchronized digital record
@@ -1506,15 +817,16 @@
                 PBFT (Hyperledger) — each with different security/speed trade-offs.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q3</span>
-            <h3>Explain the elements of Distributed Computing in detail.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q3 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q3</span>
+      <h3>Explain the elements of Distributed Computing in detail.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">Distributed Computing is a system where components on networked computers
               communicate and coordinate their actions to achieve a common goal. The system appears as a single unified
               computer to the end user, even though it runs on multiple independent machines.</div>
@@ -1545,15 +857,16 @@
                 providing an agreed-upon ordering of events without requiring synchronized clocks.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q4</span>
-            <h3>Describe Cryptographic Hashing and its role in Blockchain security.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q4 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q4</span>
+      <h3>Describe Cryptographic Hashing and its role in Blockchain security.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">A hash function is a mathematical algorithm that transforms any input data (of any
               size) into a fixed-size output called a hash value, hash digest, or simply a "hash." In blockchain,
               SHA-256 (producing a 256-bit/64-character hex hash) is the primary hash function used by Bitcoin.</div>
@@ -1582,15 +895,108 @@
                 allowing efficient verification of individual transactions without downloading the entire block.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q9</span>
-            <h3>Explain Zero-Knowledge Systems (ZKPs) — properties, types, and applications.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q5 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q5</span>
+      <h3>Explain Cryptographic Signature Schemes — Key Generation, Signing, and Verification.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">A cryptographic signature scheme allows a sender to prove the authenticity and integrity of a message using their private key. The signature can be verified by anyone using the corresponding public key, without needing to know the private key. Bitcoin and Ethereum both use ECDSA (Elliptic Curve Digital Signature Algorithm).</div>
+      <div class="sub-h">3 Core Algorithms</div>
+      <ul class="pts">
+        <li><strong>Algorithm 1 — Key Generation:</strong> Generates a key pair: a <strong>private key</strong> (a random 256-bit number — kept strictly secret, used only for signing) and a corresponding <strong>public key</strong> (derived from the private key using elliptic curve multiplication — shared openly for verification). In Bitcoin, the public key is further hashed to produce the wallet address.</li>
+        <li><strong>Algorithm 2 — Signing (Sign):</strong> The signer uses their private key and the message (or its SHA-256 hash) to compute a unique digital signature. The signature is a mathematical pair (r, s) in ECDSA. Even a tiny change to the message produces a completely different signature — ensuring integrity.</li>
+        <li><strong>Algorithm 3 — Verification (Verify):</strong> Anyone can use the signer's public key, the original message, and the signature (r, s) to verify that the signature is genuine — without knowing the private key. Returns TRUE if valid, FALSE if tampered.</li>
+        <li><strong>Non-repudiation:</strong> Since only the holder of the private key can produce a valid signature, the signer cannot deny having signed the message — providing legal-grade proof of authorization.</li>
+        <li><strong>Application in Bitcoin:</strong> Every Bitcoin transaction must be signed with the sender's private key using ECDSA. Miners verify the signature before including the transaction in a block — ensuring only the rightful owner can spend the funds.</li>
+        <li><strong>Elliptic Curve advantage:</strong> ECDSA provides the same security level as RSA with much shorter key lengths — 256-bit ECC ≈ 3072-bit RSA security. This means smaller transaction sizes and faster verification on the blockchain.</li>
+        <li><strong>Schnorr Signatures (Taproot, 2021):</strong> Bitcoin's Taproot upgrade introduced Schnorr signatures as an alternative to ECDSA — they are more efficient, support native multi-signature aggregation (multiple signatures become one), and reduce transaction size.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q6</span>
+      <h3>Discuss Encryption Schemes — Symmetric, Asymmetric, and Hybrid — with examples.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">Encryption schemes transform readable data (plaintext) into unreadable ciphertext using algorithms and keys to ensure confidentiality. The two main types are Symmetric (single shared key) and Asymmetric (public-private key pair), with Hybrid combining both.</div>
+      <div class="tbl-wrap"><table class="cmp"><thead><tr><th>Feature</th><th>Symmetric</th><th>Asymmetric</th><th>Hybrid</th></tr></thead><tbody>
+        <tr><td>Keys Used</td><td>Single shared secret key</td><td>Public key + Private key pair</td><td>Both — asymmetric for key exchange, symmetric for data</td></tr>
+        <tr><td>Speed</td><td>Very fast</td><td>Slow (10–1000× slower)</td><td>Fast (symmetric speed after key exchange)</td></tr>
+        <tr><td>Key Distribution</td><td>Challenging — must share secret securely</td><td>Easy — public key can be shared openly</td><td>Solved — asymmetric exchanges the symmetric key</td></tr>
+        <tr><td>Use Case</td><td>Bulk data encryption</td><td>Key exchange, digital signatures, certificates</td><td>HTTPS/TLS, email encryption, VPN</td></tr>
+        <tr><td>Examples</td><td>AES-256, 3DES, ChaCha20</td><td>RSA-2048, ECC/ECDSA, ElGamal</td><td>TLS 1.3, PGP email, SSH</td></tr>
+      </tbody></table></div>
+      <ul class="pts">
+        <li><strong>Symmetric Encryption:</strong> Uses a single shared secret key for both encrypting and decrypting. Very fast — ideal for encrypting large amounts of data (disk encryption, file encryption). Challenge: the key must be shared securely between parties — the "key distribution problem."</li>
+        <li><strong>AES (Advanced Encryption Standard):</strong> The most widely used symmetric cipher. Operates on 128-bit blocks with key lengths of 128, 192, or 256 bits. Used in WiFi (WPA2), file encryption, and hardware security modules.</li>
+        <li><strong>Asymmetric Encryption:</strong> Uses mathematically linked key pairs — public key encrypts (or verifies), private key decrypts (or signs). Solves the key distribution problem — anyone can encrypt using your public key, only you can decrypt using your private key.</li>
+        <li><strong>RSA:</strong> Based on the mathematical difficulty of factoring large prime numbers. Key lengths of 2048–4096 bits. Used for digital certificates and secure key exchange. Significantly slower than symmetric encryption.</li>
+        <li><strong>ECC (Elliptic Curve Cryptography):</strong> Based on the algebraic structure of elliptic curves. Provides equivalent security to RSA with much shorter keys (256-bit ECC ≈ 3072-bit RSA). Used in Bitcoin (ECDSA), Ethereum, TLS, and mobile devices where computational resources are limited.</li>
+        <li><strong>Hybrid Encryption:</strong> Combines the speed of symmetric encryption with the key-management convenience of asymmetric. (1) Asymmetric encryption is used to securely transmit a temporary symmetric key. (2) The symmetric key then encrypts all actual data. Used in every HTTPS connection you make.</li>
+        <li><strong>TLS/SSL (Hybrid in practice):</strong> When you visit https://..., your browser and server use asymmetric encryption to agree on a session key, then switch to AES for the actual data transfer — combining security and performance.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q7</span>
+      <h3>What is Elliptic Curve Cryptography (ECC)? Explain its applications in blockchain.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">Elliptic Curve Cryptography (ECC) is a form of asymmetric cryptography based on the algebraic structure of elliptic curves over finite fields. It provides the same level of security as RSA with significantly shorter key lengths, making it ideal for resource-constrained environments like mobile devices and blockchain networks.</div>
+      <ul class="pts">
+        <li><strong>Mathematical basis:</strong> An elliptic curve is defined by the equation y² = x³ + ax + b over a finite field. The security relies on the Elliptic Curve Discrete Logarithm Problem (ECDLP) — given points P and Q = kP on the curve, finding k (the private key) is computationally infeasible.</li>
+        <li><strong>Key size advantage:</strong> 256-bit ECC key provides security equivalent to a 3,072-bit RSA key. Shorter keys mean: smaller transaction sizes on blockchain, faster verification, lower computational overhead, and less storage per transaction.</li>
+        <li><strong>Application in Bitcoin — ECDSA:</strong> Bitcoin uses ECDSA with the secp256k1 curve. Each Bitcoin wallet generates a 256-bit private key → derives a 512-bit public key via elliptic curve multiplication → hashes it (SHA-256 + RIPEMD-160) to produce the 160-bit Bitcoin address. All transactions are signed with ECDSA.</li>
+        <li><strong>Application in Ethereum:</strong> Ethereum also uses ECDSA with secp256k1 for signing transactions. Ethereum addresses are derived from the last 20 bytes of the Keccak-256 hash of the public key. Every transaction requires ECDSA signature verification by the network.</li>
+        <li><strong>One-way trapdoor function:</strong> Public key = private key × Generator Point G (a fixed point on the curve). This multiplication (point doubling and adding) is easy to compute forward but practically impossible to reverse — the entire security model rests on this property.</li>
+        <li><strong>Schnorr Signatures (Bitcoin Taproot 2021):</strong> An alternative to ECDSA using the same secp256k1 curve but with a simpler, more efficient algorithm. Key advantage: multiple signatures can be aggregated into one (MuSig), enabling more private and efficient multi-signature transactions.</li>
+        <li><strong>Why not RSA for blockchain?</strong> RSA requires ~3,072-bit keys for equivalent security — this would make Bitcoin transactions ~10× larger, requiring much more blockchain storage space, and verification would be slower, increasing computational load on every full node.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q8</span>
+      <h3>Define Verifiable Random Function (VRF) and explain its role in blockchain applications.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">A Verifiable Random Function (VRF) is a cryptographic function that takes inputs (including a private key), computes a pseudorandom output, and produces a <strong>proof of authenticity</strong> that anyone can verify. It combines randomness with verifiability — two properties that don't naturally coexist.</div>
+      <ul class="pts">
+        <li><strong>Three outputs of a VRF:</strong> (1) Random Output — a pseudorandom number derived from the inputs; (2) Proof — a cryptographic proof that the output was computed correctly using the specified private key; (3) Verification — anyone with the public key can verify the proof is valid without access to the private key.</li>
+        <li><strong>Why "verifiable" randomness matters in blockchain:</strong> In decentralized systems with no trusted authority, any source of randomness could be manipulated. VRFs ensure the random output was generated honestly and deterministically from known inputs — neither predictable in advance nor manipulable after the fact.</li>
+        <li><strong>Application 1 — Validator/Leader Selection (Algorand, Cardano):</strong> PoS blockchains use VRFs to pseudorandomly select which validator proposes the next block. The selected validator proves they were legitimately chosen by publishing their VRF proof — other nodes verify without any central coordinator.</li>
+        <li><strong>Application 2 — Chainlink VRF (Smart Contract Randomness):</strong> Chainlink's VRF service provides provably fair on-chain randomness for smart contracts. Applications: NFT trait randomization, lottery draws, gaming (fair dice rolls), random assignment — all provably unmanipulated.</li>
+        <li><strong>Application 3 — Rare NFTs:</strong> NFT projects use VRFs to assign rare traits during minting. Without VRF, the NFT creator or miners could manipulate which wallet receives rare items. VRF proof published on-chain proves the rarity assignment was fair.</li>
+        <li><strong>Application 4 — Unbiased Outcomes in DeFi:</strong> Protocol parameter randomization, random order execution to prevent front-running, and random sampling for security audits all benefit from VRF-based randomness that neither the protocol team nor miners can influence.</li>
+        <li><strong>VRF vs simple on-chain randomness:</strong> Using block hash as randomness source is insecure — miners can selectively withhold blocks to get favorable random outputs. VRF removes this attack vector by generating randomness off-chain (but verifiably) before it influences the chain outcome.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q9</span>
+      <h3>Explain Zero-Knowledge Systems — properties, types (zk-SNARKs vs zk-STARKs), and applications.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-1 Q3(b)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">A Zero-Knowledge Proof is a cryptographic method allowing a prover to convince a
               verifier that a statement is true without revealing any information beyond that truth. The classic
               example: proving you know a password without transmitting the password itself.</div>
@@ -1620,15 +1026,16 @@
                 provenance without revealing trade secrets.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q10</span>
-            <h3>Explain Token types, ICO process, and Cryptocurrency Wallets.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q10 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q10</span>
+      <h3>Explain Cryptocurrency Token types, the ICO process, and Cryptocurrency Wallets.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-1 Q3(a) (Wallets)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">Tokens are digital assets built on existing blockchains representing value,
               ownership, or access rights. Unlike coins (BTC, ETH) with their own native blockchains, tokens use
               existing infrastructure (typically Ethereum's ERC-20 standard).</div>
@@ -1673,25 +1080,53 @@
                 losing all crypto permanently).</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-      </div><!-- end unit1 -->
+</div><!-- end unit1 -->
 
-      <!-- =================== UNIT 2 ANSWERS =================== -->
-      <div class="section" id="sec-unit2">
-        <div class="sec-header">
-          <h2>Question Bank Answers — Unit II</h2>
-          <p>Bitcoin History · PoW · Block · Transactions · Script · Wallets · Network Architecture · Scalability ·
-            Channels</p>
-        </div>
+<!-- ===================== UNIT 2 ===================== -->
+<div class="section" id="sec-unit2">
+  <div class="sec-header">
+    <h2>Unit II — All 10 Questions & Answers</h2>
+    <p>Bitcoin History · Proof-of-Work · Block · Transactions · Lifecycle · Script · Wallets · Network · Scalability · Channels</p>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q12</span>
-            <h3>Explain Distributed Consensus using Proof-of-Work (PoW) in Bitcoin.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q11 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q11</span>
+      <h3>Trace the History of Bitcoin and discuss its Significance.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">Bitcoin was created in response to the 2008 global financial crisis as a trustless, decentralized alternative to the traditional banking system. It has grown from a cryptography experiment to the world's most valuable digital asset class.</div>
+      <div class="sub-h">Key Historical Timeline</div>
+      <ul class="pts">
+        <li><strong>2008 — The Idea:</strong> A person (or group) named "Satoshi Nakamoto" published the Bitcoin whitepaper — "Bitcoin: A Peer-to-Peer Electronic Cash System" — describing a new way to send money directly between people without needing a bank or any intermediary.</li>
+        <li><strong>Jan 2009 — The Launch:</strong> Bitcoin network officially started when the first "genesis block" was mined. Nine days later, Satoshi sent 10 BTC to computer scientist Hal Finney as the first-ever Bitcoin transaction.</li>
+        <li><strong>2010 — The Pizza Purchase & First Value:</strong> A programmer paid 10,000 BTC for two Papa John's pizzas — the first real-world Bitcoin transaction. By 2011, 1 BTC = $1 for the first time, establishing monetary value.</li>
+        <li><strong>2014 — Mt. Gox Collapse:</strong> The world's largest Bitcoin exchange was hacked and shut down — 850,000 BTC lost. This demonstrated the risks of centralized custodians and accelerated development of hardware wallets.</li>
+        <li><strong>2017 — The First Boom:</strong> Bitcoin price skyrocketed to ~$20,000 in December 2017. ICO boom. SegWit activated. Lightning Network launched. Millions of new users entered the ecosystem.</li>
+        <li><strong>2024 — Institutional Adoption:</strong> The US SEC approved Bitcoin ETFs (January 2024), making Bitcoin accessible to institutional investors through stock market accounts. The April 2024 halving reduced block reward to 3.125 BTC.</li>
+        <li><strong>2025 — Government Recognition:</strong> Bitcoin surpassed $124,000 in August 2025. US President Donald Trump signed an executive order creating a national strategic Bitcoin reserve — treating it as a sovereign asset.</li>
+      </ul>
+      <div class="sub-h">Significance of Bitcoin</div>
+      <ul class="pts">
+        <li><strong>Decentralization:</strong> No single entity controls the network — preventing censorship, manipulation, or seizure by any government or corporation.</li>
+        <li><strong>Fixed Supply & Scarcity:</strong> Maximum supply of 21 million BTC — designed to be anti-inflationary, similar to gold ("digital gold"). Halvings every 4 years reduce new supply, historically driving price appreciation.</li>
+        <li><strong>Innovation Catalyst:</strong> Bitcoin introduced blockchain to the world — spawning thousands of cryptocurrency projects, DeFi, NFTs, DAOs, and an entirely new digital financial ecosystem worth trillions of dollars.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q12</span>
+      <h3>Explain Distributed Consensus using Proof-of-Work (PoW) in Bitcoin.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-1 Q2(a)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">Distributed Consensus in Bitcoin solves the fundamental problem: how can thousands
               of untrusting nodes around the world agree on one true version of transaction history without any central
               authority? Proof-of-Work answers this by transforming trust into a computational and economic challenge.
@@ -1727,15 +1162,46 @@
                 majority.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q14</span>
-            <h3>Explain how Bitcoin Transactions work — Creation to Irreversibility.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q13 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q13</span>
+      <h3>Describe the structure of a Bitcoin Block — Header, Body, Merkle Root, Halving, and Immutability.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">A Bitcoin Block is a secure digital container that stores verified transaction data and is cryptographically linked to the previous block, forming the immutable blockchain. A new block is mined approximately every 10 minutes.</div>
+      <div class="tbl-wrap"><table class="cmp"><thead><tr><th>Part</th><th>Field</th><th>Description</th></tr></thead><tbody>
+        <tr><td rowspan="6">Block Header (~80 bytes)</td><td>Version</td><td>Bitcoin protocol version number</td></tr>
+        <tr><td>Previous Block Hash</td><td>SHA-256 hash of the previous block's header — creates the chain link</td></tr>
+        <tr><td>Merkle Root</td><td>Root hash of all transactions in the block (binary hash tree)</td></tr>
+        <tr><td>Timestamp</td><td>Approximate block creation time (Unix time)</td></tr>
+        <tr><td>Target Bits</td><td>Compact form of the current difficulty target</td></tr>
+        <tr><td>Nonce</td><td>32-bit number miners increment trying to find a valid hash</td></tr>
+        <tr><td>Block Body</td><td>Transaction Count</td><td>Number of transactions in the block</td></tr>
+        <tr><td>Block Body</td><td>Transaction List</td><td>All validated transactions, starting with coinbase (miner reward) TX</td></tr>
+      </tbody></table></div>
+      <ul class="pts">
+        <li><strong>Block Header (80 bytes):</strong> Contains the fingerprint metadata. The most critical field is the Previous Block Hash — this is what creates the "chain" in blockchain. A valid block header must hash (using SHA-256 twice) to a value below the current difficulty target.</li>
+        <li><strong>Merkle Root:</strong> All transactions in a block are arranged in a binary Merkle Tree — each transaction is hashed, then pairs of hashes are combined and hashed again, all the way up to a single root hash. This allows efficient verification: you can prove a single transaction is in a block without downloading all transactions (Simplified Payment Verification — SPV).</li>
+        <li><strong>Nonce:</strong> The only field miners change during mining. They increment the nonce (0 to 4.29 billion) and for each value, compute the full block header hash. If they exhaust all nonce values without finding a valid hash, they change other fields (timestamp, coinbase extra nonce) and try again.</li>
+        <li><strong>Coinbase Transaction:</strong> The first transaction in every block, created by the miner for themselves — awarding the block subsidy (3.125 BTC currently) + all transaction fees. This is how new Bitcoin enters circulation.</li>
+        <li><strong>Halving:</strong> The block subsidy is halved every 210,000 blocks (~4 years). Started at 50 BTC (2009) → 25 BTC (2012) → 12.5 BTC (2016) → 6.25 BTC (2020) → 3.125 BTC (April 2024) → eventually 0 (~2140). This built-in scarcity mechanism caps total supply at 21 million BTC.</li>
+        <li><strong>Immutability mechanism:</strong> Changing any past transaction changes that block's Merkle Root → changes the block hash → changes the "Previous Block Hash" field of the next block → invalidates every subsequent block. Restoring validity would require re-mining all subsequent blocks faster than the entire honest network — practically impossible.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q14</span>
+      <h3>Explain how Bitcoin Transactions work — from Creation to Irreversibility.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">A Bitcoin transaction is a signed message broadcast to the Bitcoin P2P network
               that transfers value (bitcoin) between addresses by consuming existing Unspent Transaction Outputs (UTXOs)
               as inputs and creating new UTXOs as outputs.</div>
@@ -1776,15 +1242,135 @@
                 amounts, 100 for newly mined coins (coinbase maturity).</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q19</span>
-            <h3>Discuss the Bitcoin Scalability Problem and its solutions.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q15 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q15</span>
+      <h3>Describe the Transaction Lifecycle — Payment, Capital Markets, and Database (ACID) lifecycle.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-1 Q4(a)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">A transaction lifecycle is the end-to-end journey of a transaction from initial request to final completion. The specific stages vary depending on the context: payment transactions, financial trading (capital markets), or database management (DBMS).</div>
+      <div class="sub-h">1. Bitcoin/Payment Transaction Lifecycle</div>
+      <div class="flow">
+        <div class="flow-step start">Initiation — Customer provides credentials / user initiates transfer</div>
+        <div class="flow-arrow">▼</div>
+        <div class="flow-step">Authorization — Bank/network verifies funds & fraud checks</div>
+        <div class="flow-arrow">▼</div>
+        <div class="flow-step">Capture — Merchant/sender confirms; bundles for processing</div>
+        <div class="flow-arrow">▼</div>
+        <div class="flow-step">Clearing — Exchange of transaction info between banks/nodes</div>
+        <div class="flow-arrow">▼</div>
+        <div class="flow-step">Settlement — Actual fund transfer; accounts credited/debited</div>
+        <div class="flow-arrow">▼</div>
+        <div class="flow-step end">Reconciliation — Merchant verifies received funds match records</div>
+      </div>
+      <ul class="pts">
+        <li><strong>Initiation:</strong> The customer provides payment credentials (swipes card, enters details online, or signs a Bitcoin transaction with private key) to begin the transfer process.</li>
+        <li><strong>Authorization:</strong> For card payments: payment gateway sends a request to the issuing bank to verify funds and check for fraud. For Bitcoin: nodes validate the ECDSA signature, check UTXO existence, and verify script execution.</li>
+        <li><strong>Capture (Submission):</strong> The merchant confirms the sale and submits authorized transactions in a batch to their acquiring bank. In Bitcoin: the miner includes the transaction in a candidate block after PoW puzzle is solved.</li>
+        <li><strong>Clearing:</strong> The card network (Visa/Mastercard) facilitates exchange of transaction information between acquiring and issuing banks. In Bitcoin: the new block is broadcast and all nodes update their copy of the blockchain.</li>
+        <li><strong>Settlement:</strong> Actual fund transfer — issuing bank debits the customer's account and credits the merchant's account. In Bitcoin: UTXOs are consumed (inputs) and new UTXOs created (outputs) — permanently recorded on-chain.</li>
+        <li><strong>Reconciliation:</strong> Merchant compares internal sales records against bank statements to ensure all funds received correctly and no discrepancies exist.</li>
+      </ul>
+      <div class="sub-h">2. Database Transaction Lifecycle (ACID)</div>
+      <ul class="pts">
+        <li><strong>Active:</strong> Transaction is currently executing read/write operations on the database.</li>
+        <li><strong>Partially Committed:</strong> All operations finished but changes still in volatile memory (buffer) — not yet permanently saved to disk.</li>
+        <li><strong>Committed:</strong> Changes permanently saved to the database. The transaction is complete and cannot be undone. Database reflects the new state.</li>
+        <li><strong>Failed/Aborted (Rolled Back):</strong> If any error occurs, all changes are undone — the database returns to its previous consistent state. This is ACID's Atomicity property — either all operations succeed or none do.</li>
+        <li><strong>Terminated:</strong> The final state after the transaction has been either committed (success) or aborted (failure). Resources are released.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q16</span>
+      <h3>Explain Bitcoin Script Execution in detail — with P2PKH step-by-step example.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-1 Q2(b)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">Bitcoin Script is a simple, stack-based, non-Turing-complete language used to verify that the conditions for spending a transaction's funds have been met. Every transaction contains two scripts that must be combined and executed successfully for the transaction to be valid.</div>
+      <div class="sub-h">Two Scripts in Every Transaction</div>
+      <ul class="pts">
+        <li><strong>scriptPubKey (Locking Script):</strong> Attached to a transaction output (UTXO). Defines the conditions that must be met to spend those funds. Written by the <em>sender</em> when they create the transaction. Acts as a "digital lock."</li>
+        <li><strong>scriptSig (Unlocking Script):</strong> Provided in the spending transaction's input. Contains the data (signature, public key) needed to satisfy the locking script. Written by the <em>spender</em>. Acts as the "digital key."</li>
+        <li><strong>Execution order:</strong> (1) scriptSig is executed first — pushes its data onto an empty stack; (2) scriptPubKey is executed — uses data from the stack; (3) If execution completes without error and leaves TRUE on top of the stack → transaction is VALID; otherwise → REJECTED.</li>
+      </ul>
+      <div class="sub-h">P2PKH (Pay-to-Public-Key-Hash) Step-by-Step</div>
+      <ul class="pts">
+        <li><strong>Scripts:</strong> scriptSig = <code>&lt;Signature&gt; &lt;PublicKey&gt;</code> &nbsp;|&nbsp; scriptPubKey = <code>OP_DUP OP_HASH160 &lt;PubKeyHash&gt; OP_EQUALVERIFY OP_CHECKSIG</code></li>
+        <li><strong>Step 1:</strong> <code>&lt;Signature&gt;</code> pushed onto stack. <code>&lt;PublicKey&gt;</code> pushed onto stack. Stack: [Sig, PubKey]</li>
+        <li><strong>Step 2 — OP_DUP:</strong> Duplicates the top item (PublicKey). Stack: [Sig, PubKey, PubKey]</li>
+        <li><strong>Step 3 — OP_HASH160:</strong> Hashes the top PublicKey with SHA-256 then RIPEMD-160 → produces PubKeyHash. Stack: [Sig, PubKey, PubKeyHash_derived]</li>
+        <li><strong>Step 4:</strong> The expected <code>&lt;PubKeyHash&gt;</code> from the locking script is pushed onto the stack. Stack: [Sig, PubKey, PubKeyHash_derived, PubKeyHash_expected]</li>
+        <li><strong>Step 5 — OP_EQUALVERIFY:</strong> Compares the two PubKeyHashes. If they don't match → script ABORTS (wrong key). If they match → both are removed from stack. Stack: [Sig, PubKey]</li>
+        <li><strong>Step 6 — OP_CHECKSIG:</strong> Verifies the Signature against the PubKey and the transaction data. If valid → pushes TRUE → transaction VALID. If invalid → FALSE → transaction REJECTED.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q17</span>
+      <h3>Discuss the Applications of Bitcoin Scripts.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-1 Q2(b)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">Bitcoin Script, despite being intentionally simple and non-Turing-complete, enables a surprisingly diverse range of financial applications by defining flexible conditions under which funds can be spent.</div>
+      <ul class="pts">
+        <li><strong>Standard Payments (P2PKH):</strong> Pay-to-Public-Key-Hash — funds sent to a Bitcoin address are unlocked only by the matching private key signature. Used in ~80% of all Bitcoin transactions. Simple, fast, and widely supported by all wallets.</li>
+        <li><strong>Multi-Signature (Multisig) Wallets:</strong> Requires M-of-N signatures before funds can be spent (e.g., 2 of 3 parties must agree). Used for institutional custody, corporate wallets, and escrow. Significantly enhances security — no single private key loss can drain the wallet.</li>
+        <li><strong>Time-Locked Transactions (CLTV — OP_CHECKLOCKTIMEVERIFY):</strong> Funds are frozen until a specified future block height or Unix timestamp. Used for: inheritance arrangements (funds unlockable after a date), employee vesting schedules, and as the foundational building block for the Lightning Network.</li>
+        <li><strong>Payment Channels (Lightning Network):</strong> Multi-sig + time-lock scripts together enable bidirectional payment channels — two parties can transact unlimited times off-chain, with the final balance settled on-chain. Enables instant micropayments with near-zero fees.</li>
+        <li><strong>Escrow Services (2-of-3 Multisig):</strong> Three parties: buyer, seller, and arbitrator. Funds released only when 2 of 3 parties sign — either buyer+seller agree the deal is complete, or buyer/seller+arbitrator resolve a dispute. Trustless escrow without a bank.</li>
+        <li><strong>Proof-of-Burn (OP_RETURN):</strong> Creates provably unspendable outputs by including OP_RETURN — coins are permanently destroyed. Used for: creating scarcity, bootstrapping alternative cryptocurrencies (altcoins verified against Bitcoin's chain), and reducing token supply.</li>
+        <li><strong>Data Embedding (OP_RETURN):</strong> OP_RETURN allows embedding up to 80 bytes of arbitrary data in a transaction without affecting the UTXO set. Used for: document timestamping (proof of existence on a specific date), the Ordinals protocol (Bitcoin NFTs), and cross-chain communication protocols.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q18 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q18</span>
+      <h3>Explain Bitcoin Network Architecture — Core Components and 5 Functional Layers.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">The Bitcoin network is a decentralized, peer-to-peer (P2P) system with a flat topology — no central server or authority controls it. It operates using a combination of a public distributed ledger (blockchain), PoW consensus, and various node types to maintain security and integrity.</div>
+      <div class="sub-h">Core Components</div>
+      <ul class="pts">
+        <li><strong>Peer-to-Peer Network:</strong> Nodes (computers running Bitcoin software) connect directly to each other in a mesh network — acting as both clients and servers simultaneously. Transactions and blocks are relayed on a best-effort basis. No single node is critical to network operation.</li>
+        <li><strong>Blockchain (Distributed Ledger):</strong> A public, immutable, chronologically ordered database recording every Bitcoin transaction since the genesis block (January 3, 2009). Each block's hash is dependent on the previous — creating tamper-evidence through cryptographic linkage.</li>
+        <li><strong>Full Nodes:</strong> Store a complete copy of the entire blockchain, independently verify every transaction and block against all consensus rules. Currently ~15,000+ reachable full nodes globally. They are the guardians of Bitcoin's rules — they reject invalid transactions regardless of miner activity.</li>
+        <li><strong>SPV Nodes (Lightweight):</strong> Used on devices with limited storage (smartphones). Download only block headers (~80 bytes vs ~1MB per block) and rely on full nodes for transaction verification — trading some security for convenience.</li>
+        <li><strong>Miners:</strong> Specialized nodes that compete to solve PoW puzzles using ASICs (specialized chips). They bundle transactions, create new blocks, and receive block rewards. Currently ~1-2 million ASIC mining machines globally.</li>
+      </ul>
+      <div class="sub-h">5 Functional Layers</div>
+      <ul class="pts">
+        <li><strong>Layer 1 — Hardware/Infrastructure:</strong> Physical computers, mining ASICs (SHA-256 chips), GPUs, and storage. The computational power and storage foundation the entire network is built upon.</li>
+        <li><strong>Layer 2 — Data Layer:</strong> Manages data structure and storage. Blocks, cryptographic hashes (SHA-256), Merkle Trees (organizing transactions), digital signatures (ECDSA), UTXOs. Defines what data exists and how it's structured.</li>
+        <li><strong>Layer 3 — Network Layer:</strong> Facilitates P2P communication between nodes. Handles node discovery (DNS seeding), transaction propagation (gossip protocol), block propagation (Compact Block Relay — reduces bandwidth by 80%), and peer management.</li>
+        <li><strong>Layer 4 — Consensus Layer:</strong> Defines rules for network agreement. Proof-of-Work (SHA-256) algorithm, the Longest Chain Rule, difficulty adjustment, block reward rules, and all validation logic that every full node enforces independently.</li>
+        <li><strong>Layer 5 — Application Layer:</strong> End-user interfaces. Wallet software (MetaMask, Ledger), exchanges, payment processors, Lightning Network clients, and any application allowing users to interact with the underlying Bitcoin network.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q19 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q19</span>
+      <h3>Discuss the Bitcoin Scalability Problem and its Layer 1 & Layer 2 solutions.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-1 Q4(b)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">Bitcoin's design intentionally limits throughput to ~3–7 transactions per second
               (TPS) on its base layer (Layer 1) — compared to Visa's ~24,000 TPS. This is an intentional trade-off:
               prioritizing decentralization and security over speed. Various solutions have been developed across two
@@ -1824,15 +1410,16 @@
                 new blocks. Erlay reduces the network overhead of transaction announcement between nodes.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q20</span>
-            <h3>Compare Payment Channels and State Channels. Explain the Lightning Network.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q20 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q20</span>
+      <h3>Compare Payment Channels and State Channels. Explain the Lightning Network in detail.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">Payment Channels are a specialized type of State Channel. State Channels are the
               broader concept — any off-chain interaction governed by smart contracts. Payment Channels are specifically
               designed for transferring value.</div>
@@ -1901,24 +1488,88 @@
                 coffee, not just large store-of-value transactions.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-      </div><!-- end unit2 -->
+</div><!-- end unit2 -->
 
-      <!-- =================== UNIT 3 ANSWERS =================== -->
-      <div class="section" id="sec-unit3">
-        <div class="sec-header">
-          <h2>Question Bank Answers — Unit III</h2>
-          <p>Ethereum · Block Format · PoS · Account Management · Smart Contracts · DApps · ERC-20 · Auditing</p>
-        </div>
+<!-- ===================== UNIT 3 ===================== -->
+<div class="section" id="sec-unit3">
+  <div class="sec-header">
+    <h2>Unit III — All 10 Questions & Answers</h2>
+    <p>Ethereum · Block Format · PoW vs PoS · Account Management · Smart Contracts · DApps · ERC-20 · Auditing</p>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q23</span>
-            <h3>Compare Proof-of-Work and Proof-of-Stake. Why did Ethereum switch to PoS?</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q21 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q21</span>
+      <h3>Define Ethereum and compare it with Bitcoin across all key dimensions.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-2 Q1(a)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro"><strong>Definition:</strong> Ethereum is a decentralized, open-source blockchain platform that enables the creation and execution of smart contracts and dApps, with Ether (ETH) as its native cryptocurrency used to pay for computation (gas). Vitalik Buterin proposed it in 2013; it launched in July 2015.</div>
+      <div class="tbl-wrap"><table class="cmp"><thead><tr><th>Aspect</th><th>Bitcoin (BTC)</th><th>Ethereum (ETH)</th></tr></thead><tbody>
+        <tr><td>Primary Purpose</td><td>Digital currency / store of value ("digital gold")</td><td>Programmable platform for smart contracts and dApps ("digital oil")</td></tr>
+        <tr><td>Consensus</td><td>Proof-of-Work (PoW) — SHA-256 since 2009</td><td>Proof-of-Stake (PoS) since "The Merge" (September 2022)</td></tr>
+        <tr><td>Supply Cap</td><td>Fixed max of 21 million BTC</td><td>No fixed cap; EIP-1559 fee burning can make ETH deflationary</td></tr>
+        <tr><td>Block Time</td><td>~10 minutes</td><td>~12 seconds — significantly faster</td></tr>
+        <tr><td>Programmability</td><td>Very limited — Bitcoin Script, non-Turing-complete</td><td>Fully Turing-complete — Solidity enables arbitrarily complex contracts</td></tr>
+        <tr><td>Transaction Speed</td><td>~7 TPS</td><td>~15–30 TPS base; much higher with L2 rollups</td></tr>
+        <tr><td>Energy Use</td><td>Very high — ~150 TWh/year (PoW)</td><td>Very low — ~0.01 TWh/year (PoS, 99.95% reduction)</td></tr>
+      </tbody></table></div>
+      <ul class="pts">
+        <li><strong>Smart Contract capability:</strong> Ethereum's EVM (Ethereum Virtual Machine) runs arbitrary Turing-complete code. Bitcoin's Script is intentionally restricted — it cannot run loops or complex logic. This is the fundamental architectural difference between them.</li>
+        <li><strong>Ether (ETH) dual role:</strong> ETH is both a cryptocurrency (store of value, means of payment) AND "gas" — the fuel paying for EVM computation. Every smart contract call, every DApp interaction costs gas in ETH.</li>
+        <li><strong>Account model vs UTXO model:</strong> Bitcoin uses UTXOs (Unspent Transaction Outputs) — balances are implicit. Ethereum uses an account-based model (like a bank) with explicit account balances — making it much easier to write complex financial logic.</li>
+        <li><strong>The Merge (September 15, 2022):</strong> Ethereum transitioned from PoW to PoS — the single largest energy reduction in blockchain history (99.95%). Bitcoin deliberately retained PoW for its 15-year security track record.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q22 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q22</span>
+      <h3>Describe the Ethereum Block Format — Block Header, Block Body, and post-Merge architecture.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">In Ethereum's modern architecture (post-Merge), the block format is divided into two primary sections: the Block Header (metadata) and the Block Body (data). The post-Merge architecture also introduces a structural split between the Execution Layer and Consensus Layer.</div>
+      <div class="sub-h">1. Block Header — Key Fields</div>
+      <div class="tbl-wrap"><table class="cmp"><thead><tr><th>Field</th><th>Description</th></tr></thead><tbody>
+        <tr><td>Parent Hash</td><td>256-bit Keccak hash of the previous block's header — creates the chain link</td></tr>
+        <tr><td>State Root</td><td>Root hash of the global state trie — reflects all account balances and contract storage after this block's execution</td></tr>
+        <tr><td>Transactions Root</td><td>Root of the Merkle Patricia Trie containing all transactions in this block</td></tr>
+        <tr><td>Receipts Root</td><td>Root of the receipts trie — logs, transaction status, and gas used for each transaction</td></tr>
+        <tr><td>Logs Bloom</td><td>Bloom filter allowing efficient search for specific event logs without downloading the full block</td></tr>
+        <tr><td>Timestamp</td><td>Unix timestamp when the block was proposed by the validator</td></tr>
+        <tr><td>Gas Limit</td><td>Maximum total gas that can be spent by all transactions in this block</td></tr>
+        <tr><td>Gas Used</td><td>Actual total gas consumed by all transactions — must be ≤ Gas Limit</td></tr>
+        <tr><td>Base Fee Per Gas</td><td>Minimum gas price per unit — burned by the network (EIP-1559). Adjusts automatically with demand.</td></tr>
+      </tbody></table></div>
+      <div class="sub-h">2. Block Body — Contents</div>
+      <ul class="pts">
+        <li><strong>List of Transactions:</strong> All verified transactions included in this block. Each specifies: sender, recipient, ETH value (in Wei — 1 ETH = 10^18 Wei), gas limit, gas price/tip, and optional calldata for smart contract interaction.</li>
+        <li><strong>Ommer (Uncle) Blocks:</strong> References to valid blocks that were mined/proposed simultaneously but not included in the main chain. Previously used in PoW to reward miners and improve security. Post-Merge: uncle blocks are no longer relevant under PoS (slot-based finality).</li>
+      </ul>
+      <div class="sub-h">3. Post-Merge Split Architecture (since September 2022)</div>
+      <ul class="pts">
+        <li><strong>Execution Layer (EL) — formerly "eth1":</strong> Handles transaction execution, EVM computation, state management, and smart contract logic. Manages the UTXO-like transaction pool and produces the "Execution Payload" containing transactions and state updates.</li>
+        <li><strong>Consensus Layer (CL) — Beacon Chain:</strong> Handles Proof-of-Stake, validator coordination, attestations, and block finality. Validators propose and vote on blocks. The Beacon Chain "wraps" the execution payload into a Beacon Block for final PoS consensus.</li>
+        <li><strong>Communication:</strong> The two layers communicate via the Engine API. The Execution client (Geth, Nethermind) and Consensus client (Prysm, Lighthouse) run side-by-side on every full node, working together to process and finalize blocks.</li>
+        <li><strong>Finality:</strong> Ethereum PoS achieves "economic finality" within ~12.8 minutes (2 epochs). After this point, reversing blocks would require an attacker to burn at least 1/3 of all staked ETH — currently billions of dollars.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q23 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q23</span>
+      <h3>Compare Proof-of-Work and Proof-of-Stake. Why did Ethereum transition to PoS?</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">PoW and PoS are the two dominant consensus mechanisms for blockchain networks.
               Both achieve the same goal — decentralized agreement on transaction validity — but through fundamentally
               different approaches: computational competition (PoW) vs. economic collateral (PoS).</div>
@@ -1989,15 +1640,45 @@
                 mathematically impossible to revert without slashing 1/3 of all staked ETH.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q25</span>
-            <h3>Explain Smart Contracts with Solidity — creation, compilation, and deployment with MetaMask.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q24 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q24</span>
+      <h3>Explain Ethereum Account Management — EOA vs Contract Accounts, Transactions, Gas, and Internal Transactions.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">Ethereum uses an account-based model (unlike Bitcoin's UTXO model). All accounts are "state objects" that hold a balance (in Wei), a nonce (transaction counter), and in the case of Contract Accounts, also code and storage.</div>
+      <div class="sub-h">Two Types of Ethereum Accounts</div>
+      <div class="tbl-wrap"><table class="cmp"><thead><tr><th>Feature</th><th>Externally Owned Account (EOA)</th><th>Contract Account (CA)</th></tr></thead><tbody>
+        <tr><td>Controlled By</td><td>A private key held by a human user</td><td>Smart contract code deployed on the blockchain</td></tr>
+        <tr><td>Can Initiate TX</td><td>Yes — EOAs start all transactions</td><td>No — can only react to incoming transactions/calls</td></tr>
+        <tr><td>Has Code</td><td>No — just a balance and nonce</td><td>Yes — contains immutable EVM bytecode</td></tr>
+        <tr><td>Has Storage</td><td>No</td><td>Yes — persistent key-value storage on the blockchain</td></tr>
+        <tr><td>Gas Fees</td><td>Must pay gas for all outgoing transactions</td><td>Gas is paid by the EOA that triggered the chain of calls</td></tr>
+        <tr><td>Examples</td><td>MetaMask wallets, hardware wallet addresses</td><td>Uniswap contracts, ERC-20 token contracts, DAOs</td></tr>
+      </tbody></table></div>
+      <ul class="pts">
+        <li><strong>Nonce:</strong> Every account has a nonce — a transaction counter. For EOAs, it increments by 1 for each outgoing transaction. This prevents replay attacks (rebroadcasting an old signed transaction) and ensures transactions execute in the correct order.</li>
+        <li><strong>Three types of transactions:</strong> (1) Value Transfers — sending ETH from one EOA to another; (2) Contract Creation — deploying new smart contract bytecode to the network, creating a new Contract Account; (3) Contract Interaction — calling a function in an existing contract to execute logic or change state.</li>
+        <li><strong>Gas:</strong> Every EVM operation (addition, storage write, hash computation) costs a defined amount of gas units. Users specify: gasLimit (maximum gas willing to spend) and maxFeePerGas (max ETH per gas unit). If execution exceeds gasLimit, it reverts but the gas is still consumed.</li>
+        <li><strong>EIP-1559 Gas Reform (2021):</strong> Split fees into Base Fee (burned, reducing ETH supply — deflationary pressure) and Priority Fee (tip to validator for inclusion). The Base Fee adjusts automatically based on network demand — targeting ~50% full blocks.</li>
+        <li><strong>Internal Transactions:</strong> When a smart contract calls another contract during execution, those are "internal transactions" (also called "message calls"). They don't appear in the main transaction list but are recorded in transaction traces. A single user-initiated transaction can trigger dozens of internal transactions across multiple contracts.</li>
+        <li><strong>Account Abstraction (ERC-4337, 2023):</strong> A new standard allowing Contract Accounts to behave like EOAs — enabling smart contract wallets with features like multi-sig, social recovery, gas sponsorship, and batch transactions. Removes the restriction that only EOAs can initiate transactions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q25 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q25</span>
+      <h3>Explain Smart Contracts with Solidity — Creation, Compilation, and Deployment with MetaMask.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-2 Q1(b) (MetaMask part)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">Solidity is Ethereum's primary smart contract language — a statically-typed,
               object-oriented language designed specifically for writing contracts on EVM-compatible blockchains. Remix
               IDE + MetaMask is the standard beginner development workflow.</div>
@@ -2042,15 +1723,37 @@
                 deployment is critical.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q27</span>
-            <h3>Explain Error Handling in Smart Contracts — require, revert, assert, custom errors.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q26 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q26</span>
+      <h3>Describe the roles of MetaMask in Smart Contract creation and interaction.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-2 Q1(b)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">MetaMask is a browser extension and mobile wallet that acts as the bridge between a user's web browser and the Ethereum blockchain, serving as a secure wallet, transaction signer, and blockchain provider simultaneously.</div>
+      <ul class="pts">
+        <li><strong>Role 1 — Secure Key Vault:</strong> MetaMask encrypts and stores private keys in a password-protected vault inside the browser. It generates HD (Hierarchical Deterministic) wallets from a single seed phrase — creating multiple accounts while requiring only one backup. Keys never leave the extension.</li>
+        <li><strong>Role 2 — Contract Deployment:</strong> When a developer clicks "Deploy" in Remix IDE, MetaMask intercepts the transaction, displays the estimated gas cost, and presents a confirmation dialog. The compiled bytecode is only submitted to the network after explicit user approval and signing.</li>
+        <li><strong>Role 3 — Write Transactions (State-Changing Calls):</strong> Functions that modify blockchain state (e.g., <code>updateMessage()</code>, token <code>transfer()</code>) require a MetaMask-signed transaction with gas payment. MetaMask decodes the calldata and displays a human-readable summary of what the transaction will do.</li>
+        <li><strong>Role 4 — Read Calls (Free, No Signature Required):</strong> Functions marked <code>view</code> or <code>pure</code> in Solidity only read existing data — they execute locally on the user's node, require no gas, no MetaMask popup, and no transaction broadcast. Example: calling <code>balanceOf()</code> on an ERC-20 contract.</li>
+        <li><strong>Role 5 — Provider Service (window.ethereum):</strong> MetaMask injects a global <code>window.ethereum</code> JavaScript object into every webpage. This is the EIP-1193 standard provider — developer tools (Remix, Hardhat, ethers.js, web3.js) use this to connect to the blockchain, send transactions, and read data.</li>
+        <li><strong>Role 6 — Network Management:</strong> MetaMask allows switching between Ethereum mainnet, Sepolia/Goerli testnets, and any custom EVM network (BSC, Polygon, Avalanche). Developers use testnet accounts with free test ETH for development before paying real ETH on mainnet.</li>
+        <li><strong>Role 7 — dApp Authentication (Sign-In with Ethereum):</strong> dApps request MetaMask to sign a challenge message — proving ownership of the wallet address without submitting an on-chain transaction. This provides cryptographic identity verification that replaces traditional username/password login systems entirely.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q27 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q27</span>
+      <h3>Explain Error Handling in Smart Contracts — require, revert, assert, custom errors, try/catch.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">Error handling in Solidity ensures atomicity — if any step in a transaction fails,
               ALL state changes are rolled back (reverted) to the previous valid state. This prevents partial execution
               that could leave the blockchain in an inconsistent state.</div>
@@ -2123,15 +1826,87 @@
                 called back into the sender, which still showed the full balance — draining millions.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-        <div class="card">
-          <div class="card-header" onclick="toggle(this)">
-            <span class="q-badge">Q30</span>
-            <h3>Discuss Best Practices and Auditing for Smart Contracts.</h3>
-            <span class="marks-badge">10M</span><span class="toggle">▼</span>
-          </div>
-          <div class="card-body">
+  <!-- Q28 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q28</span>
+      <h3>Define DApps and explain how a DApp transaction works end-to-end.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-2 Q2(a)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">A Decentralized Application (DApp) is software that runs on a peer-to-peer blockchain network rather than centralized servers. Its backend logic lives in smart contracts — ensuring no single entity controls it, no server can be taken down, and all rules are enforced by transparent code.</div>
+      <div class="sub-h">DApp Transaction End-to-End Flow</div>
+      <div class="flow">
+        <div class="flow-step start">1. User interacts with DApp frontend (browser/mobile UI)</div>
+        <div class="flow-arrow">▼</div>
+        <div class="flow-step">2. Frontend constructs smart contract call (via ethers.js/web3.js)</div>
+        <div class="flow-arrow">▼</div>
+        <div class="flow-step">3. MetaMask / Wallet prompts user to review + sign TX</div>
+        <div class="flow-arrow">▼</div>
+        <div class="flow-step">4. Signed TX broadcast to Ethereum P2P network nodes</div>
+        <div class="flow-arrow">▼</div>
+        <div class="flow-step">5. Validators verify signatures + execute smart contract code in EVM</div>
+        <div class="flow-arrow">▼</div>
+        <div class="flow-step">6. Block finalized — new state permanently written to blockchain</div>
+        <div class="flow-arrow">▼</div>
+        <div class="flow-step end">7. DApp frontend listens for events and updates UI accordingly</div>
+      </div>
+      <ul class="pts">
+        <li><strong>Decentralization:</strong> DApps run on thousands of globally distributed nodes — no single server, no single point of failure, censorship-resistant. The application remains available as long as the blockchain itself operates.</li>
+        <li><strong>Smart Contract Backend:</strong> Business logic lives in smart contracts deployed on-chain. Rules are enforced by code, not by any company's promises — creating trustless, transparent operations that anyone can audit.</li>
+        <li><strong>Open Source:</strong> Most dApp source code (both frontend and smart contracts) is publicly visible. Users can verify exactly what the code does before interacting. Smart contract code is also visible by decompiling the deployed bytecode.</li>
+        <li><strong>Tokenization:</strong> Many dApps use tokens (ERC-20 fungible, ERC-721 NFTs, ERC-1155 multi-tokens) to incentivize participation, manage governance, represent in-app assets, or enable a two-sided marketplace economy.</li>
+        <li><strong>Immutability:</strong> Once deployed, smart contract code and all transaction records on-chain cannot be altered — providing a permanent, tamper-proof audit trail of all user interactions and financial flows.</li>
+        <li><strong>Gas Cost Consideration:</strong> Every on-chain interaction costs gas — dApp designers must carefully minimize on-chain operations. Frequent small interactions are handled off-chain (Layer 2) or in the browser, with only final state changes written to the blockchain.</li>
+        <li><strong>Examples by category:</strong> Finance (Uniswap — DEX, Aave — lending, MakerDAO — stablecoin), NFT (OpenSea marketplace), Gaming (Axie Infinity, CryptoKitties), Social (Lens Protocol), Identity (ENS — Ethereum Name Service).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q29 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q29</span>
+      <h3>Explain the ERC-20 Token Standard in detail — functions, events, and significance.</h3>
+      <span class="marks-badge">10M</span><span class="cie-tag">Common: CIE-2 Q2(b)</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="answer-intro">ERC-20 (Ethereum Request for Comments 20) is a technical standard defining a common interface for fungible tokens on the Ethereum blockchain. Proposed by Fabian Vogelsteller in November 2015, it enables any token to work seamlessly with any wallet, exchange, or dApp that implements the standard.</div>
+      <div class="sub-h">6 Mandatory Functions</div>
+      <div class="tbl-wrap"><table class="cmp"><thead><tr><th>Function</th><th>Parameters</th><th>Returns</th><th>Description</th></tr></thead><tbody>
+        <tr><td>totalSupply()</td><td>none</td><td>uint256</td><td>Returns the total number of tokens in existence</td></tr>
+        <tr><td>balanceOf(address owner)</td><td>address</td><td>uint256</td><td>Returns token balance of the specified address</td></tr>
+        <tr><td>transfer(to, amount)</td><td>address, uint256</td><td>bool</td><td>Transfers tokens from caller to specified address</td></tr>
+        <tr><td>transferFrom(from, to, amount)</td><td>2 addresses, uint256</td><td>bool</td><td>Transfers on behalf of another user (requires prior approval)</td></tr>
+        <tr><td>approve(spender, amount)</td><td>address, uint256</td><td>bool</td><td>Grants permission to spender to withdraw up to amount</td></tr>
+        <tr><td>allowance(owner, spender)</td><td>2 addresses</td><td>uint256</td><td>Returns remaining amount spender is allowed to withdraw</td></tr>
+      </tbody></table></div>
+      <div class="sub-h">2 Mandatory Events</div>
+      <ul class="pts">
+        <li><strong>Transfer event:</strong> <code>event Transfer(address indexed from, address indexed to, uint256 value)</code> — emitted on every token transfer (including minting and burning). Indexed parameters allow efficient filtering by address in blockchain explorers and indexers.</li>
+        <li><strong>Approval event:</strong> <code>event Approval(address indexed owner, address indexed spender, uint256 value)</code> — emitted when approve() is called. Allows frontends to track spending permissions without querying storage.</li>
+      </ul>
+      <div class="sub-h">Significance & Applications</div>
+      <ul class="pts">
+        <li><strong>Standardization & Composability:</strong> Any wallet (MetaMask), exchange (Uniswap), or protocol (Aave, Compound) automatically supports any ERC-20 token without custom code for each token. This "money Lego" composability is foundational to DeFi.</li>
+        <li><strong>approve() + transferFrom() pattern:</strong> Enables DeFi protocols to move tokens on a user's behalf. When you "approve" Uniswap to spend your USDC, you call approve(). Uniswap then calls transferFrom() on your behalf when you initiate a swap. This is how all DEX trading works.</li>
+        <li><strong>ICO Enablement:</strong> ERC-20 powered the 2017 ICO boom — any project could create and distribute tokens within hours. Smart contracts automated the token sale, distribution, and vesting without any centralized infrastructure.</li>
+        <li><strong>Limitations (known issues):</strong> Tokens accidentally sent to a contract address (not a wallet) using transfer() are permanently lost — the contract has no way to reject or return them. ERC-777 and ERC-223 proposed solutions but have not replaced ERC-20 due to network effects.</li>
+        <li><strong>Examples:</strong> USDT (Tether) — $100B+ market cap stablecoin, USDC (USD Coin) — Circle's stablecoin, LINK (Chainlink) — oracle network token, UNI (Uniswap) — governance token, SHIB (Shiba Inu) — meme token. All ERC-20 on Ethereum mainnet.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q30 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="q-badge">Q30</span>
+      <h3>Discuss Best Practices and Auditing for Smart Contracts.</h3>
+      <span class="marks-badge">10M</span><span class="toggle">▼</span>
+    </div>
+    <div class="card-body">
             <div class="answer-intro">Smart contract security is critical because deployed contracts manage billions in
               value and are often immutable — bugs cannot be patched after deployment. A single vulnerability can result
               in total loss of funds with no recourse. Rigorous development practices and independent auditing are
@@ -2172,29 +1947,28 @@
                 audit firms are recommended.</li>
             </ul>
           </div>
-        </div>
+  </div>
 
-      </div><!-- end unit3 -->
+</div><!-- end unit3 -->
 
-    </div><!-- end main -->
-  </div><!-- end layout -->
+</div><!-- end main -->
+</div><!-- end layout -->
 
-  <script>
-    function show(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-      document.getElementById('sec-' + id).classList.add('active');
-      event.currentTarget.classList.add('active');
-      const titles = { 'cie1': 'CIE-1 Examination – January 2026', 'cie2': 'CIE-2 Examination – March 2026', 'priority': 'Priority & Probability Analysis', 'unit1': 'Unit I – Blockchain & Cryptography Answers', 'unit2': 'Unit II – Bitcoin Answers', 'unit3': 'Unit III – Ethereum Answers' };
-      document.getElementById('topbar-title').textContent = titles[id] || '';
-    }
-    function toggle(header) {
-      header.classList.toggle('open');
-      const body = header.nextElementSibling;
-      body.classList.toggle('open');
-    }
-    document.querySelectorAll('.card-header.open').forEach(h => { h.nextElementSibling.classList.add('open'); });
-  </script>
+<script>
+function show(id, el){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  if(el) el.classList.add('active');
+  const titles={cie1:'CIE-1 Examination – January 2026 (CO1 & CO2)',cie2:'CIE-2 Examination – March 2026 (CO3 only)',priority:'Priority & Probability Analysis — Units 1–3',unit1:'Unit I — All 10 Questions & Answers (Q1–Q10)',unit2:'Unit II — All 10 Questions & Answers (Q11–Q20)',unit3:'Unit III — All 10 Questions & Answers (Q21–Q30)'};
+  document.getElementById('topbar-title').textContent=titles[id]||'';
+}
+function toggle(header){
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+}
+// open first cards by default
+document.querySelectorAll('.card-header.open').forEach(h=>h.nextElementSibling.classList.add('open'));
+</script>
 </body>
-
 </html>
