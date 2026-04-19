@@ -1,0 +1,2230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Crime & Information Security — Study Guide</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080c14;
+      --surface: #0e1520;
+      --surface2: #141e2e;
+      --border: #1e2d45;
+      --text: #cdd6f4;
+      --muted: #6c7a96;
+      --u1: #60a5fa;
+      --u1-dim: #1e3a5f;
+      --u2: #4ade80;
+      --u2-dim: #0d2e1a;
+      --u3: #c084fc;
+      --u3-dim: #2a1245;
+      --gold: #f59e0b;
+      --gold-dim: #3d2505;
+      --red: #f87171;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(160deg, #0a1628 0%, #080c14 60%);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 24px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% -10%, rgba(96, 165, 250, 0.08) 0%, transparent 70%);
+    }
+
+    header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6em, 4vw, 2.4em);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #f1f5f9;
+      position: relative;
+    }
+
+    header h1 span {
+      color: var(--u1);
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.88em;
+      margin-top: 6px;
+      position: relative;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 16px;
+      position: relative;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78em;
+      color: var(--muted);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* ── TABS ── */
+    .tab-nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(8, 12, 20, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+    }
+
+    .tab-btn {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.88em;
+      padding: 9px 28px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.25s;
+      letter-spacing: 0.04em;
+    }
+
+    .tab-btn.u1 {
+      background: var(--u1-dim);
+      color: var(--u1);
+    }
+
+    .tab-btn.u1.active,
+    .tab-btn.u1:hover {
+      background: var(--u1);
+      color: #0a0e1a;
+    }
+
+    .tab-btn.u2 {
+      background: var(--u2-dim);
+      color: var(--u2);
+    }
+
+    .tab-btn.u2.active,
+    .tab-btn.u2:hover {
+      background: var(--u2);
+      color: #020c08;
+    }
+
+    .tab-btn.u3 {
+      background: var(--u3-dim);
+      color: var(--u3);
+    }
+
+    .tab-btn.u3.active,
+    .tab-btn.u3:hover {
+      background: var(--u3);
+      color: #1a0a2e;
+    }
+
+    /* ── CONTENT ── */
+    .unit-content {
+      display: none;
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 36px 20px 60px;
+    }
+
+    .unit-content.active {
+      display: block;
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 36px 0 22px;
+    }
+
+    .sec-head h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      color: var(--muted);
+    }
+
+    .sec-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── QUESTION CARD ── */
+    .qcard {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--u1);
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-bottom: 18px;
+      transition: border-color 0.2s;
+    }
+
+    .qcard.u2 {
+      border-left-color: var(--u2);
+    }
+
+    .qcard.u3 {
+      border-left-color: var(--u3);
+    }
+
+    .qcard.internal {
+      border-left-color: var(--gold);
+      background: #0d1525;
+    }
+
+    .qcard.internal .q-title {
+      color: #fde68a;
+    }
+
+    .q-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .q-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1em;
+      color: #f1f5f9;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .badge {
+      padding: 2px 9px;
+      border-radius: 20px;
+      font-size: 0.7em;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .b-internal {
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid #7c3e10;
+    }
+
+    .b-6m {
+      background: var(--u1-dim);
+      color: var(--u1);
+      border: 1px solid #1d3d6e;
+    }
+
+    .b-2m {
+      background: #0a2e1a;
+      color: #4ade80;
+      border: 1px solid #0d4a26;
+    }
+
+    .b-syllabus {
+      background: #2a1245;
+      color: #c084fc;
+      border: 1px solid #4a1e80;
+    }
+
+    /* ── ANSWER ── */
+    .ans {
+      font-size: 0.91em;
+      color: #a8b8d8;
+    }
+
+    .ans ol,
+    .ans ul {
+      padding-left: 20px;
+      margin: 6px 0 10px;
+    }
+
+    .ans li {
+      margin-bottom: 8px;
+    }
+
+    .ans li strong {
+      color: #93c5fd;
+    }
+
+    .ans>ol>li>ul {
+      margin-top: 4px;
+    }
+
+    .ans>ol>li>ul li strong {
+      color: var(--text);
+    }
+
+    .ans p {
+      margin-bottom: 8px;
+    }
+
+    .ans p strong {
+      color: #93c5fd;
+    }
+
+    /* ── FLOWCHART ── */
+    .flow-wrap {
+      margin: 18px 0;
+      padding: 18px 16px;
+      background: #050810;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    .flow-wrap .flow-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+
+    .fbox {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76em;
+      color: #93c5fd;
+      text-align: center;
+      min-width: 100px;
+    }
+
+    .fbox.gold {
+      color: var(--gold);
+      border-color: #7c3e10;
+      background: #1a0e04;
+    }
+
+    .fbox.green {
+      color: var(--u2);
+      border-color: #0d4a26;
+      background: #040d06;
+    }
+
+    .farr {
+      color: #334155;
+      font-size: 1.2em;
+      padding: 0 4px;
+    }
+
+    .farr-down {
+      display: block;
+      text-align: center;
+      color: #334155;
+      font-size: 1.2em;
+      line-height: 1;
+      margin: 2px 0;
+    }
+
+    /* ── COMPARISON TABLE ── */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 0.86em;
+    }
+
+    .comp-table th {
+      background: var(--surface2);
+      color: #f1f5f9;
+      padding: 10px 14px;
+      text-align: left;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .comp-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border);
+      color: #a8b8d8;
+      vertical-align: top;
+    }
+
+    .comp-table tr:hover td {
+      background: #0d1828;
+    }
+
+    .comp-table th:first-child,
+    .comp-table td:first-child {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ── 2-MARK GRID ── */
+    .tm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 13px;
+      margin-top: 16px;
+    }
+
+    .tm-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 16px 18px;
+      border-top: 2px solid var(--border);
+    }
+
+    .tm-card.internal-2m {
+      border-top-color: var(--gold);
+    }
+
+    .tm-card h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82em;
+      color: #e2e8f0;
+      margin-bottom: 8px;
+    }
+
+    .tm-card p {
+      font-size: 0.83em;
+      color: #7a8aaa;
+      line-height: 1.65;
+    }
+
+    .tm-card strong {
+      color: #93c5fd;
+    }
+
+    /* ── NOTE BOX ── */
+    .note {
+      background: #1c1432;
+      border-left: 3px solid var(--u3);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 0.84em;
+      color: #b8a0e0;
+      margin: 12px 0;
+    }
+
+    .note strong {
+      color: var(--u3);
+    }
+
+    @media (max-width: 600px) {
+      .tab-btn {
+        padding: 8px 16px;
+        font-size: 0.82em;
+      }
+
+      .qcard {
+        padding: 16px;
+      }
+
+      .tm-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-row {
+        gap: 3px;
+      }
+
+      .fbox {
+        min-width: 80px;
+        font-size: 0.7em;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🔐 <span>Cyber Crime</span> & Information Security</h1>
+    <p>Complete Study Notes — Units 1, 2 & 3 | Internal + Syllabus Questions</p>
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--gold)"></div> Internal Exam Q
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--u1)"></div> 6-Mark Answer
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--u2)"></div> 2-Mark Answer
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--u3)"></div> Also in Syllabus
+      </div>
+    </div>
+  </header>
+
+  <div class="tab-nav">
+    <button class="tab-btn u1 active" onclick="showUnit('u1')">Unit 1</button>
+    <button class="tab-btn u2" onclick="showUnit('u2')">Unit 2</button>
+    <button class="tab-btn u3" onclick="showUnit('u3')">Unit 3</button>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║             UNIT  1                  ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <div id="u1" class="unit-content active">
+
+    <div class="sec-head">
+      <h2>🏆 Internal Exam Questions</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <!-- 1. Cyber crime vs Cyber fraud -->
+    <div class="qcard internal">
+      <div class="q-header">
+        <div class="q-title">Is there a difference between Cybercrime &amp; Cyber Fraud? Explain.</div>
+        <span class="badge b-internal">INTERNAL</span>
+        <span class="badge b-6m">6 MARKS</span>
+        <span class="badge b-syllabus">Also in Syllabus</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Definition of Cybercrime:</strong> Cybercrime is any illegal activity in which a computer,
+            network, or internet-connected device is the tool, target, or place of the crime. It is a broad umbrella
+            term covering hacking, DoS attacks, cyberstalking, spreading malware, and digital espionage.</li>
+          <li><strong>Definition of Cyber Fraud:</strong> Cyber fraud is a specific subset of cybercrime involving
+            deliberate deception, misrepresentation, or trickery via digital means to obtain financial benefit, steal
+            personal information, or cause harm. It always requires fraudulent intent.</li>
+          <li><strong>Scope and Relationship:</strong> All cyber frauds are cybercrimes, but not all cybercrimes are
+            cyber frauds. Example: hacking a website for thrill is a cybercrime but not fraud; phishing to steal bank
+            credentials is both.</li>
+          <li><strong>Motive and Intent:</strong> Cybercrime may be driven by curiosity, revenge, political ideology,
+            financial greed, or vandalism. Cyber fraud is exclusively motivated by deception for personal or financial
+            gain.</li>
+          <li><strong>Examples Compared:</strong>
+            <ul>
+              <li><strong>Cybercrime only:</strong> DDoS attacks, spreading ransomware, hacking government systems,
+                cyberstalking.</li>
+              <li><strong>Cyber Fraud:</strong> Phishing emails, fake e-commerce sites, online banking fraud, identity
+                theft for financial use, advance-fee scams (419 fraud).</li>
+            </ul>
+          </li>
+          <li><strong>Legal Framework in India:</strong> Both are addressed under the IT Act 2000 (Sections 43, 66, 66C,
+            66D). Cyber fraud additionally invokes IPC Sections 415–420 (cheating &amp; dishonest inducement), which
+            carry additional penalties.</li>
+          <li><strong>Detection &amp; Impact:</strong> Cybercrime may be detected quickly (e.g., a DDoS crash); cyber
+            fraud can remain undetected for months. Fraud causes direct, quantifiable financial harm, while cybercrime
+            can have broader systemic impacts.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 2. Classification of Cybercrimes -->
+    <div class="qcard internal">
+      <div class="q-header">
+        <div class="q-title">How do we classify Cybercrimes? Explain each one briefly.</div>
+        <span class="badge b-internal">INTERNAL</span>
+        <span class="badge b-6m">6 MARKS</span>
+        <span class="badge b-syllabus">Also in Syllabus</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Crimes Against Individuals:</strong> Target a specific person — includes cyberstalking, online
+            harassment, email bombing, defamation, morphing of images, and identity theft. The victim suffers personal,
+            reputational, or psychological harm.</li>
+          <li><strong>Crimes Against Property:</strong> Involve theft or damage of digital or financial assets — credit
+            card fraud, intellectual property theft, software piracy, unauthorized fund transfers, and virtual property
+            theft in gaming environments.</li>
+          <li><strong>Crimes Against Organizations:</strong> Corporate espionage, ransomware attacks, insider data
+            theft, DoS/DDoS, and sabotage of business systems. These cause financial, operational, and reputational
+            damage to businesses.</li>
+          <li><strong>Crimes Against Society &amp; Government:</strong> Cyber terrorism, attacks on critical national
+            infrastructure (power grids, water supply, hospitals), hacking of government databases, and spreading
+            anti-national propaganda. These threaten public order and national security.</li>
+          <li><strong>Content-Related Crimes:</strong> Creation, distribution, or possession of illegal digital content
+            — child exploitation material, hate speech, obscene content. Covered under Section 67 of IT Act 2000.</li>
+          <li><strong>Financial / Economic Crimes:</strong> Online banking fraud, cryptocurrency theft, phishing, Ponzi
+            schemes run via websites, e-commerce fraud, and money laundering through digital channels.</li>
+          <li><strong>Type I vs Type II:</strong> Type I are single-event technical crimes (installing malware, one-time
+            hack). Type II are ongoing, relationship-based crimes (grooming, long-term cyberstalking, sustained social
+            engineering campaigns).</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 3. Types of Cybercriminals -->
+    <div class="qcard internal">
+      <div class="q-header">
+        <div class="q-title">What are the different types of Cybercriminals? / Who is a Cyber Criminal?</div>
+        <span class="badge b-internal">INTERNAL</span>
+        <span class="badge b-6m">6 MARKS</span>
+        <span class="badge b-syllabus">Also in Syllabus</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Hackers (White / Black / Grey Hat):</strong> White-hat hackers (ethical hackers) test systems with
+            authorization. Black-hat hackers exploit vulnerabilities illegally for personal gain or damage. Grey-hat
+            hackers sometimes act without permission but without malicious intent — they may disclose vulnerabilities
+            after exploiting them.</li>
+          <li><strong>Crackers:</strong> Break software protection mechanisms — crack software licenses, bypass DRM, or
+            break authentication — to distribute pirated software or gain unauthorized access. More destructive and
+            criminal than exploratory hackers.</li>
+          <li><strong>Script Kiddies:</strong> Inexperienced individuals who use pre-built tools, scripts, and exploit
+            kits downloaded from the internet without deep technical knowledge. Motivated by thrill and notoriety, not
+            specific goals. Despite low skill, they can cause significant damage.</li>
+          <li><strong>Phishers &amp; Social Engineers:</strong> Highly skilled at human manipulation. Use deceptive
+            emails, fake websites, and phone calls (vishing) to trick victims into revealing credentials, financial
+            data, or confidential information.</li>
+          <li><strong>Insider Threats:</strong> Disgruntled employees, ex-employees, or contractors who misuse
+            authorized access to steal data, sabotage systems, or leak confidential information — often motivated by
+            revenge, financial gain, or coercion.</li>
+          <li><strong>Cyber Terrorists:</strong> Politically or ideologically motivated criminals who attack critical
+            infrastructure, financial systems, or government agencies to create fear, disruption, or political leverage.
+            Examples include attacks on power grids and military networks.</li>
+          <li><strong>State-Sponsored Hackers &amp; Organized Crime Groups:</strong> Nation-state actors (APT groups)
+            conduct large-scale espionage and sabotage. Criminal organizations run ransomware-as-a-service operations,
+            large phishing campaigns, and dark web marketplaces, treating cybercrime as a business enterprise.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 4. Evils and perils of cyber threats -->
+    <div class="qcard internal">
+      <div class="q-header">
+        <div class="q-title">Discuss the evils and perils of Cyber Threats for Organizations.</div>
+        <span class="badge b-internal">INTERNAL</span>
+        <span class="badge b-6m">6 MARKS</span>
+        <span class="badge b-syllabus">Also in Syllabus</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Financial Losses:</strong> Data breaches, ransomware payments, fraud, and remediation costs run
+            into millions. The global average cost of a data breach exceeds $4.45 million. Ransomware demands can
+            paralyze organizations until paid.</li>
+          <li><strong>Reputation and Brand Damage:</strong> A single security breach destroys years of built customer
+            trust, leading to client loss, negative media coverage, and lasting brand damage — often more costly than
+            the incident itself.</li>
+          <li><strong>Operational Disruption:</strong> DDoS attacks, ransomware, and system compromises halt production,
+            customer service, and transactions — violating SLAs, causing revenue loss, and jeopardizing business
+            continuity.</li>
+          <li><strong>Intellectual Property (IP) Theft:</strong> Targeted corporate espionage steals trade secrets,
+            R&amp;D data, product formulas, and competitive strategies, handing rivals an unfair advantage and
+            eliminating years of investment.</li>
+          <li><strong>Legal and Regulatory Consequences:</strong> Organizations that fail to protect data face GDPR
+            fines (up to 4% of global annual turnover), lawsuits from affected parties, mandated security audits, and
+            loss of operating licenses in regulated industries.</li>
+          <li><strong>Supply Chain Attacks:</strong> Attackers compromise trusted vendors to gain access to larger
+            targets (SolarWinds 2020, compromised 18,000+ organizations). Organizations inherit risks from every
+            third-party they integrate with.</li>
+          <li><strong>Employee and Customer Data Exposure:</strong> Breaches expose Personally Identifiable Information
+            (PII), enabling secondary identity theft and fraud for employees and customers — multiplying the harm beyond
+            the organization itself.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ── Additional 6-mark questions ── -->
+    <div class="sec-head">
+      <h2>📘 Additional Syllabus Questions (6 Marks)</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <!-- Virus dissemination -->
+    <div class="qcard">
+      <div class="q-header">
+        <div class="q-title">How do viruses get disseminated? Explain with diagrams.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Email Attachments:</strong> Viruses are embedded in file attachments (.exe, .doc with macros, .pdf
+            exploits). When the recipient opens the attachment, the virus executes and infects the system, often
+            silently in the background.</li>
+          <li><strong>Infected Websites – Drive-by Downloads:</strong> Visiting a malicious or compromised legitimate
+            website triggers automatic silent download and execution of virus code, exploiting unpatched browser or
+            plugin vulnerabilities.</li>
+          <li><strong>Removable Media (USB / External Drives):</strong> Autorun features execute virus code the moment
+            an infected USB drive is plugged in. This is a common vector in air-gapped (offline) networks like
+            industrial control systems.</li>
+          <li><strong>File Sharing Networks (P2P):</strong> Pirated software, games, and movies downloaded through
+            peer-to-peer networks are frequently bundled with hidden virus executables that activate when the user runs
+            the downloaded content.</li>
+          <li><strong>Social Engineering &amp; Malicious Downloads:</strong> Victims are tricked via pop-ups, fake
+            alerts, or phishing messages into voluntarily downloading and running infected software disguised as
+            legitimate updates, codecs, or tools.</li>
+          <li><strong>Network Propagation:</strong> Once inside a network, a virus spreads laterally to connected
+            machines via shared folders, open SMB ports, and unpatched vulnerabilities — enabling rapid enterprise-wide
+            infection (e.g., WannaCry via EternalBlue).</li>
+        </ol>
+        <div class="flow-wrap">
+          <div class="flow-label">// Virus Dissemination Flow</div>
+          <div class="flow-row">
+            <div class="fbox">Virus Created</div>
+            <div class="farr">→</div>
+            <div class="fbox">Attached to Host File</div>
+            <div class="farr">→</div>
+            <div class="fbox">Distributed (Email / Web / USB)</div>
+            <div class="farr">→</div>
+            <div class="fbox">User Opens / Executes</div>
+            <div class="farr">→</div>
+            <div class="fbox gold">Virus Activates</div>
+            <div class="farr">→</div>
+            <div class="fbox gold">Self-Replicates</div>
+            <div class="farr">→</div>
+            <div class="fbox green">Spreads to Network</div>
+            <div class="farr">→</div>
+            <div class="fbox green">Payload Delivered</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Information Security -->
+    <div class="qcard">
+      <div class="q-header">
+        <div class="q-title">Explain the concept of Information Security. Discuss its importance in protecting digital
+          information.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Definition:</strong> Information Security (InfoSec) is the set of practices, technologies, and
+            policies designed to protect digital and physical information from unauthorized access, disclosure,
+            alteration, destruction, or disruption. It applies across all media — digital, physical, and human.</li>
+          <li><strong>CIA Triad — The Core Pillars:</strong>
+            <ul>
+              <li><strong>Confidentiality:</strong> Information is accessible only to authorized individuals (enforced
+                via encryption, access controls, authentication).</li>
+              <li><strong>Integrity:</strong> Information remains accurate and unmodified by unauthorized parties
+                (enforced via hashing, digital signatures, checksums).</li>
+              <li><strong>Availability:</strong> Authorized users can access information and systems whenever needed
+                (enforced via redundancy, backups, DDoS protection).</li>
+            </ul>
+          </li>
+          <li><strong>Extended Principles:</strong> Authentication (verifying identity), Authorization (permission-based
+            access), Non-repudiation (preventing denial of performed actions — digital signatures), and Accountability
+            (audit trails).</li>
+          <li><strong>Types of InfoSec:</strong> Network security (firewalls, IDS/IPS), Application security (secure
+            coding, OWASP practices), Data security (DLP, encryption), Physical security (server room controls), and
+            Operational security (policies, procedures, training).</li>
+          <li><strong>Importance for Individuals:</strong> Protects personal data (bank records, health info, Aadhaar)
+            from theft, misuse, identity fraud, and reputational harm.</li>
+          <li><strong>Importance for Organizations:</strong> Protects trade secrets, customer data, and financial
+            systems. Ensures regulatory compliance (IT Act, GDPR), maintains business continuity, and builds customer
+            trust.</li>
+          <li><strong>Importance for Governments:</strong> Safeguards classified military and diplomatic information,
+            protects critical national infrastructure (power, water, transport), and defends against state-sponsored
+            cyber espionage.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- IT Act 2000 legal perspective -->
+    <div class="qcard">
+      <div class="q-header">
+        <div class="q-title">Discuss the legal perspective of Cybercrime in India with reference to provisions of IT Act
+          2000.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Background:</strong> India's Information Technology Act 2000 is the primary legislation governing
+            cybercrimes, electronic records, and digital commerce. It was significantly amended in 2008 (IT Amendment
+            Act) to address emerging cybercrime threats and align with global standards.</li>
+          <li><strong>Section 43 – Unauthorized Access / Computer Damage:</strong> Penalizes unauthorized access, data
+            downloading without consent, introducing viruses, and disrupting computer systems. The guilty party is
+            liable to pay damages up to ₹1 crore to the affected party.</li>
+          <li><strong>Section 66 – Computer Related Offences (Hacking):</strong> Any person who dishonestly or
+            fraudulently commits acts under Section 43 faces imprisonment up to 3 years or a fine up to ₹5 lakhs, or
+            both.</li>
+          <li><strong>Section 66C – Identity Theft:</strong> Fraudulent use of another's electronic signature, password,
+            or unique identification feature is punishable with up to 3 years imprisonment and a fine up to ₹1 lakh.
+          </li>
+          <li><strong>Section 66D – Cheating by Personation Using Computer Resources:</strong> Impersonating another
+            person online to cheat or deceive is punishable with up to 3 years imprisonment and fine up to ₹1 lakh.</li>
+          <li><strong>Section 67 – Obscene Content Online:</strong> Publishing or transmitting obscene material
+            electronically is punishable with up to 3 years imprisonment (5 years on subsequent conviction) and fine up
+            to ₹5 lakhs.</li>
+          <li><strong>Section 70 – Protected Systems:</strong> Unauthorized access to government-notified protected
+            systems (critical infrastructure) carries imprisonment up to 10 years. Section 72 covers breach of
+            confidentiality and privacy.</li>
+          <li><strong>Supporting Bodies:</strong> CERT-In (Indian Computer Emergency Response Team) monitors threats and
+            coordinates response. State Cyber Crime Cells and the National Cyber Crime Reporting Portal
+            (cybercrime.gov.in) handle investigations and complaints.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- IT Act 2000 features and objectives -->
+    <div class="qcard">
+      <div class="q-header">
+        <div class="q-title">Explain the major features and objectives of IT Act 2000.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <p><strong>Objectives:</strong></p>
+        <ol>
+          <li><strong>Legal Recognition of Electronic Records &amp; Signatures:</strong> Grants legal validity to
+            digital documents and electronic/digital signatures, enabling paperless transactions in commerce, banking,
+            and governance.</li>
+          <li><strong>Facilitate E-Commerce &amp; E-Governance:</strong> Creates a trusted legal framework for online
+            business, digital contracts, electronic payments, and government services accessible online — reducing
+            friction and increasing inclusion.</li>
+          <li><strong>Prevent &amp; Penalize Cybercrime:</strong> Defines specific cybercrime offences (hacking,
+            identity theft, obscene content, denial of service) with clear penalties, providing a legal basis for
+            prosecution.</li>
+          <li><strong>Data Protection:</strong> Section 43A requires organizations handling sensitive personal data to
+            maintain "reasonable security practices." Non-compliance results in compensation liability to affected
+            persons.</li>
+        </ol>
+        <p><strong>Key Features:</strong></p>
+        <ol start="5">
+          <li><strong>Digital Signatures:</strong> Recognizes digital signatures (using public key cryptography) as
+            legally equivalent to handwritten signatures, enabling secure and verifiable online authentication.</li>
+          <li><strong>Cyber Appellate Tribunal:</strong> Establishes a specialized tribunal for adjudicating cybercrime
+            and IT disputes — providing faster, expert resolution compared to traditional civil courts.</li>
+          <li><strong>Liability of Network Service Providers (ISPs):</strong> Defines when intermediaries (ISPs, web
+            hosts, social media platforms) are exempt from third-party content liability, provided they follow due
+            diligence procedures.</li>
+          <li><strong>2008 Amendment Enhancements:</strong> Added Sections 66A–66F (cybercrime offences), Section 43A
+            (data protection), recognized electronic evidence more broadly, introduced cyber terrorism provisions (66F),
+            and enhanced penalties for child exploitation content.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Global perspective -->
+    <div class="qcard">
+      <div class="q-header">
+        <div class="q-title">Describe the global perspective of Cybercrime. Explain how cybercrime has evolved
+          worldwide.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Origins (1970s–80s):</strong> Cybercrime began with phone phreaking — manipulating telephone
+            networks for free calls. The Morris Worm (1988) was one of the first internet-based cyberattacks, infecting
+            ~6,000 computers and exposing networked system vulnerabilities.</li>
+          <li><strong>Internet Era (1990s):</strong> Commercialization of the internet brought website defacement, early
+            online fraud, credit card theft, and rapid virus spread via email (ILOVEYOU worm, 1999 infected millions
+            globally).</li>
+          <li><strong>Organized Cybercrime (2000s):</strong> Cybercrime transformed from solo acts to organized criminal
+            enterprises. Botnets, professional phishing campaigns, ransomware, and dark web markets emerged with global
+            professional criminal networks.</li>
+          <li><strong>Nation-State Cyber Warfare (2010s):</strong> Stuxnet (2010) — a sophisticated worm targeting
+            Iranian nuclear centrifuges — marked a turning point where nation-states began using cyber weapons. The US,
+            Russia, China, North Korea, and Iran are now recognized cyber powers.</li>
+          <li><strong>International Legal Framework:</strong> The Budapest Convention on Cybercrime (2001) is the first
+            international treaty on cybercrime, facilitating cross-border cooperation. 65+ countries have ratified it.
+            India participates as an observer but has not ratified it, creating extradition challenges.</li>
+          <li><strong>Ransomware &amp; Supply Chain Era (2020s):</strong> WannaCry (2017) affected 150+ countries;
+            SolarWinds attack (2020) compromised 18,000+ organizations including US government agencies.
+            Ransomware-as-a-Service (RaaS) democratized sophisticated attacks.</li>
+          <li><strong>Current Global Challenges:</strong> Cross-border jurisdiction gaps, anonymization tools (Tor,
+            VPNs, cryptocurrency), AI-powered attacks, dark web marketplaces for stolen data, and inconsistent national
+            laws make global cybercrime control extremely difficult.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Cybercrime and InfoSec relationship -->
+    <div class="qcard">
+      <div class="q-header">
+        <div class="q-title">What is the relationship between Cybercrime and Information Security? Explain with suitable
+          examples.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Opposing Forces:</strong> Cybercrime and Information Security are directly opposed — cybercrime
+            exploits weaknesses in information systems, while InfoSec works to identify, close, and monitor those
+            weaknesses. Where security fails, crime thrives.</li>
+          <li><strong>CIA Triad Violations Enable Cybercrime:</strong> Confidentiality breaches lead to data theft;
+            Integrity failures enable fraud and data manipulation; Availability disruptions are the goal of DoS/DDoS
+            attacks. Each cybercrime maps to a CIA principle violation.</li>
+          <li><strong>Example — Weak Authentication → Account Hacking:</strong> An organization not enforcing
+            multi-factor authentication (InfoSec gap) allows attackers to compromise accounts via credential stuffing or
+            brute force (cybercrime).</li>
+          <li><strong>Example — Unencrypted Storage → Data Breach:</strong> Storing customer passwords in plaintext
+            (InfoSec negligence) enables attackers who breach the database to steal and sell millions of credentials on
+            dark web markets (cybercrime + cyber fraud).</li>
+          <li><strong>Example — Unpatched Systems → Ransomware:</strong> Organizations failing to apply security patches
+            (InfoSec failure) are vulnerable to ransomware that exploits known vulnerabilities — the WannaCry attack
+            exploited an unpatched Windows SMB vulnerability.</li>
+          <li><strong>Security as a Deterrent:</strong> Firewalls, IDS/IPS, encryption, security awareness training, and
+            penetration testing directly reduce cybercrime opportunities by raising the cost and complexity of an
+            attack.</li>
+          <li><strong>Continuous Arms Race:</strong> As security technologies improve, attackers innovate — zero-day
+            exploits target unpatched vulnerabilities, social engineering bypasses technical controls, and AI is now
+            used to craft highly convincing phishing emails. The relationship is a perpetually evolving conflict.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Impact of cybercrime -->
+    <div class="qcard">
+      <div class="q-header">
+        <div class="q-title">Explain the impact of Cybercrime on individuals, organisations, and governments.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Individuals – Financial Loss:</strong> Victims of phishing, online banking fraud, and credit card
+            theft suffer direct monetary losses. Recovery is slow, and banks may not always reimburse losses from
+            customer-initiated actions like clicking malicious links.</li>
+          <li><strong>Individuals – Identity Theft &amp; Psychological Harm:</strong> Stolen PII is used to take loans,
+            file false tax returns, or commit fraud in the victim's name — damaging credit scores and reputation.
+            Cyberstalking causes chronic fear, anxiety, and psychological trauma.</li>
+          <li><strong>Organisations – Operational &amp; Financial Impact:</strong> Ransomware halts operations entirely;
+            data breaches require expensive forensic investigation, legal response, and customer notification. Average
+            global data breach cost: $4.45 million (IBM 2023).</li>
+          <li><strong>Organisations – Reputation &amp; Legal Liability:</strong> Post-breach customer attrition,
+            class-action lawsuits, regulatory fines (GDPR up to 4% of global revenue), and mandatory security audits
+            compound the damage well beyond the initial incident.</li>
+          <li><strong>Governments – National Security:</strong> Cyber espionage by foreign state actors leaks classified
+            military and diplomatic secrets. Attacks on critical infrastructure (nuclear plants, power grids) pose
+            existential national security risks.</li>
+          <li><strong>Governments – Political &amp; Economic Disruption:</strong> Election interference through
+            disinformation campaigns, attacks on financial markets, and disruption of government e-services destabilize
+            democratic processes and economic confidence.</li>
+          <li><strong>Broader Societal Impact:</strong> Mass erosion of public trust in digital systems, increased
+            government surveillance measures in response to threats, chilling effects on online free expression, and
+            widened digital inequality as victims disengage from digital services.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ── 2 MARK UNIT 1 ── -->
+    <div class="sec-head">
+      <h2>📗 2-Mark Questions — Unit 1</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="tm-grid">
+      <div class="tm-card internal-2m">
+        <h4>Define Cybercrime <span style="color:var(--gold)">[Internal]</span></h4>
+        <p>Cybercrime is any criminal activity where a computer, network, or internet-connected device is the tool,
+          target, or place of the crime. It includes hacking, phishing, identity theft, online fraud, and cyberstalking.
+          In India, it is governed by the IT Act 2000.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Cyber Space</h4>
+        <p>Cyberspace is the virtual environment formed by interconnected digital systems, computer networks, and the
+          internet. It has no physical boundaries and serves as the domain where data is stored, transmitted, and
+          processed globally, enabling communication and digital transactions.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Identity Theft</h4>
+        <p>Identity theft is a cybercrime where a criminal steals personal information (Aadhaar, PAN, banking
+          credentials) to impersonate the victim and commit fraud. It results in financial loss, credit damage, and
+          significant psychological harm. Covered under Section 66C of IT Act 2000.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Confidentiality</h4>
+        <p>Confidentiality is a core principle of information security ensuring that sensitive information is accessible
+          only to authorized users. It is enforced through encryption, access controls, authentication, and need-to-know
+          policies, preventing unauthorized disclosure.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Integrity</h4>
+        <p>Integrity in information security ensures that data remains accurate, complete, and unaltered by unauthorized
+          parties. It is maintained using hashing algorithms (SHA-256), digital signatures, and checksums that detect
+          any unauthorized modifications to data in transit or at rest.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Availability</h4>
+        <p>Availability ensures that information systems and data remain accessible to authorized users whenever
+          required. It is maintained through redundancy, load balancing, regular backups, disaster recovery planning,
+          and protection against DoS/DDoS attacks that aim to disrupt services.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Digital Evidence</h4>
+        <p>Digital evidence is any electronically stored information used in a legal investigation or court proceeding —
+          emails, chat logs, metadata, deleted files, server logs, or device data. It must be carefully preserved to
+          maintain admissibility and chain-of-custody integrity.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Cyber Law</h4>
+        <p>Cyber law is the legal framework governing the use of computers, the internet, and digital technologies.
+          India's IT Act 2000 is the primary cyber law, addressing e-commerce, cybercrime definitions and penalties,
+          digital signatures, and data protection obligations.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Cyber Offence</h4>
+        <p>A cyber offence is any illegal act committed using computers, networks, or the internet. Examples include
+          hacking, identity theft, malware distribution, cyberstalking, and online fraud. Cyber offences are prosecuted
+          under the IT Act 2000 and relevant IPC sections in India.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Hacking</h4>
+        <p>Hacking is unauthorized access to or manipulation of a computer system, network, or data. White-hat hackers
+          operate with permission (ethical/security testing); black-hat hackers exploit vulnerabilities illegally for
+          personal gain or damage. Punishable under Section 66, IT Act 2000.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Information Security</h4>
+        <p>Information security is the discipline of protecting digital information from unauthorized access,
+          disclosure, modification, and destruction. It is built on the CIA triad — Confidentiality, Integrity, and
+          Availability — using tools like firewalls, encryption, and access control systems.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Cyber Crime &amp; Cyber Criminal</h4>
+        <p><strong>Cybercrime:</strong> Any illegal activity using computers or networks as tool or target.
+          <strong>Cyber Criminal:</strong> A person who commits cybercrime — may be a hacker, phisher, insider, or
+          organized crime member. They exploit technical vulnerabilities or human psychology for unauthorized access or
+          gain.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Two Types of Cyber Crime</h4>
+        <p><strong>1. Hacking:</strong> Unauthorized access to computer systems to steal, modify, or destroy data
+          (Section 66, IT Act). <strong>2. Phishing:</strong> Deceptive emails or fake websites that trick users into
+          revealing passwords and financial details, enabling fraud (Section 66D, IT Act).</p>
+      </div>
+      <div class="tm-card">
+        <h4>Two Challenges in Controlling Cyber Crime</h4>
+        <p><strong>1. Anonymity:</strong> Criminals use Tor, VPNs, and fake digital identities to hide their true
+          location and identity, making tracking and attribution extremely difficult. <strong>2. Cross-border
+            Jurisdiction:</strong> Cybercriminals operate from foreign countries where local laws may not apply,
+          complicating investigation, prosecution, and extradition.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║             UNIT  2                  ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <div id="u2" class="unit-content">
+
+    <div class="sec-head">
+      <h2>🏆 Internal Exam Questions</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <!-- Passive vs Active -->
+    <div class="qcard internal u2">
+      <div class="q-header">
+        <div class="q-title">Explain the difference between Passive &amp; Active Attacks. Provide examples.</div>
+        <span class="badge b-internal">INTERNAL</span>
+        <span class="badge b-6m">6 MARKS</span>
+        <span class="badge b-syllabus">Also in Syllabus</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Definition – Passive Attack:</strong> A passive attack involves unauthorized interception or
+            monitoring of data transmissions without altering or disrupting them. The attacker remains in "listen-only"
+            mode, making these attacks very difficult to detect.</li>
+          <li><strong>Definition – Active Attack:</strong> An active attack involves deliberate modification, deletion,
+            fabrication, or disruption of data or systems. The attacker interacts with the target, making these attacks
+            more visible but also more immediately damaging.</li>
+          <li><strong>Detection:</strong> Passive attacks are nearly impossible to detect in real-time because no data
+            is altered and no anomalies are generated. Active attacks are more detectable via intrusion detection
+            systems, anomaly alerts, or visible service disruption.</li>
+          <li><strong>Intent and Damage:</strong> Passive attacks are reconnaissance-focused — gathering intelligence
+            for future exploitation. Active attacks cause immediate, measurable harm: system disruption, data
+            corruption, unauthorized access, or service denial.</li>
+          <li><strong>Prevention:</strong> Passive attacks are prevented via strong encryption (so intercepted data is
+            useless). Active attacks require firewalls, IDS/IPS, authentication, rate limiting, and input validation to
+            detect and block.</li>
+        </ol>
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Aspect</th>
+              <th>Passive Attack</th>
+              <th>Active Attack</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nature</td>
+              <td>Interception / monitoring only</td>
+              <td>Modification, disruption, or fabrication</td>
+            </tr>
+            <tr>
+              <td>Goal</td>
+              <td>Gather information/intelligence</td>
+              <td>Damage, disrupt, steal, or manipulate</td>
+            </tr>
+            <tr>
+              <td>Detectability</td>
+              <td>Very difficult to detect</td>
+              <td>Easier to detect (anomalies visible)</td>
+            </tr>
+            <tr>
+              <td>Alteration of Data</td>
+              <td>No — data flows unmodified</td>
+              <td>Yes — data is modified or blocked</td>
+            </tr>
+            <tr>
+              <td>Examples</td>
+              <td>Eavesdropping, Traffic Analysis, Sniffing</td>
+              <td>DoS/DDoS, Replay, Masquerade, SQL Injection</td>
+            </tr>
+            <tr>
+              <td>Prevention</td>
+              <td>Encryption of data in transit</td>
+              <td>Firewalls, IDS, Authentication, Patching</td>
+            </tr>
+          </tbody>
+        </table>
+        <ol start="6">
+          <li><strong>Examples – Passive:</strong> Network sniffing (Wireshark on unsecured Wi-Fi), traffic analysis to
+            determine communication patterns, eavesdropping on unencrypted HTTP/FTP sessions, and email interception.
+          </li>
+          <li><strong>Examples – Active:</strong> DoS/DDoS (flooding a server), Man-in-the-Middle with session
+            hijacking, replay attacks (capturing and resending authentication packets), SQL injection, ransomware
+            deployment, and ARP poisoning.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Attack Vectors -->
+    <div class="qcard internal u2">
+      <div class="q-header">
+        <div class="q-title">What are the different attacks launched with Attack Vectors? Explain.</div>
+        <span class="badge b-internal">INTERNAL</span>
+        <span class="badge b-6m">6 MARKS</span>
+        <span class="badge b-syllabus">Also in Syllabus</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Definition of Attack Vector:</strong> An attack vector is the pathway or method used by a
+            cybercriminal to gain unauthorized access to a system or network. It is the route through which the attacker
+            delivers malicious payload or exploits a vulnerability.</li>
+          <li><strong>Email Attack Vectors:</strong> Phishing emails with malicious links/attachments, spear-phishing
+            (targeted), whaling (targeting executives). Malware is delivered as Office document macros, PDF exploits, or
+            zip archive payloads.</li>
+          <li><strong>Web-Based Vectors:</strong> Drive-by downloads (malicious code injected into legitimate websites),
+            SQL injection (manipulating database queries), Cross-Site Scripting / XSS (injecting scripts into web pages
+            viewed by victims).</li>
+          <li><strong>Network Vectors:</strong> Man-in-the-Middle (MITM) attacks (intercepting communications between
+            two parties), packet sniffing on unsecured networks, session hijacking (stealing active session tokens), and
+            ARP cache poisoning to redirect traffic.</li>
+          <li><strong>Physical Vectors:</strong> USB drop attacks (infected drives left in public places for curious
+            users to plug in), shoulder surfing (observing screen/keyboard input), and physical access to unlocked
+            machines.</li>
+          <li><strong>Social Engineering Vectors:</strong> Pretexting, baiting (fake software downloads/free offers),
+            vishing (voice phishing), and SMiShing (SMS phishing) — all exploit human trust rather than technical
+            vulnerabilities.</li>
+          <li><strong>Wireless &amp; Insider Vectors:</strong> Rogue Access Points / Evil Twin attacks (fake Wi-Fi
+            hotspots), Bluetooth hijacking, and insider threats (employees abusing authorized access). Supply chain
+            attacks compromise software/hardware before reaching the target organization.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Botnets -->
+    <div class="qcard internal u2">
+      <div class="q-header">
+        <div class="q-title">Explain how Botnets can be used as a fuel to Cybercrime.</div>
+        <span class="badge b-internal">INTERNAL</span>
+        <span class="badge b-6m">6 MARKS</span>
+        <span class="badge b-syllabus">Also in Syllabus</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>What is a Botnet:</strong> A botnet is a network of internet-connected devices (computers, IoT
+            devices, smartphones) infected with malware and controlled remotely by a cybercriminal (the "bot herder")
+            via a Command &amp; Control (C&amp;C) server. Individual infected devices are called "bots" or "zombies."
+          </li>
+          <li><strong>How Bots are Recruited:</strong> Devices become bots when users open malicious email attachments,
+            visit infected websites, or connect infected USB drives. The malware installs silently, joining the device
+            to the botnet without the owner's knowledge.</li>
+          <li><strong>DDoS Attacks (Primary Use):</strong> The bot herder commands thousands of bots simultaneously to
+            flood a target server with traffic, overwhelming it and causing denial of service. Each bot contributes
+            small traffic; the aggregate is devastating. Example: Mirai botnet (2016) disrupted major internet services
+            using infected IoT devices.</li>
+          <li><strong>Spam Campaigns at Scale:</strong> Botnets send billions of spam or phishing emails per day. Using
+            distributed sending (from many different IPs), they evade spam filters and blacklists far more effectively
+            than single-server campaigns.</li>
+          <li><strong>Credential Stuffing &amp; Brute Force:</strong> Botnets systematically try stolen
+            username/password combinations across thousands of websites simultaneously — exploiting password reuse to
+            compromise accounts at scale.</li>
+          <li><strong>Cryptocurrency Mining &amp; Click Fraud:</strong> Bot herders use compromised devices' CPU/GPU
+            power for unauthorized cryptocurrency mining ("cryptojacking") or generate fraudulent advertising clicks to
+            steal ad revenue.</li>
+          <li><strong>Crime-as-a-Service:</strong> Established botnets are rented to other criminals on dark web
+            marketplaces (Botnet-as-a-Service), enabling anyone to launch massive cyberattacks with no technical skill.
+            This "democratization of cybercrime" is why botnets are considered the engine fueling the cybercrime
+            ecosystem.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Cyberstalking and IT Act -->
+    <div class="qcard internal u2">
+      <div class="q-header">
+        <div class="q-title">What is Cyberstalking? As per your understanding, is it a crime under the Indian IT Act?
+        </div>
+        <span class="badge b-internal">INTERNAL</span>
+        <span class="badge b-6m">6 MARKS</span>
+        <span class="badge b-syllabus">Also in Syllabus</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Definition of Cyberstalking:</strong> Cyberstalking is the repeated, deliberate use of electronic
+            means — email, social media, messaging apps, GPS tracking, spyware — to harass, threaten, monitor, or
+            intimidate a specific individual, causing fear or distress.</li>
+          <li><strong>Methods Used:</strong> Sending threatening/harassing emails and messages, monitoring social media
+            activity, using spyware or stalkerware to track location, doxxing (publishing private information),
+            impersonating the victim online, and enlisting others to harass the target (mob cyberstalking).</li>
+          <li><strong>Types:</strong> Intimate partner cyberstalking (ex-partners), workplace cyberstalking, celebrity
+            stalking, and stranger stalking (often escalating from online harassment). Victims are often women, though
+            anyone can be targeted.</li>
+          <li><strong>Impact on Victims:</strong> Severe psychological trauma, chronic anxiety, fear for physical
+            safety, social isolation, damage to reputation and relationships, and in extreme cases, escalation to
+            real-world physical violence.</li>
+          <li><strong>Is it a Crime Under the Indian IT Act?</strong> Section 66A of IT Act 2000 (which covered online
+            harassment) was struck down by the Supreme Court in 2015 (Shreya Singhal v. Union of India) as
+            unconstitutional for being overly broad. However, cyberstalking is still criminalized under:</li>
+          <li><strong>Current Legal Provisions:</strong>
+            <ul>
+              <li><strong>Section 354D IPC:</strong> Specifically penalizes stalking (including via internet and
+                electronic communication) with up to 3 years imprisonment on first conviction.</li>
+              <li><strong>Section 67 IT Act:</strong> Covers transmitting obscene/threatening content electronically.
+              </li>
+              <li><strong>Section 72 IT Act:</strong> Addresses breach of confidentiality and privacy.</li>
+              <li><strong>Section 509 IPC:</strong> Words or gestures intended to insult the modesty of a woman.</li>
+            </ul>
+          </li>
+          <li><strong>Preventive Measures:</strong> Strict privacy settings on social media, blocking and reporting
+            harassers, documenting evidence (screenshots, logs), filing FIRs at Cyber Crime Cells, and using the
+            National Cyber Crime Reporting Portal (cybercrime.gov.in).</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Cloud Computing and Cybercrime -->
+    <div class="qcard internal u2">
+      <div class="q-header">
+        <div class="q-title">Explain Cloud Computing and Cybercrime.</div>
+        <span class="badge b-internal">INTERNAL</span>
+        <span class="badge b-6m">6 MARKS</span>
+        <span class="badge b-syllabus">Also in Syllabus</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Cloud Computing Overview:</strong> Cloud computing delivers IT services (servers, storage,
+            databases, software) over the internet on a pay-as-you-go basis. Models: IaaS (Infrastructure), PaaS
+            (Platform), SaaS (Software). Examples: AWS, Google Cloud, Microsoft Azure, Dropbox, Gmail.</li>
+          <li><strong>Misconfigurations and Data Breaches:</strong> The most common cloud security failure is
+            misconfigured storage buckets (e.g., AWS S3 buckets set to public), exposing millions of sensitive records.
+            Capital One breach (2019) exposed 100 million+ records due to a misconfigured AWS firewall.</li>
+          <li><strong>Criminals Exploiting Cloud Infrastructure:</strong> Attackers abuse cloud platforms to host
+            malware, phishing websites, and Command &amp; Control (C&amp;C) servers for botnets — leveraging the cloud's
+            high availability and legitimate-looking IP addresses to evade blacklisting.</li>
+          <li><strong>Shared Tenancy Risks:</strong> Multiple customers share the same physical infrastructure in the
+            cloud. Vulnerabilities like side-channel attacks (e.g., Spectre/Meltdown CPU vulnerabilities) can
+            potentially allow one tenant to access another's data.</li>
+          <li><strong>Insider Threats at Cloud Providers:</strong> Cloud provider employees with privileged access to
+            infrastructure could potentially access or leak customer data. Cloud providers themselves have been targets
+            of social engineering and insider attacks.</li>
+          <li><strong>Jurisdictional and Legal Challenges:</strong> Cloud data may be stored across multiple countries
+            with different data protection laws. When cybercrime occurs involving cloud data, determining which
+            country's law applies and who has jurisdiction over evidence is highly complex.</li>
+          <li><strong>Shared Responsibility Model Gap:</strong> Security in the cloud is shared between the provider
+            (securing infrastructure) and the customer (securing data, access, and applications). Many organizations
+            misunderstand this division, leaving critical security gaps that cybercriminals exploit.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ── Additional Unit 2 ── -->
+    <div class="sec-head">
+      <h2>📘 Additional Syllabus Questions (6 Marks)</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <!-- Cyber criminal planning / Cyber Kill Chain -->
+    <div class="qcard u2">
+      <div class="q-header">
+        <div class="q-title">Explain how cyber criminals plan cyber attacks. Discuss the stages involved in executing
+          cyber attacks.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <p>Cyber attacks follow a structured methodology known as the <strong>Cyber Kill Chain</strong> (Lockheed
+          Martin, 2011):</p>
+        <ol>
+          <li><strong>Stage 1 – Reconnaissance:</strong> The attacker gathers intelligence about the target — scanning
+            social media, LinkedIn, company websites, WHOIS records, and using tools like Maltego, Shodan, and
+            theHarvester. Both passive (no direct contact) and active scanning are used.</li>
+          <li><strong>Stage 2 – Weaponization:</strong> The attacker creates or selects an exploit and packages it with
+            a malicious payload (e.g., embedding a Trojan in a PDF, crafting a phishing email with a macro-enabled
+            document, or developing a custom exploit for a discovered vulnerability).</li>
+          <li><strong>Stage 3 – Delivery:</strong> The weaponized payload is transmitted to the target — via
+            spear-phishing email, malicious website link, USB drop, watering-hole attack, or supply chain compromise.
+          </li>
+          <li><strong>Stage 4 – Exploitation:</strong> The malicious payload exploits a vulnerability in the target
+            system — a software bug, misconfiguration, or human action (opening attachment). The attacker gains initial
+            code execution on the target machine.</li>
+          <li><strong>Stage 5 – Installation:</strong> The attacker installs a backdoor, Remote Access Trojan (RAT), or
+            rootkit to establish persistent access — ensuring they can return even if the initial exploit is patched or
+            detected.</li>
+          <li><strong>Stage 6 – Command &amp; Control (C2):</strong> The compromised machine connects to the attacker's
+            C&amp;C server, enabling the attacker to remotely control it, issue commands, exfiltrate data, or recruit it
+            into a botnet.</li>
+          <li><strong>Stage 7 – Actions on Objectives:</strong> The attacker achieves their goal — data exfiltration,
+            ransomware deployment, intellectual property theft, credential harvesting, or lateral movement deeper into
+            the network.</li>
+        </ol>
+        <div class="flow-wrap">
+          <div class="flow-label">// Cyber Kill Chain</div>
+          <div class="flow-row">
+            <div class="fbox">1. Recon</div>
+            <div class="farr">→</div>
+            <div class="fbox">2. Weaponize</div>
+            <div class="farr">→</div>
+            <div class="fbox">3. Deliver</div>
+            <div class="farr">→</div>
+            <div class="fbox">4. Exploit</div>
+            <div class="farr">→</div>
+            <div class="fbox gold">5. Install</div>
+            <div class="farr">→</div>
+            <div class="fbox gold">6. C2 Control</div>
+            <div class="farr">→</div>
+            <div class="fbox green">7. Act on Objectives</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Engineering -->
+    <div class="qcard u2">
+      <div class="q-header">
+        <div class="q-title">What is Social Engineering? Explain the different social engineering techniques used by
+          attackers.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Definition:</strong> Social engineering is the psychological manipulation of people into
+            performing actions or divulging confidential information. It bypasses technical security controls by
+            exploiting human emotions — trust, fear, urgency, curiosity, and greed.</li>
+          <li><strong>Phishing:</strong> Mass deceptive emails appearing to come from trusted sources (banks, tech
+            companies) urging recipients to click malicious links or enter credentials on fake websites. Spear-phishing
+            is personalized to a specific individual; whaling targets executives.</li>
+          <li><strong>Vishing (Voice Phishing):</strong> Attackers call victims pretending to be bank officials, IT
+            support, or government agents, verbally extracting OTPs, passwords, or personal information. Very effective
+            because of the real-time, human-to-human nature.</li>
+          <li><strong>Pretexting:</strong> The attacker fabricates a convincing backstory (pretext) to establish trust
+            before requesting sensitive information. Example: Posing as an IT auditor needing password access for a
+            system check.</li>
+          <li><strong>Baiting:</strong> Enticing victims with something appealing — infected USB drives labeled "Salary
+            List Q3" left in parking lots, or fake free software downloads — that deliver malware when the bait is
+            taken.</li>
+          <li><strong>Quid Pro Quo:</strong> Offering a service in exchange for information — example: calling employees
+            offering free IT help/upgrades in exchange for their login credentials.</li>
+          <li><strong>Tailgating / Piggybacking:</strong> Physical social engineering — following an authorized person
+            through a secure access point (key-card door) without authenticating independently, gaining unauthorized
+            physical access to restricted areas.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Role of Cyber Cafes -->
+    <div class="qcard u2">
+      <div class="q-header">
+        <div class="q-title">Describe the role of Cyber Cafes in Cybercrime and security measures to prevent misuse.
+        </div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Shared Public Terminals:</strong> Cyber cafes use shared computers accessed by multiple strangers.
+            This creates significant security risks — malware, keyloggers, or browser history from previous users can
+            compromise data entered by subsequent users.</li>
+          <li><strong>Keyloggers on Shared Systems:</strong> Criminals install hardware or software keyloggers on café
+            computers to silently capture every keystroke — collecting banking credentials, email passwords, and
+            personal information without any visible sign.</li>
+          <li><strong>Anonymous Access for Cybercrime:</strong> Cyber cafes have historically offered quasi-anonymous
+            internet access. Criminals use them to send threatening emails, conduct phishing campaigns, access illegal
+            content, or launch attacks — making attribution difficult.</li>
+          <li><strong>Lack of Proper Monitoring:</strong> Many cafés lack CCTV, user activity logging, or identity
+            verification, making it difficult for law enforcement to trace criminal activities back to specific
+            individuals.</li>
+          <li><strong>Illegal Content Access:</strong> Cyber cafes are used to access and distribute child exploitation
+            material, pirated content, and material banned under Indian law, often facilitated by inadequate filtering
+            systems.</li>
+          <li><strong>Security Measures – Technical:</strong> Install endpoint security (antivirus, anti-keylogger),
+            disable USB ports, clear browser data and cookies after each session (sandboxed/kiosk mode), use deep-freeze
+            or session-reset software, and block illegal content via filtering.</li>
+          <li><strong>Security Measures – Regulatory:</strong> Under Indian law, cyber café owners must maintain user
+            registration logs (name, ID proof, time of use) and install government-approved monitoring software. Regular
+            police inspection and CCTV installation at workstations are mandated in many states.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Recon methods -->
+    <div class="qcard u2">
+      <div class="q-header">
+        <div class="q-title">Explain the methods used by attackers to gather information before launching cyber attacks
+          (Reconnaissance).</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Passive Reconnaissance (OSINT):</strong> Gathering publicly available information without directly
+            interacting with the target. Sources include: company websites, LinkedIn profiles, job postings (revealing
+            tech stack), social media, news articles, and annual reports.</li>
+          <li><strong>WHOIS &amp; DNS Lookups:</strong> WHOIS queries reveal domain registration details, administrative
+            contacts, and IP address ranges. DNS enumeration discovers subdomains, mail servers (MX records), and
+            network architecture without triggering alerts.</li>
+          <li><strong>Google Dorking:</strong> Advanced Google search operators (e.g., filetype:pdf site:target.com,
+            intitle:"index of") to find exposed files, login portals, error messages, or sensitive documents
+            accidentally indexed by search engines.</li>
+          <li><strong>Shodan (Internet of Things Search Engine):</strong> Shodan indexes internet-connected devices and
+            their open ports/services. Attackers use it to find exposed servers, webcams, SCADA systems, and vulnerable
+            services without directly scanning the target.</li>
+          <li><strong>Active Scanning — Network Mapping:</strong> Tools like Nmap perform port scanning and service
+            version detection on target IP ranges to identify open ports, running services, and operating system
+            fingerprints — directly interacting with the target (generates network traffic/logs).</li>
+          <li><strong>Social Engineering for Information:</strong> Calling employees pretending to be vendors, IT staff,
+            or auditors to gather internal network details, employee names, email formats, and system configurations
+            through conversation.</li>
+          <li><strong>Tools Commonly Used:</strong> Maltego (relationship mapping and OSINT), theHarvester (email/domain
+            enumeration), Recon-ng (web reconnaissance framework), Netcraft (website history &amp; technology), and
+            LinkedIn/Facebook for employee profiling and targeting spear-phishing.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Botnets and DDoS -->
+    <div class="qcard u2">
+      <div class="q-header">
+        <div class="q-title">Explain the relationship between Botnets and Distributed Cyber Attacks.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Botnets as the Infrastructure for DDoS:</strong> A botnet provides the distributed army of
+            compromised machines required to execute a Distributed Denial of Service (DDoS) attack. Without a botnet,
+            generating enough traffic to overwhelm a modern server from a single source is practically impossible.</li>
+          <li><strong>How DDoS Works via Botnet:</strong> The bot herder issues a command to the C&amp;C server, which
+            relays the attack instruction to all bots simultaneously. Thousands or millions of bots flood the target
+            with requests — HTTP floods, UDP floods, SYN floods — overwhelming its capacity to respond.</li>
+          <li><strong>Distributed Nature Defeats Simple Defenses:</strong> Because attack traffic originates from
+            thousands of legitimate-looking IP addresses across multiple countries, simple IP blocking is ineffective.
+            The distributed nature is what makes botnet-driven DDoS so powerful and difficult to mitigate.</li>
+          <li><strong>Amplification Attacks:</strong> Botnets are used in reflection/amplification DDoS attacks —
+            sending spoofed requests to public servers (DNS, NTP, memcached) that send large responses to the victim's
+            IP. Small botnet traffic generates massively amplified attack volume (up to 51,000x amplification with
+            memcached).</li>
+          <li><strong>P2P Botnet Architecture:</strong> Modern botnets use peer-to-peer (P2P) C&amp;C rather than
+            centralized servers — making them resilient to takedown since there is no single point of failure. Taking
+            down one node does not disable the botnet.</li>
+          <li><strong>Real-World Examples:</strong> Mirai Botnet (2016) used 600,000+ compromised IoT devices (cameras,
+            routers) to launch a 1.1 Tbps DDoS attack against DNS provider Dyn, disrupting Twitter, Netflix, Reddit, and
+            GitHub for hours. The 2007 Estonia attacks used botnets to target government and banking infrastructure.
+          </li>
+          <li><strong>Mitigation:</strong> BGP blackholing, rate limiting, DDoS scrubbing centers (Cloudflare, Akamai),
+            anycast diffusion, and ISP-level traffic filtering are the primary defenses against large-scale botnet DDoS
+            attacks.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ── 2-Mark Unit 2 ── -->
+    <div class="sec-head">
+      <h2>📗 2-Mark Questions — Unit 2</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="tm-grid">
+      <div class="tm-card internal-2m">
+        <h4>What is Social Engineering? <span style="color:var(--gold)">[Internal]</span></h4>
+        <p>Social engineering is the psychological manipulation of humans into performing actions or revealing
+          confidential information. It exploits trust, fear, urgency, and authority rather than technical
+          vulnerabilities. Examples include phishing emails, vishing calls, and pretexting scenarios.</p>
+      </div>
+      <div class="tm-card internal-2m">
+        <h4>What is Cyberstalking? <span style="color:var(--gold)">[Internal]</span></h4>
+        <p>Cyberstalking is the repeated, deliberate use of electronic communication (emails, social media, tracking
+          apps) to harass, monitor, or intimidate a specific person. It causes fear and psychological distress. In
+          India, it is punishable under Section 354D IPC and relevant IT Act provisions.</p>
+      </div>
+      <div class="tm-card internal-2m">
+        <h4>What are Botnets? <span style="color:var(--gold)">[Internal]</span></h4>
+        <p>A botnet is a network of internet-connected devices infected with malware and remotely controlled by an
+          attacker (bot herder) via a Command &amp; Control server. Individual infected devices are called bots or
+          zombies. Botnets are used for DDoS attacks, spam, credential theft, and cryptojacking.</p>
+      </div>
+      <div class="tm-card internal-2m">
+        <h4>What is a Virus? <span style="color:var(--gold)">[Internal]</span></h4>
+        <p>A computer virus is a self-replicating malicious program that attaches itself to legitimate files and spreads
+          when those files are executed. It requires human action to trigger (opening an infected file). Viruses can
+          corrupt data, delete files, or open backdoors, and spread via email, USB drives, and downloads.</p>
+      </div>
+      <div class="tm-card internal-2m">
+        <h4>Name two Information Gathering Tools <span style="color:var(--gold)">[Internal]</span></h4>
+        <p><strong>1. Maltego:</strong> A graphical OSINT and link analysis tool that maps relationships between people,
+          organizations, domains, and IP addresses using public data. <strong>2. Nmap (Network Mapper):</strong> A
+          network scanning tool used to discover hosts, open ports, running services, and OS versions on a target
+          network.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Attack Vectors</h4>
+        <p>Attack vectors are the pathways or methods through which a cybercriminal gains unauthorized access to a
+          system. Common vectors include phishing emails, malicious websites, infected USB drives, vulnerable network
+          ports, social engineering, and compromised third-party software.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Phishing</h4>
+        <p>Phishing is a social engineering attack using deceptive emails, messages, or websites that impersonate
+          trusted entities to trick users into revealing credentials, financial information, or clicking malicious
+          links. Spear-phishing is targeted; whaling targets executives. Covered under Section 66D, IT Act 2000.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Cloud Computing (Security Context)</h4>
+        <p>Cloud computing delivers IT resources over the internet (IaaS, PaaS, SaaS). Security concerns include
+          misconfigured storage buckets exposing data, shared tenancy risks, jurisdictional ambiguity for digital
+          evidence, and criminals using cloud platforms to host malware and C&amp;C servers.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Spoofing</h4>
+        <p>Spoofing is the act of disguising a communication (email, IP address, DNS response, caller ID) to appear as a
+          trusted, legitimate source. Types include: IP spoofing (forging source IP), email spoofing (faking sender
+          address), ARP spoofing (linking attacker's MAC to victim's IP), and DNS spoofing.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Malware</h4>
+        <p>Malware (malicious software) is any software intentionally designed to cause damage, steal data, or gain
+          unauthorized access to systems. Types include viruses, worms, Trojans, ransomware, spyware, adware, rootkits,
+          and keyloggers. It spreads via email, downloads, infected media, and network exploits.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Spam Email</h4>
+        <p>Spam is unsolicited bulk email sent to large numbers of recipients, typically for advertising, phishing, or
+          malware distribution. Spam consumes network bandwidth and storage, carries phishing payloads, spreads viruses,
+          and constitutes approximately 45–85% of all email traffic globally. Filtered by spam detection algorithms.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Password Cracking</h4>
+        <p>Password cracking is the process of recovering passwords from stored or transmitted data using techniques
+          like brute force (trying all combinations), dictionary attacks (using common word lists), rainbow table
+          attacks (precomputed hash lookups), and hybrid attacks. Defenses: strong hashing (bcrypt), salting, MFA, and
+          account lockout policies.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Zombie Computer</h4>
+        <p>A zombie computer is a device compromised by malware and secretly controlled by a cybercriminal as part of a
+          botnet. The owner is unaware. Zombies are used to send spam, launch DDoS attacks, mine cryptocurrency, or
+          relay attack traffic — giving the attacker anonymity while the victim bears responsibility.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Distributed Attack (DDoS)</h4>
+        <p>A Distributed Denial of Service (DDoS) attack uses multiple compromised systems (botnet) to simultaneously
+          flood a target server or network with traffic, exhausting its resources and rendering it unable to serve
+          legitimate users. It is "distributed" because attack traffic originates from many geographic locations
+          simultaneously.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Online Fraud</h4>
+        <p>Online fraud involves any deceptive scheme conducted via the internet for financial gain — including
+          e-commerce fraud (fake sellers), advance-fee scams, auction fraud, investment scams, romance scams, and
+          insurance fraud. It exploits the anonymity and reach of the internet to victimize users across borders.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Pretexting in Social Engineering</h4>
+        <p>Pretexting is a social engineering technique where the attacker fabricates a believable false scenario
+          (pretext) to manipulate a target into revealing information or performing an action. Example: An attacker
+          calls an employee claiming to be an IT auditor needing their password to "verify a system backup." Trust is
+          established through the narrative.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Cyber Cafe Misuse</h4>
+        <p>Cyber cafe misuse refers to the exploitation of shared public computer terminals for illegal activities —
+          accessing illegal content, sending threatening emails, conducting financial fraud, installing keyloggers to
+          steal subsequent users' data, or using café anonymity to evade law enforcement tracking of criminal
+          activities.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║             UNIT  3                  ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <div id="u3" class="unit-content">
+
+    <div class="sec-head">
+      <h2>🏆 Internal Exam Questions</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <!-- WAPkitting vs WAPjacking -->
+    <div class="qcard internal u3">
+      <div class="q-header">
+        <div class="q-title">Differentiate between WAPkitting &amp; WAPjacking with suitable examples.</div>
+        <span class="badge b-internal">INTERNAL</span>
+        <span class="badge b-6m">6 MARKS</span>
+        <span class="badge b-syllabus">Also in Syllabus</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>WAP (Wireless Access Protocol):</strong> WAP was the early-generation protocol enabling mobile
+            devices to access internet services. Though largely replaced by modern mobile web standards, WAP-related
+            attack terminologies remain relevant in mobile security.</li>
+          <li><strong>WAPkitting – Definition:</strong> WAPkitting involves setting up a rogue/fake Wireless Access
+            Point (Evil Twin attack) that mimics a legitimate network (same SSID/network name). Unsuspecting users
+            connect to it instead of the real network, allowing the attacker to intercept all their traffic, steal
+            credentials, and inject malicious content.</li>
+          <li><strong>WAPkitting – Example:</strong> An attacker sets up a fake "CafeWiFi_Free" hotspot in a coffee
+            shop, identical in name to the café's real network. When customers connect, their banking passwords, emails,
+            and messages are intercepted by the attacker via Man-in-the-Middle interception.</li>
+          <li><strong>WAPjacking – Definition:</strong> WAPjacking involves hijacking or compromising a legitimate,
+            already-existing wireless access point — by exploiting weak passwords (WEP/WPA brute force), router
+            vulnerabilities, or physical access to the router — to redirect users' traffic through the attacker's
+            system.</li>
+          <li><strong>WAPjacking – Example:</strong> An attacker cracks the weak WPA2 password of a home router or
+            exploits an unpatched router firmware vulnerability to gain admin access. They then redirect DNS queries,
+            inject ads, intercept sessions, or perform phishing attacks on all connected devices without setting up a
+            separate fake network.</li>
+        </ol>
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Aspect</th>
+              <th>WAPkitting</th>
+              <th>WAPjacking</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nature</td>
+              <td>Creates a new fake/rogue access point</td>
+              <td>Hijacks an existing legitimate access point</td>
+            </tr>
+            <tr>
+              <td>Technique</td>
+              <td>Evil Twin / Rogue AP setup</td>
+              <td>Router exploit, password cracking, firmware attack</td>
+            </tr>
+            <tr>
+              <td>Victim Awareness</td>
+              <td>Victim connects to a decoy network</td>
+              <td>Victim remains on the real (compromised) network</td>
+            </tr>
+            <tr>
+              <td>Difficulty</td>
+              <td>Easier — just needs a wireless adapter</td>
+              <td>Harder — requires exploiting existing hardware</td>
+            </tr>
+            <tr>
+              <td>Detection</td>
+              <td>Network scanning shows duplicate SSID</td>
+              <td>Harder to detect — router looks legitimate</td>
+            </tr>
+            <tr>
+              <td>Prevention</td>
+              <td>Verify BSSID before connecting; use VPN</td>
+              <td>Strong router passwords; firmware updates; WPA3</td>
+            </tr>
+          </tbody>
+        </table>
+        <ol start="6">
+          <li><strong>Common Defenses Against Both:</strong> Always use a VPN on public/unknown networks (encrypts
+            traffic even if intercepted), verify network authenticity before connecting, enable HTTPS everywhere,
+            disable auto-connect to open networks, and keep router firmware updated with WPA3 encryption where
+            available.</li>
+          <li><strong>Legal Perspective:</strong> Both constitute unauthorized interception and unauthorized access to
+            computer networks — punishable under Section 43 (unauthorized access) and Section 66 (computer offences) of
+            India's IT Act 2000, with penalties including imprisonment and fines.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Components of Wireless Network -->
+    <div class="qcard internal u3">
+      <div class="q-header">
+        <div class="q-title">List and explain the different components of a Wireless Network.</div>
+        <span class="badge b-internal">INTERNAL</span>
+        <span class="badge b-6m">6 MARKS</span>
+        <span class="badge b-syllabus">Also in Syllabus</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Wireless Clients (Stations):</strong> End-user devices such as laptops, smartphones, tablets, and
+            IoT devices equipped with a Wireless Network Interface Card (WNIC). They connect to the network wirelessly
+            using IEEE 802.11 (Wi-Fi) standards and are the primary users and potential vulnerabilities of the network.
+          </li>
+          <li><strong>Wireless Access Point (WAP / AP):</strong> The central hub that enables wireless devices to
+            connect to a wired network. It transmits and receives Wi-Fi signals, manages device authentication, assigns
+            IP addresses (via DHCP), and bridges wireless and wired networks. Security of the AP is critical — it is the
+            primary attack surface.</li>
+          <li><strong>Wireless Router:</strong> Combines the functions of a WAP, network switch, and IP router. It
+            directs traffic between the local wireless network and the internet, manages NAT (Network Address
+            Translation), and provides basic firewall functionality. Most home and small-office networks use a combined
+            router/WAP unit.</li>
+          <li><strong>SSID (Service Set Identifier):</strong> The human-readable name of a wireless network (e.g.,
+            "HomeNetwork_5G"). Devices use the SSID to identify and connect to the correct network. Hiding the SSID
+            provides minimal security; WPA3 encryption and strong passwords are the real defenses.</li>
+          <li><strong>Wireless Security Protocols:</strong>
+            <ul>
+              <li><strong>WEP (Wired Equivalent Privacy):</strong> Outdated, easily cracked — considered insecure.</li>
+              <li><strong>WPA / WPA2 (Wi-Fi Protected Access):</strong> Uses AES-CCMP encryption; WPA2 is current
+                standard for most networks.</li>
+              <li><strong>WPA3:</strong> Latest protocol — improved encryption, protection against brute-force offline
+                dictionary attacks, and forward secrecy. Recommended for modern deployments.</li>
+            </ul>
+          </li>
+          <li><strong>Antenna:</strong> Directs and amplifies the wireless signal transmission from the AP.
+            Omnidirectional antennas broadcast in all directions; directional antennas focus signals toward specific
+            areas. Signal strength and direction affect coverage area and interception risk.</li>
+          <li><strong>Firewall / IDS/IPS:</strong> Network firewall filters incoming and outgoing wireless traffic based
+            on rules; Intrusion Detection/Prevention Systems monitor wireless traffic for attack patterns (rogue APs,
+            deauthentication floods, evil twin attacks) and alert or block suspicious activity.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ── Additional Unit 3 ── -->
+    <div class="sec-head">
+      <h2>📘 Additional Syllabus Questions (6 Marks)</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <!-- Growth of mobile devices -->
+    <div class="qcard u3">
+      <div class="q-header">
+        <div class="q-title">Explain the growth and proliferation of mobile and wireless devices. Discuss their impact
+          on Cybercrime.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Explosive Growth:</strong> The number of mobile devices globally surpassed 8 billion, exceeding
+            the world's population. Smartphone penetration in India has grown from ~5% in 2010 to over 65% today, driven
+            by affordable devices, cheap data (Jio effect), and digital services expansion.</li>
+          <li><strong>Proliferation of Wireless Connectivity:</strong> The rollout of 4G/5G networks, widespread public
+            Wi-Fi hotspots, and Bluetooth-enabled IoT devices has created an always-connected environment where billions
+            of endpoints transmit sensitive data constantly.</li>
+          <li><strong>Expanded Attack Surface:</strong> Every mobile device is a potential entry point for cybercrime.
+            The proliferation means attackers have billions more targets — many running outdated software, connected to
+            insecure networks, or lacking proper security configuration.</li>
+          <li><strong>Rise of Mobile-Specific Cybercrime:</strong> Mobile growth drove new crime categories: SMiShing
+            (SMS phishing), mobile banking fraud (UPI fraud in India), vishing (voice phishing), malicious app
+            distribution via sideloading, and SIM swapping attacks to bypass OTP authentication.</li>
+          <li><strong>BYOD (Bring Your Own Device) Risks:</strong> Employees using personal devices for work mix
+            personal and corporate data. If a personal device is compromised, corporate networks and data are exposed —
+            organizations have limited control over the security posture of personal devices.</li>
+          <li><strong>IoT Proliferation:</strong> Smart TVs, home assistants, routers, cameras, and wearables are often
+            deployed with default passwords and no security updates. The Mirai botnet (2016) demonstrated how millions
+            of poorly secured IoT devices can be recruited for massive DDoS attacks.</li>
+          <li><strong>Data Privacy Implications:</strong> Mobile devices continuously collect location data, biometrics,
+            contacts, messages, and browsing history. If compromised or if apps abuse permissions, this vast personal
+            data enables highly targeted fraud, stalking, and identity theft.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Security challenges of mobile devices -->
+    <div class="qcard u3">
+      <div class="q-header">
+        <div class="q-title">Explain the security challenges posed by mobile devices in modern computing environments.
+        </div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Insecure Wi-Fi Connectivity:</strong> Mobile devices frequently connect to public Wi-Fi hotspots
+            that lack encryption. Attackers on the same network can intercept unencrypted traffic (HTTP) via MitM
+            attacks, capturing credentials and session tokens.</li>
+          <li><strong>Malicious and Unofficial Applications:</strong> Sideloading apps from unofficial sources (APK
+            files, third-party stores) bypasses platform security checks. Even official app stores occasionally contain
+            malicious apps that steal data, display fraudulent ads, or mine cryptocurrency.</li>
+          <li><strong>Lost or Stolen Devices:</strong> Mobile devices are physically small and easily lost or stolen.
+            Without strong screen lock, encryption, and remote wipe capabilities, a stolen phone provides full access to
+            emails, banking apps, contacts, and stored credentials.</li>
+          <li><strong>Outdated OS and Unpatched Vulnerabilities:</strong> Many users delay or are unable to apply OS
+            security updates. Budget Android devices often receive no long-term support. Unpatched vulnerabilities are
+            actively exploited — e.g., Stagefright vulnerability affected ~950 million Android devices.</li>
+          <li><strong>Excessive App Permissions:</strong> Many apps request unnecessary permissions (contacts,
+            microphone, camera, location) beyond their functional needs. Malicious apps exploit excessive permissions to
+            collect sensitive data for espionage or targeted advertising.</li>
+          <li><strong>SMS and Call Interception:</strong> SS7 (Signaling System No. 7) protocol vulnerabilities allow
+            sophisticated attackers to intercept SMS messages and calls globally — bypassing SMS-based two-factor
+            authentication and enabling account takeovers.</li>
+          <li><strong>Mobile Phishing &amp; Social Engineering:</strong> The small screen size of mobile devices makes
+            phishing URLs and fake UI elements harder to detect. Mobile users are more likely to click suspicious links,
+            and browser security indicators (padlocks, full URLs) are often hidden or truncated on mobile browsers.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Credit card frauds -->
+    <div class="qcard u3">
+      <div class="q-header">
+        <div class="q-title">Discuss credit card frauds in the wireless and mobile computing era.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Card-Not-Present (CNP) Fraud:</strong> The most prevalent form — using stolen card details
+            (number, CVV, expiry) to make online or telephone purchases where the physical card is not required. Mobile
+            commerce and e-commerce growth has massively increased CNP fraud exposure.</li>
+          <li><strong>NFC / Contactless Skimming:</strong> Near-Field Communication (NFC) enabled contactless payment
+            cards can theoretically be skimmed by specially equipped devices in close proximity. Attackers use NFC
+            readers to capture card data from cards in pockets or bags in crowded places.</li>
+          <li><strong>Fake Mobile Payment Apps:</strong> Malicious apps disguised as banking or UPI apps (PhonePe, BHIM
+            clones) capture card/UPI PIN details entered by users who mistake them for the legitimate app. India has
+            seen numerous such fake UPI apps.</li>
+          <li><strong>Phishing for Card Data:</strong> Smishing (SMS phishing) messages claiming "Your card has been
+            blocked — verify now" direct users to fake banking sites that capture complete card details. The mobile
+            context (urgency, smaller screen) makes users more vulnerable.</li>
+          <li><strong>Man-in-the-Middle on Public Wi-Fi:</strong> When conducting payment transactions over unencrypted
+            or compromised Wi-Fi, attackers intercept card data, CVVs, and OTPs. Even HTTPS can be compromised via SSL
+            stripping attacks on unprotected networks.</li>
+          <li><strong>SIM Swap Attack:</strong> Attackers convince or bribe telecom employees to transfer the victim's
+            mobile number to an attacker-controlled SIM. They then receive all OTPs and authentication calls, enabling
+            complete takeover of banking and payment accounts linked to that phone number.</li>
+          <li><strong>Preventive Measures:</strong> Enable transaction alerts (SMS/email) for all card activity; use
+            virtual card numbers for online purchases; never enter card details on unverified links; activate 3D Secure
+            (OTP-based) authentication; regularly monitor statements; report unauthorized charges immediately; avoid
+            financial transactions on public Wi-Fi.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Attacks on mobile phones -->
+    <div class="qcard u3">
+      <div class="q-header">
+        <div class="q-title">Describe the various attacks on mobile phones and cellphones. Suggest preventive measures.
+        </div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Mobile Malware:</strong> Malicious software (Trojans, spyware, ransomware, adware) specifically
+            designed for mobile platforms. Android is more frequently targeted due to open sideloading. Example: Pegasus
+            spyware — a zero-click spyware capable of accessing microphone, camera, messages, and location without any
+            user interaction.</li>
+          <li><strong>SMiShing (SMS Phishing):</strong> Deceptive SMS messages with malicious links or false emergency
+            claims ("Your bank account suspended — click here"). The mobile context increases click rates as users are
+            more impulsive on small screens.</li>
+          <li><strong>Bluetooth Attacks:</strong> Bluejacking (sending unsolicited messages), Bluesnarfing (unauthorized
+            access to data via Bluetooth), and Bluebugging (gaining full control of a phone via Bluetooth) exploit
+            Bluetooth vulnerabilities when devices are set to discoverable mode.</li>
+          <li><strong>SIM Cloning / SIM Swap:</strong> SIM cloning duplicates a victim's SIM card to intercept calls and
+            messages. SIM swapping socially engineers telecom providers to reassign a victim's number to an attacker's
+            SIM, allowing account takeovers via OTP interception.</li>
+          <li><strong>Rogue Mobile Applications:</strong> Fake or trojanized apps distributed via unofficial stores or
+            through phishing links install malware, steal credentials, enable remote access, or subscribe users to
+            premium services without consent.</li>
+          <li><strong>Man-in-the-Middle on Wi-Fi:</strong> Attackers on the same network intercept mobile device traffic
+            via ARP poisoning or evil twin attacks, capturing unencrypted communications including login sessions and
+            payment data.</li>
+          <li><strong>Preventive Measures:</strong>
+            <ul>
+              <li>Install apps only from official stores (Play Store, App Store); review permissions before granting.
+              </li>
+              <li>Keep OS and apps fully updated; enable automatic security updates.</li>
+              <li>Use strong screen lock (biometric + PIN); enable full device encryption.</li>
+              <li>Disable Bluetooth and NFC when not in use; never leave device in discoverable mode.</li>
+              <li>Use a trusted VPN on public Wi-Fi networks.</li>
+              <li>Enable remote tracking and wipe (Find My Device / Google Find My) for loss/theft scenarios.</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Authentication services in mobile security -->
+    <div class="qcard u3">
+      <div class="q-header">
+        <div class="q-title">Explain the authentication services used in Mobile Device Security.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>PIN / Password Authentication:</strong> The most basic form — a numeric PIN (4–8 digits) or
+            alphanumeric password protects device access. Longer, complex passwords significantly raise the cost of
+            brute-force attacks. Recommended: minimum 6-digit PIN; alphanumeric passwords for high-security needs.</li>
+          <li><strong>Biometric Authentication – Fingerprint:</strong> Fingerprint scanners (capacitive or ultrasonic)
+            compare stored fingerprint templates. Fast, convenient, and difficult to spoof physically. Widely adopted as
+            the primary unlock mechanism on modern smartphones. Stored fingerprint data remains on-device (TEE — Trusted
+            Execution Environment).</li>
+          <li><strong>Facial Recognition:</strong> Uses front camera and/or infrared 3D mapping (Face ID – Apple) to
+            authenticate users by facial geometry. IR-based 3D face recognition (like Apple Face ID) is highly secure;
+            2D camera-based recognition is less secure and can be spoofed with photos.</li>
+          <li><strong>Multi-Factor Authentication (MFA):</strong> Combines two or more authentication factors —
+            something you know (PIN), something you have (device/OTP), something you are (biometric). Mobile MFA
+            examples: Google Authenticator TOTP codes, SMS OTPs, hardware security keys via NFC/Bluetooth.</li>
+          <li><strong>OTP (One-Time Password) via SMS:</strong> A time-limited single-use code sent to the registered
+            mobile number during login. Widely used for banking and app authentication in India (UPI). Vulnerable to SIM
+            swap attacks and SS7 interception. Considered weaker than authenticator apps.</li>
+          <li><strong>Device Registration &amp; Mobile Device Management (MDM):</strong> Organizations use MDM solutions
+            (Microsoft Intune, VMware Workspace ONE) to register and authenticate corporate mobile devices — enforcing
+            security policies, enabling remote wipe, and requiring corporate certificate-based authentication before
+            granting network access.</li>
+          <li><strong>Behavioral Authentication:</strong> Emerging technique that continuously authenticates users based
+            on behavioral patterns — typing rhythm, gait pattern, touchscreen pressure, and usage patterns — providing
+            passive continuous authentication beyond the initial login, detecting if a different person picks up an
+            unlocked device.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Security implications for organizations -->
+    <div class="qcard u3">
+      <div class="q-header">
+        <div class="q-title">Explain the security implications of mobile devices for organisations.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>BYOD (Bring Your Own Device) Risk:</strong> When employees use personal smartphones for work,
+            organizations have limited control over device security posture. A personal device infected with consumer
+            malware can serve as an entry point into corporate networks and data.</li>
+          <li><strong>Data Leakage Through Mobile Apps:</strong> Corporate email, documents, and credentials stored on
+            mobile devices can be leaked if apps mishandle data, use insecure cloud sync, or if third-party apps have
+            overly broad data access permissions.</li>
+          <li><strong>Unmanaged Device Diversity:</strong> Employees use a wide range of devices (iOS, Android — various
+            versions, manufacturers), each with different security capabilities, update frequencies, and vulnerability
+            profiles. Ensuring consistent security across this diversity is extremely challenging for IT teams.</li>
+          <li><strong>Mobile Network Interception:</strong> Employees accessing corporate systems via public Wi-Fi
+            (hotels, airports, cafes) expose corporate data to potential interception. Corporate VPN usage on mobile is
+            often inconsistent or bypassed by employees for convenience.</li>
+          <li><strong>Loss and Theft Exposure:</strong> If an employee's corporate-enabled device is lost or stolen
+            without proper encryption and remote wipe capabilities, all corporate data, emails, and credentials stored
+            on the device are immediately at risk of exposure.</li>
+          <li><strong>Shadow IT via Mobile:</strong> Employees increasingly install unapproved third-party productivity
+            apps (cloud storage, messaging) on their devices and use them for corporate communications — creating data
+            flows and storage outside the organization's visibility and control.</li>
+          <li><strong>Organizational Security Measures:</strong> Implement MDM/EMM solutions, enforce device encryption
+            and screen lock policies, require VPN for corporate access, enable remote wipe for lost devices, adopt app
+            whitelisting, segment corporate and personal data via containerization (e.g., Samsung Knox, Work Profile),
+            and conduct regular employee security awareness training.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Importance of organizational security policies -->
+    <div class="qcard u3">
+      <div class="q-header">
+        <div class="q-title">Explain the importance of organisational security policies in the mobile computing era.
+        </div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Establishing a Security Baseline:</strong> A mobile security policy defines the minimum security
+            standards all devices accessing corporate resources must meet — screen lock requirements, encryption, OS
+            version minimums, and approved apps — ensuring consistent protection regardless of device type.</li>
+          <li><strong>BYOD Policy Framework:</strong> A clear BYOD policy defines which personal devices are permitted,
+            what data may be accessed, what the organization can monitor or remotely wipe, and what happens on
+            employment termination — protecting both employee privacy and corporate data simultaneously.</li>
+          <li><strong>VPN and Network Access Controls:</strong> Policies mandating VPN use for remote corporate access
+            ensure all mobile traffic is encrypted in transit, even on untrusted public Wi-Fi. Conditional access
+            policies can deny network access to non-compliant devices.</li>
+          <li><strong>App Installation and Usage Policy:</strong> Restricting installation to MDM-approved apps prevents
+            malware introduction via shadow IT. Containerization policies separate work and personal data on the same
+            device, limiting lateral data exposure.</li>
+          <li><strong>Incident Response Procedures:</strong> Policies define response procedures for lost/stolen devices
+            (immediate remote wipe procedures), data breach protocols, and employee reporting obligations — minimizing
+            the window between device loss and data exposure.</li>
+          <li><strong>Regular Training and Compliance:</strong> Security awareness training tailored to mobile threats
+            (SMiShing, vishing, app permissions) ensures employees understand their role in security. Regular policy
+            compliance audits via MDM dashboards identify non-compliant devices before they become incidents.</li>
+          <li><strong>Legal and Regulatory Compliance:</strong> Documented mobile security policies provide evidence of
+            "reasonable security practices" required under India's IT Act Section 43A and international regulations like
+            GDPR — protecting organizations from liability in the event of a mobile-related data breach.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Laptop security issues -->
+    <div class="qcard u3">
+      <div class="q-header">
+        <div class="q-title">Discuss security issues related to laptops and portable computing devices.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Physical Theft and Loss:</strong> Laptops are compact, valuable, and frequently transported —
+            making them prime theft targets. A stolen unencrypted laptop provides immediate access to all stored files,
+            emails, saved passwords, and corporate VPN credentials.</li>
+          <li><strong>Unencrypted Storage:</strong> Without full disk encryption (BitLocker, FileVault, LUKS), a stolen
+            laptop's hard drive can be removed and directly read on another machine, bypassing all OS-level
+            authentication and security controls.</li>
+          <li><strong>Insecure Public Network Usage:</strong> Remote workers frequently use laptops at coffee shops,
+            airports, and hotels on public Wi-Fi — subjecting corporate communications to potential interception, rogue
+            AP attacks, and session hijacking.</li>
+          <li><strong>Outdated Software and Unpatched Vulnerabilities:</strong> Remote workers who rarely connect to the
+            corporate network may not receive timely security patches. Outdated OS and software create exploitable
+            vulnerabilities that attackers actively scan for on public networks.</li>
+          <li><strong>Malware via Physical Media:</strong> USB ports on laptops are entry points for malware via
+            infected drives, accessories (e.g., "rubber ducky" USB keystroke injection attacks), or malicious charging
+            cables.</li>
+          <li><strong>Shoulder Surfing and Visual Eavesdropping:</strong> In public spaces, sensitive information
+            displayed on a laptop screen (confidential documents, source code, client data) can be observed by nearby
+            individuals without any technical intrusion.</li>
+          <li><strong>Preventive Measures:</strong>
+            <ul>
+              <li>Enable full disk encryption (BitLocker/FileVault) on all laptops.</li>
+              <li>Use strong BIOS/UEFI passwords and disable boot from external media.</li>
+              <li>Attach physical security cables (Kensington lock) in public environments.</li>
+              <li>Use privacy screen protectors in public places.</li>
+              <li>Mandate VPN for all remote corporate access.</li>
+              <li>Enable remote tracking and remote wipe capabilities via MDM/endpoint management.</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Trends and mobility -->
+    <div class="qcard u3">
+      <div class="q-header">
+        <div class="q-title">Explain the trends and mobility and their impact on cyber security.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>5G Network Expansion:</strong> 5G's ultra-low latency and massive device connectivity (enabling
+            millions of IoT connections per sq. km) dramatically expands the attack surface. 5G network slicing and
+            virtualized infrastructure introduce new classes of network-level vulnerabilities.</li>
+          <li><strong>Work-From-Home (WFH) and Remote Work:</strong> Post-pandemic normalization of remote work has
+            permanently moved corporate computing outside traditional network perimeters. VPN usage, cloud service
+            adoption, and home network security became critical security battlegrounds.</li>
+          <li><strong>IoT and Connected Devices:</strong> The explosion of smart home devices, wearables, industrial
+            sensors, and connected vehicles creates billions of endpoints — most with minimal security, no update
+            mechanism, and default credentials — dramatically increasing attack surface.</li>
+          <li><strong>Mobile-First Applications:</strong> Business-critical applications (banking, healthcare, retail)
+            have moved to mobile-first architectures. Vulnerabilities in mobile apps directly impact critical systems —
+            insecure API endpoints, weak local data storage, and certificate pinning bypasses are common mobile app
+            security failures.</li>
+          <li><strong>Cloud-Mobile Integration:</strong> All mobile data syncs to cloud storage (iCloud, Google Drive,
+            OneDrive). A compromised cloud account gives attackers access to all synced mobile data — photos, documents,
+            contacts, location history — from anywhere in the world.</li>
+          <li><strong>Zero Trust Architecture Adoption:</strong> The trend of employees accessing corporate systems from
+            mobile devices on unknown networks drove adoption of Zero Trust — "never trust, always verify" — requiring
+            continuous authentication, least-privilege access, and device health verification regardless of location.
+          </li>
+          <li><strong>AI-Powered Mobile Threats:</strong> Attackers use AI to generate deepfake audio/video for social
+            engineering, craft highly personalized spear-phishing messages from OSINT data, and automate vulnerability
+            discovery in mobile applications — raising the sophistication and scale of mobile-targeted attacks.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Bluetooth Hacking -->
+    <div class="qcard u3">
+      <div class="q-header">
+        <div class="q-title">Explain hacking Bluetooth.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Overview of Bluetooth Hacking:</strong> Bluetooth operates in the 2.4GHz ISM band with a typical
+            range of 10m (Class 2) to 100m (Class 1). Because many users leave Bluetooth enabled and devices in
+            discoverable mode, attackers within range can exploit various Bluetooth protocol vulnerabilities.</li>
+          <li><strong>Bluejacking:</strong> The simplest Bluetooth attack — sending unsolicited text messages, contact
+            cards, or images to a nearby device via Bluetooth's Object Push Profile. Not destructive, but intrusive.
+            Used for spam advertising or to psychologically manipulate targets.</li>
+          <li><strong>Bluesnarfing:</strong> Unauthorized access to data stored on a Bluetooth device — contacts,
+            calendar, emails, messages, and stored photos — without the device owner's knowledge or consent. Exploits
+            flaws in the Object Exchange (OBEX) protocol implementation. A more serious attack than Bluejacking.</li>
+          <li><strong>Bluebugging:</strong> The most severe Bluetooth attack — gaining full remote control over a
+            victim's phone, including making calls, sending messages, reading data, and activating the microphone for
+            eavesdropping. Exploits Bluetooth's AT command interface; allows the attacker to operate the phone as if
+            they had it in hand.</li>
+          <li><strong>BlueBorne Attack:</strong> A critical 2017 vulnerability (CVE-2017-0781) affecting over 5 billion
+            devices. BlueBorne required no user interaction and no pairing — an attacker could compromise devices just
+            by being within Bluetooth range, spread like a worm between devices, and gain full device control.</li>
+          <li><strong>Bluetooth Relay and Man-in-the-Middle:</strong> Attackers use relay devices to extend the
+            effective range of Bluetooth connections, enabling attacks from greater distances. MitM attacks intercept
+            and manipulate data between paired devices during the connection establishment phase.</li>
+          <li><strong>Preventive Measures:</strong>
+            <ul>
+              <li>Turn off Bluetooth when not actively in use — this is the single most effective defense.</li>
+              <li>Set device to "non-discoverable" mode in public places.</li>
+              <li>Reject unexpected pairing requests from unknown devices.</li>
+              <li>Regularly update device firmware to patch Bluetooth stack vulnerabilities.</li>
+              <li>Avoid pairing with unknown or untrusted devices in public.</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Organizational security measures for mobile -->
+    <div class="qcard u3">
+      <div class="q-header">
+        <div class="q-title">Discuss organisational security measures for handling mobile devices securely.</div>
+        <span class="badge b-6m">6 MARKS</span>
+      </div>
+      <div class="ans">
+        <ol>
+          <li><strong>Mobile Device Management (MDM):</strong> Deploy MDM solutions (Microsoft Intune, VMware Workspace
+            ONE) to centrally manage all corporate mobile devices — enforce encryption, screen lock, approved app lists,
+            OS version requirements, and remotely wipe devices on loss or theft.</li>
+          <li><strong>Network Access Control (NAC):</strong> Only allow devices meeting the security policy baseline
+            (compliant OS version, encryption enabled, no jailbreak/root) to connect to the corporate network.
+            Non-compliant devices are quarantined or given limited access.</li>
+          <li><strong>Corporate VPN Mandate:</strong> Require VPN connection for all corporate data access from mobile
+            devices — encrypting traffic even on public or untrusted networks and routing it through corporate security
+            inspection points.</li>
+          <li><strong>Containerization / Work Profiles:</strong> Separate work and personal data using containerization
+            technologies (Samsung Knox, Android Work Profile, Apple Managed Apps) — ensuring that even if personal apps
+            are compromised, corporate data in the container remains protected and separately encrypted.</li>
+          <li><strong>App Whitelisting and Vetting:</strong> Maintain a list of approved applications for corporate use.
+            Use MDM to prevent installation of unapproved apps on corporate devices. Conduct security vetting of all
+            business apps before deployment.</li>
+          <li><strong>Security Awareness Training:</strong> Regular training on mobile-specific threats (SMiShing, QR
+            code phishing, vishing, fake app stores) makes employees the first line of defense. Simulated phishing tests
+            on mobile (SMS-based) measure and improve employee vigilance.</li>
+          <li><strong>Remote Wipe and Asset Tracking:</strong> All corporate devices must have remote wipe capability
+            configured. GPS tracking of corporate devices enables recovery before data exposure. Establish a clear,
+            tested lost-device response procedure with defined timelines for remote wipe activation.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ── 2-Mark Unit 3 ── -->
+    <div class="sec-head">
+      <h2>📗 2-Mark Questions — Unit 3</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="tm-grid">
+      <div class="tm-card">
+        <h4>Wireless Communications</h4>
+        <p>Wireless communication transmits data between devices over electromagnetic waves without physical cables.
+          Technologies include Wi-Fi (IEEE 802.11), Bluetooth, NFC, 4G/5G cellular, and satellite. Security challenges
+          arise from signal interception, rogue access points, and protocol vulnerabilities in wireless transmission.
+        </p>
+      </div>
+      <div class="tm-card">
+        <h4>Mobile Malware</h4>
+        <p>Mobile malware is malicious software targeting smartphones and tablets — including mobile Trojans, banking
+          malware, ransomware, spyware (e.g., Pegasus), adware, and SMiShing-delivered malware. Android is more
+          frequently targeted due to open app distribution. Prevention: use official app stores, keep OS updated, use
+          mobile antivirus.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Mobile Phishing</h4>
+        <p>Mobile phishing uses SMS (SMiShing), messaging apps, email, and fake apps to trick mobile users into
+          revealing credentials or clicking malicious links. The small screen size of mobile devices makes it harder to
+          verify URLs and security indicators, making users more susceptible than on desktop browsers.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Mobile Device Management (MDM)</h4>
+        <p>MDM is a software solution that allows organizations to remotely manage, monitor, and secure employee mobile
+          devices. It enforces security policies (encryption, screen lock, app control), enables remote wipe for lost
+          devices, manages software updates, and tracks device compliance — all from a central management console.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Bluetooth Attack</h4>
+        <p>Bluetooth attacks exploit the Bluetooth protocol to access or compromise nearby devices. Types:
+          <strong>Bluejacking</strong> (unsolicited messages), <strong>Bluesnarfing</strong> (unauthorized data access),
+          <strong>Bluebugging</strong> (full device control via AT commands). Prevention: keep Bluetooth off when not
+          needed; set device to non-discoverable.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Laptop Security</h4>
+        <p>Laptop security involves protecting portable computers from theft, unauthorized access, and cyber threats.
+          Key measures: full disk encryption (BitLocker/FileVault), strong BIOS password, VPN for remote access,
+          Kensington security cable in public, privacy screen protector, automatic screen lock, and remote wipe
+          capability.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Data Encryption in Mobile Devices</h4>
+        <p>Data encryption on mobile devices scrambles stored data using cryptographic keys so it is unreadable without
+          authentication. Full-device encryption (AES-256 on modern Android/iOS) protects all data on the device's
+          storage. Even if a device is stolen and the storage physically removed, encrypted data remains unreadable
+          without the decryption key.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Wireless Network Vulnerability</h4>
+        <p>Wireless network vulnerabilities arise from weak or outdated security protocols (WEP is easily cracked),
+          default router credentials, open/unsecured networks, rogue access points (evil twin attacks), deauthentication
+          frame attacks (Wi-Fi jamming), and poor physical security of access points. WPA3 and strong unique passwords
+          significantly reduce these risks.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Device Registration in Mobile Security</h4>
+        <p>Device registration is the process of enrolling a mobile device with an organization's MDM system or a
+          trusted service, binding the device to a specific user identity. It enables security policy enforcement, app
+          management, and conditional access — only registered and compliant devices are granted access to corporate
+          resources and networks.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Authentication Service in Mobile Security</h4>
+        <p>Authentication services verify the identity of a user or device before granting access. In mobile security,
+          these include PIN/password, biometrics (fingerprint, face recognition), OTP (one-time password via SMS or
+          authenticator app), PKI certificate-based authentication, and behavioral biometrics — providing layers of
+          identity verification for device access and app logins.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Credit Card Frauds in Mobile Commerce</h4>
+        <p>Mobile commerce credit card fraud includes card-not-present (CNP) fraud in online shopping apps, fake
+          banking/UPI apps capturing card details, SMiShing leading to phishing payment pages, NFC skimming of
+          contactless cards, and SIM swap attacks intercepting OTPs for transaction authorization. Prevention: virtual
+          card numbers, transaction alerts, 3D Secure, and VPN on public networks.</p>
+      </div>
+      <div class="tm-card">
+        <h4>Vishing, Phishing &amp; SMiShing</h4>
+        <p><strong>Phishing:</strong> Deceptive emails impersonating trusted entities to steal credentials.
+          <strong>Vishing:</strong> Voice phishing — fraudulent phone calls (pretending to be banks, IT support,
+          government) to extract sensitive information verbally. <strong>SMiShing:</strong> SMS-based phishing using
+          text messages with malicious links or fake alerts targeting mobile users. All three exploit trust and urgency.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showUnit(id) {
+      document.querySelectorAll('.unit-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelector(`.tab-btn.${id}`).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+
+</html>
