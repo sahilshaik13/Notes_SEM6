@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSIS Exam Guide — Units 1, 2 & 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0e17;
+    --surface: #1a1929;
+    --card: #211f35;
+    --border: #2e2b4a;
+    --u1: #ff6b6b;
+    --u2: #4ecdc4;
+    --u5: #ffe66d;
+    --text: #e8e6f0;
+    --muted: #8b88a8;
+    --accent: #a78bfa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #1a1929 0%, #0f0e17 60%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(167,139,250,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 900;
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 100px;
+    letter-spacing: 0.5px;
+  }
+  .badge-u1 { background: rgba(255,107,107,0.15); color: var(--u1); border: 1px solid rgba(255,107,107,0.3); }
+  .badge-u2 { background: rgba(78,205,196,0.15); color: var(--u2); border: 1px solid rgba(78,205,196,0.3); }
+  .badge-u5 { background: rgba(255,230,109,0.15); color: var(--u5); border: 1px solid rgba(255,230,109,0.3); }
+  .badge-hot { background: rgba(255,150,50,0.15); color: #ff9632; border: 1px solid rgba(255,150,50,0.3); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+  .toc-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media(max-width:600px) { .toc-grid { grid-template-columns: 1fr; } }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 13.5px;
+  }
+  .toc-item:hover { background: var(--card); }
+  .toc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot-u1 { background: var(--u1); }
+  .dot-u2 { background: var(--u2); }
+  .dot-u5 { background: var(--u5); }
+
+  /* ── UNIT HEADER ── */
+  .unit-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 52px 0 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .unit-pill {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .pill-u1 { background: rgba(255,107,107,0.2); color: var(--u1); }
+  .pill-u2 { background: rgba(78,205,196,0.2); color: var(--u2); }
+  .pill-u5 { background: rgba(255,230,109,0.2); color: var(--u5); }
+  .unit-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* ── QUESTION CARD ── */
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .q-card:hover { border-color: var(--accent); }
+  .q-header {
+    padding: 18px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    user-select: none;
+  }
+  .q-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+  .q-text {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    flex: 1;
+    line-height: 1.5;
+  }
+  .q-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .tag {
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .tag-hot { background: rgba(255,150,50,0.2); color: #ff9632; }
+  .tag-marks { background: rgba(167,139,250,0.15); color: var(--accent); }
+  .tag-internal { background: rgba(78,205,196,0.15); color: var(--u2); }
+  .chevron {
+    font-size: 18px;
+    color: var(--muted);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-card.open .chevron { transform: rotate(180deg); }
+
+  .q-body {
+    display: none;
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 0;
+  }
+  .q-card.open .q-body { display: block; }
+
+  /* ── ANSWER CONTENT ── */
+  .ans-intro {
+    font-size: 14px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 20px 0 12px;
+  }
+  .ans-text { color: #d4d2e4; line-height: 1.8; font-size: 14.5px; }
+  .ans-text p { margin-bottom: 12px; }
+  .ans-text strong { color: #fff; font-weight: 600; }
+
+  .points-list {
+    list-style: none;
+    margin: 14px 0;
+  }
+  .points-list li {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 14.5px;
+    color: #d4d2e4;
+    line-height: 1.6;
+  }
+  .points-list li:last-child { border-bottom: none; }
+  .li-bullet {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .diff-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .diff-table th {
+    background: rgba(167,139,250,0.1);
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+  .diff-table td {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    color: #d4d2e4;
+    vertical-align: top;
+  }
+  .diff-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+  .highlight-box {
+    background: rgba(167,139,250,0.08);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 14px;
+    color: #d4d2e4;
+    font-style: italic;
+  }
+
+  .sub-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin: 18px 0 10px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 32px;
+    color: var(--muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  .footer strong { color: var(--accent); }
+
+  /* ── EXAM TIP BOX ── */
+  .exam-tip {
+    background: rgba(255,230,109,0.07);
+    border: 1px solid rgba(255,230,109,0.2);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 13.5px;
+    color: #e0d8a0;
+  }
+  .exam-tip::before { content: '💡 Exam Tip: '; font-weight: 700; color: var(--u5); }
+
+  /* Top progress */
+  .progress-bar {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 40px;
+  }
+  .prog-seg {
+    height: 4px;
+    border-radius: 2px;
+    flex: 1;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .prog-seg:hover { opacity: 1; }
+  .seg-u1 { background: var(--u1); }
+  .seg-u2 { background: var(--u2); }
+  .seg-u5 { background: var(--u5); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">NSAKCET · VI Semester Final Exam Prep</div>
+  <h1>SSIS <span>Exam Answer</span> Guide</h1>
+  <p style="color:var(--muted);max-width:560px;font-size:14px;">Most-repeated questions from all previous papers + internals + assignments. Each answer is exam-ready for 6–7 marks.</p>
+  <div class="hero-meta">
+    <span class="badge badge-u1">Unit 1 · Listening & Soft Skills</span>
+    <span class="badge badge-u2">Unit 2 · Speaking Skills</span>
+    <span class="badge badge-u5">Unit 5 · Specific Soft Skills ✓ RECOMMENDED</span>
+    <span class="badge badge-hot">🔥 High-Frequency Questions</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">Quick Navigation</div>
+    <div class="toc-grid">
+      <a class="toc-item" href="#u1q1"><span class="toc-dot dot-u1"></span>Define Soft Skills & Nature</a>
+      <a class="toc-item" href="#u1q2"><span class="toc-dot dot-u1"></span>Hard Skills vs Soft Skills</a>
+      <a class="toc-item" href="#u1q3"><span class="toc-dot dot-u1"></span>Types of Listening Skills</a>
+      <a class="toc-item" href="#u1q4"><span class="toc-dot dot-u1"></span>Listening vs Hearing / Active Listening</a>
+      <a class="toc-item" href="#u1q5"><span class="toc-dot dot-u1"></span>Critical Listening</a>
+      <a class="toc-item" href="#u1q6"><span class="toc-dot dot-u1"></span>Tips for Effective Listening</a>
+      <a class="toc-item" href="#u1q7"><span class="toc-dot dot-u1"></span>Note-Taking: Importance & 5 R's</a>
+      <a class="toc-item" href="#u2q1"><span class="toc-dot dot-u2"></span>6 Pillars of Speaking Skills</a>
+      <a class="toc-item" href="#u2q2"><span class="toc-dot dot-u2"></span>Teamwork Skills & Importance</a>
+      <a class="toc-item" href="#u2q3"><span class="toc-dot dot-u2"></span>GD: Types, Techniques & Skills</a>
+      <a class="toc-item" href="#u2q4"><span class="toc-dot dot-u2"></span>GD Do's and Don'ts</a>
+      <a class="toc-item" href="#u2q5"><span class="toc-dot dot-u2"></span>Interview: Definition & Objectives</a>
+      <a class="toc-item" href="#u2q6"><span class="toc-dot dot-u2"></span>Leadership: Types & Characteristics</a>
+      <a class="toc-item" href="#u2q7"><span class="toc-dot dot-u2"></span>Presentation: 4 P's</a>
+      <a class="toc-item" href="#u5q1"><span class="toc-dot dot-u5"></span>Emotional Intelligence & EQ</a>
+      <a class="toc-item" href="#u5q2"><span class="toc-dot dot-u5"></span>Goal Setting: Short & Long Term</a>
+      <a class="toc-item" href="#u5q3"><span class="toc-dot dot-u5"></span>Motivation: Intrinsic vs Extrinsic</a>
+      <a class="toc-item" href="#u5q4"><span class="toc-dot dot-u5"></span>Stress Management Techniques</a>
+      <a class="toc-item" href="#u5q5"><span class="toc-dot dot-u5"></span>Time Management</a>
+      <a class="toc-item" href="#u5q6"><span class="toc-dot dot-u5"></span>Creative vs Critical Thinking</a>
+      <a class="toc-item" href="#u5q7"><span class="toc-dot dot-u5"></span>VARK Learning Styles</a>
+    </div>
+  </div>
+
+  <!-- ═══════════ UNIT 1 ═══════════ -->
+  <div class="unit-header">
+    <span class="unit-pill pill-u1">Unit 1</span>
+    <h2 class="unit-title">Introduction & Skills of Listening</h2>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" id="u1q1">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q1</span>
+      <div style="flex:1">
+        <div class="q-text">Write the definition and nature of Soft Skills.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 Every Paper</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">CIE-I Q1a</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p><strong>Definition:</strong> Soft skills are a cluster of interpersonal, social, communication, and self-management abilities that determine how a person interacts with others and manages their work environment. Unlike technical qualifications, soft skills are personality-driven and shape a person's character, attitude, and behavior in professional and academic settings.</p>
+        <p>According to experts, soft skills are "the non-technical, intangible skills that determine one's ability to relate to others effectively."</p>
+
+        <div class="sub-heading">Nature of Soft Skills</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Intangible:</strong> They cannot be easily measured or quantified like technical skills. They are observed through behavior and interaction.</li>
+          <li><span class="li-bullet"></span><strong>Transferable:</strong> Soft skills are applicable across all industries and professions — a good communicator performs well anywhere.</li>
+          <li><span class="li-bullet"></span><strong>Learnable and Improvable:</strong> While some are innate, soft skills can be developed through practice, training, and experience.</li>
+          <li><span class="li-bullet"></span><strong>Holistic:</strong> They encompass communication, teamwork, leadership, time management, emotional intelligence, and critical thinking.</li>
+          <li><span class="li-bullet"></span><strong>Complementary:</strong> Soft skills complement hard/technical skills. A technically brilliant person fails without communication or teamwork skills.</li>
+          <li><span class="li-bullet"></span><strong>Contextual:</strong> The expression of soft skills varies based on culture, profession, and relationship dynamics.</li>
+        </ul>
+
+        <div class="sub-heading">Importance in Academic & Professional Settings</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span>In academics: improve participation, group work, presentation, and comprehension.</li>
+          <li><span class="li-bullet"></span>In workplace: essential for leadership, client relations, conflict resolution, and career growth.</li>
+          <li><span class="li-bullet"></span>Employers today rank soft skills equally important to technical expertise during hiring.</li>
+        </ul>
+
+        <div class="highlight-box">"Hard skills may get you the interview, but soft skills get you the job and keep you there."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="u1q2">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q2</span>
+      <div style="flex:1">
+        <div class="q-text">Distinguish between Hard Skills and Soft Skills with examples.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 Very Frequent</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">CIE-I Q1b | 2021 Paper</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <table class="diff-table">
+          <tr>
+            <th>Basis</th>
+            <th>Hard Skills</th>
+            <th>Soft Skills</th>
+          </tr>
+          <tr>
+            <td>Definition</td>
+            <td>Technical, job-specific abilities learned through training or education</td>
+            <td>Interpersonal, behavioral traits that govern how one interacts with others</td>
+          </tr>
+          <tr>
+            <td>Nature</td>
+            <td>Tangible and measurable</td>
+            <td>Intangible and difficult to quantify</td>
+          </tr>
+          <tr>
+            <td>Acquisition</td>
+            <td>Formal education, courses, certifications</td>
+            <td>Life experience, self-improvement, observation</td>
+          </tr>
+          <tr>
+            <td>Transferability</td>
+            <td>Often domain-specific (e.g., Python only in tech)</td>
+            <td>Transferable across all industries and roles</td>
+          </tr>
+          <tr>
+            <td>Evaluation</td>
+            <td>Through tests, grades, certifications</td>
+            <td>Through behavior, attitude, and performance reviews</td>
+          </tr>
+          <tr>
+            <td>Examples</td>
+            <td>Programming, Data Analysis, Welding, Accounting</td>
+            <td>Communication, Leadership, Empathy, Time Management</td>
+          </tr>
+          <tr>
+            <td>Role in Hiring</td>
+            <td>Qualifies candidate for the role</td>
+            <td>Determines cultural fit and long-term success</td>
+          </tr>
+          <tr>
+            <td>Stability</td>
+            <td>Can become obsolete with technology changes</td>
+            <td>Remain relevant throughout career</td>
+          </tr>
+        </table>
+
+        <div class="highlight-box"><strong>Conclusion:</strong> Hard skills and soft skills are complementary — hard skills qualify you for a job, while soft skills determine how well you perform, collaborate, and grow. The most successful professionals master both.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="u1q3">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q3</span>
+      <div style="flex:1">
+        <div class="q-text">Explain the types of Listening Skills in detail.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 Every Paper</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">CIE-I Q2a | Assignment Q3</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p>Listening is an active process of receiving, interpreting, and responding to spoken messages. There are several types of listening, each suited to different contexts:</p>
+
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>1. Appreciative Listening:</strong> Listening for pleasure or enjoyment — e.g., listening to music, stories, or poetry. The listener is relaxed and enjoys the content without critical evaluation. It helps develop a positive attitude toward language and communication.</li>
+          <li><span class="li-bullet"></span><strong>2. Empathetic Listening:</strong> Also called therapeutic or supportive listening. The listener tries to understand the speaker's feelings and emotions. It involves showing compassion without judgment. Vital in counseling, personal relationships, and support situations.</li>
+          <li><span class="li-bullet"></span><strong>3. Comprehensive (Active) Listening:</strong> Listening to understand and retain the content of the message. The listener pays full attention, processes information, and mentally organizes it. Used in academic lectures, workplace instructions, and TED talks. Involves note-taking and asking questions.</li>
+          <li><span class="li-bullet"></span><strong>4. Critical (Analytical) Listening:</strong> The most advanced form. The listener not only understands the message but also evaluates, analyzes, and judges it. Involves questioning assumptions, identifying biases, and making informed decisions. Essential in debates, news analysis, and problem-solving.</li>
+          <li><span class="li-bullet"></span><strong>5. Informational Listening:</strong> Focused on gathering facts and details — e.g., listening to instructions, directions, or announcements. The goal is accurate comprehension of specific information.</li>
+        </ul>
+
+        <div class="exam-tip">For 7-mark answers, explain each type with a real-life example (lecture = comprehensive, friend's problem = empathetic, debate = critical).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="u1q4">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q4</span>
+      <div style="flex:1">
+        <div class="q-text">How is listening different from hearing? Explain the process of Active Listening.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 2021 & 2024 Papers</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <div class="sub-heading">Hearing vs. Listening</div>
+        <table class="diff-table">
+          <tr><th>Hearing</th><th>Listening</th></tr>
+          <tr><td>A passive, physiological process</td><td>An active, conscious cognitive process</td></tr>
+          <tr><td>Involuntary — happens automatically</td><td>Voluntary — requires effort and attention</td></tr>
+          <tr><td>Just receiving sound waves</td><td>Processing, interpreting, and responding to sounds</td></tr>
+          <tr><td>No comprehension required</td><td>Requires understanding and meaning-making</td></tr>
+          <tr><td>Example: Hearing noise in traffic</td><td>Example: Listening to a professor's lecture</td></tr>
+        </table>
+
+        <div class="sub-heading">Process of Active Listening</div>
+        <p>Active listening is a deliberate, focused form of listening where the listener fully concentrates, understands, and responds to the speaker. It involves the following steps:</p>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>1. Receiving:</strong> Paying undivided attention to the speaker, eliminating distractions, maintaining eye contact, and adopting an open body posture.</li>
+          <li><span class="li-bullet"></span><strong>2. Understanding:</strong> Interpreting the speaker's words in context. This includes grasping not just the literal meaning but also the tone, emotion, and intent behind the words.</li>
+          <li><span class="li-bullet"></span><strong>3. Evaluating:</strong> Critically assessing the information — identifying facts vs. opinions, weighing arguments, and detecting any bias or assumptions.</li>
+          <li><span class="li-bullet"></span><strong>4. Remembering:</strong> Retaining the key points by mentally summarizing or taking notes. Memory aids like repetition and association help here.</li>
+          <li><span class="li-bullet"></span><strong>5. Responding:</strong> Providing appropriate feedback — verbal (asking questions, paraphrasing) and non-verbal (nodding, facial expressions). This confirms comprehension and encourages the speaker.</li>
+        </ul>
+
+        <div class="highlight-box">Active listening improves relationships, reduces misunderstandings, and is a critical skill in academic, professional, and personal communication.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="u1q5">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q5</span>
+      <div style="flex:1">
+        <div class="q-text">What is Critical Listening? Explain its significance in decision-making and problem solving.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 CIE-I Paper</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">Assignment Q5</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p><strong>Critical Listening</strong> is an advanced form of listening that goes beyond simple comprehension. The listener actively analyzes, evaluates, and judges the message being conveyed — questioning assumptions, identifying logical fallacies, assessing credibility, and drawing conclusions.</p>
+
+        <div class="sub-heading">Characteristics of Critical Listening</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span>Listener distinguishes facts from opinions and emotions from evidence.</li>
+          <li><span class="li-bullet"></span>Identifies speaker's biases, motives, and assumptions.</li>
+          <li><span class="li-bullet"></span>Evaluates the logic and relevance of arguments presented.</li>
+          <li><span class="li-bullet"></span>Withholds judgment until the full message is received.</li>
+          <li><span class="li-bullet"></span>Asks clarifying questions to deepen understanding.</li>
+        </ul>
+
+        <div class="sub-heading">Significance in Decision-Making</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Better Information Quality:</strong> By critically evaluating what is heard, decision-makers avoid acting on incomplete or biased information.</li>
+          <li><span class="li-bullet"></span><strong>Reduced Misunderstanding:</strong> Critical listeners seek clarity before making conclusions, reducing errors in group decisions.</li>
+          <li><span class="li-bullet"></span><strong>Detecting Flawed Reasoning:</strong> In business meetings, critically evaluating proposals helps identify weak strategies before implementation.</li>
+        </ul>
+
+        <div class="sub-heading">Significance in Problem Solving</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Root Cause Analysis:</strong> By listening critically to different perspectives, the true cause of a problem can be identified rather than its symptoms.</li>
+          <li><span class="li-bullet"></span><strong>Evaluating Solutions:</strong> Multiple solutions can be fairly assessed by listening critically to all stakeholders.</li>
+          <li><span class="li-bullet"></span><strong>Avoiding Groupthink:</strong> Critical listeners question majority opinions and introduce independent thought, leading to more creative and effective solutions.</li>
+        </ul>
+
+        <div class="highlight-box">Critical listening is particularly important in medical consultations, legal proceedings, business negotiations, and academic debates where decisions have significant consequences.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" id="u1q6">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q6</span>
+      <div style="flex:1">
+        <div class="q-text">Mention some tips for Effective Listening.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 2023 & 2024 Papers</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p>Effective listening is a skill that can be improved through conscious practice. The following tips help develop this skill:</p>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>1. Give Full Attention:</strong> Eliminate distractions — put away your phone, close unnecessary tabs, and focus completely on the speaker. Physical presence alone is not enough; mental presence matters most.</li>
+          <li><span class="li-bullet"></span><strong>2. Maintain Eye Contact:</strong> Look at the speaker naturally to show engagement and respect. Avoid staring, but do not look away frequently.</li>
+          <li><span class="li-bullet"></span><strong>3. Avoid Interrupting:</strong> Let the speaker complete their thought before responding. Interrupting disrupts the flow and signals disrespect.</li>
+          <li><span class="li-bullet"></span><strong>4. Use Positive Body Language:</strong> Nod occasionally, lean forward slightly, and use open body language to signal active engagement.</li>
+          <li><span class="li-bullet"></span><strong>5. Don't Pre-judge:</strong> Listen with an open mind. Avoid forming opinions about the speaker or topic before they have finished speaking.</li>
+          <li><span class="li-bullet"></span><strong>6. Take Notes:</strong> Jot down key points, especially in academic or professional settings, to retain information and show attentiveness.</li>
+          <li><span class="li-bullet"></span><strong>7. Ask Clarifying Questions:</strong> After the speaker finishes, ask questions if something was unclear. This shows genuine interest and improves comprehension.</li>
+          <li><span class="li-bullet"></span><strong>8. Paraphrase and Summarize:</strong> Restate what you heard in your own words to confirm understanding: "So what you're saying is..."</li>
+          <li><span class="li-bullet"></span><strong>9. Control Emotional Responses:</strong> Do not let personal feelings about the topic cloud your ability to listen objectively.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" id="u1q7">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q7</span>
+      <div style="flex:1">
+        <div class="q-text">Explain the importance of Note-Taking for students. What are the Five R's of Note-Taking?</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 2023 & 2024 Papers</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">Assignment Q6</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <div class="sub-heading">Importance of Note-Taking</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Aids Memory Retention:</strong> Writing information helps encode it into long-term memory. Students retain 60–70% more when they take notes vs. passive listening.</li>
+          <li><span class="li-bullet"></span><strong>Organizes Information:</strong> Notes help arrange complex information in a structured, logical manner for easy review.</li>
+          <li><span class="li-bullet"></span><strong>Improves Concentration:</strong> The act of writing keeps the mind focused on the lecture, reducing daydreaming.</li>
+          <li><span class="li-bullet"></span><strong>Creates a Study Resource:</strong> Well-organized notes become an invaluable reference for exam revision.</li>
+          <li><span class="li-bullet"></span><strong>Develops Critical Thinking:</strong> Students learn to distinguish key points from details and identify what is most important.</li>
+        </ul>
+
+        <div class="sub-heading">The Five R's of Note-Taking (Cornell Method)</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>1. Record:</strong> During the lecture, write down key facts, concepts, and ideas as clearly and concisely as possible in the main notes section.</li>
+          <li><span class="li-bullet"></span><strong>2. Reduce:</strong> After the lecture, summarize the main ideas into key words or short phrases in the left-hand "cue" column. This aids recall.</li>
+          <li><span class="li-bullet"></span><strong>3. Recite:</strong> Cover the notes and use only the cue column to recite the content aloud in your own words. This tests your understanding and builds memory.</li>
+          <li><span class="li-bullet"></span><strong>4. Reflect:</strong> Think critically about the content — how does it connect to what you already know? What are its implications? This deepens comprehension.</li>
+          <li><span class="li-bullet"></span><strong>5. Review:</strong> Regularly revisit your notes over days/weeks rather than cramming. Spaced repetition strengthens long-term retention.</li>
+        </ul>
+
+        <div class="exam-tip">The 5 R's come from the Cornell Note-Taking system — mentioning this name in your answer adds extra credibility.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ UNIT 2 ═══════════ -->
+  <div class="unit-header">
+    <span class="unit-pill pill-u2">Unit 2</span>
+    <h2 class="unit-title">Skills of Speaking</h2>
+  </div>
+
+  <!-- U2Q1 -->
+  <div class="q-card" id="u2q1">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q8</span>
+      <div style="flex:1">
+        <div class="q-text">Write the six important pillars of speaking skills.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 CIE-I Paper</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">Assignment Q7</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p>Speaking skills are speech enhancers used to produce clear, intelligible sentences for effective communication. The six important pillars are:</p>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>1. Fluency:</strong> Fluency is about how comfortable and confident you are while speaking. If you can speak for an extended period of time smoothly, that indicates strong fluency. It means the listener can follow what you are saying without getting lost. Fluency is built through consistent practice and conversation.</li>
+          <li><span class="li-bullet"></span><strong>2. Vocabulary:</strong> If you don't have the words to express your thoughts, you cannot communicate effectively. A good speaker constantly grows their vocabulary. The more interesting and precise words you know, the stronger your speaking skills. The best way to grow vocabulary is to read widely and note new words.</li>
+          <li><span class="li-bullet"></span><strong>3. Grammar:</strong> Grammar matters — fewer grammatical mistakes mean better speaking skill. A good speaker need not have perfect grammar but should have mastered major tenses and sentence structures. Incorrect grammar reduces credibility and causes misunderstanding.</li>
+          <li><span class="li-bullet"></span><strong>4. Pronunciation:</strong> Pronunciation is a complex skill with many sub-skills. The basic rule is that a speaker can be clearly understood. A skilled speaker uses pronunciation sub-skills — word and sentence stress, intonation, rhythm, and individual sounds — to make speech more impactful. Practice by imitating good speakers.</li>
+          <li><span class="li-bullet"></span><strong>5. Voice:</strong> Voice includes pitch, tone, and strength. How you speak signals your emotional state. A low voice with too many pauses denotes hesitation. Clarity and volume convey confidence. A strong and confident tone portrays conviction. Public speaking requires rehearsal to master voice control.</li>
+          <li><span class="li-bullet"></span><strong>6. Non-Verbal Communication:</strong> The final pillar is not about speaking at all — it is body language. This includes facial expression, posture, eye contact, and hand gestures. Your body language must match your words for your address to be effective. It shows the passion behind your words and draws the audience emotionally to your message.</li>
+        </ul>
+        <div class="highlight-box">These six pillars are interdependent. Mastery of all six transforms a speaker from merely informative to genuinely persuasive and memorable.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U2Q2 -->
+  <div class="q-card" id="u2q2">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q9</span>
+      <div style="flex:1">
+        <div class="q-text">What are Teamwork Skills? Write its importance in an organization.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 CIE-I & 2021 Paper</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">Assignment Q8</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p><strong>Teamwork</strong> is the collaborative effort of a group of people working together toward a shared goal. Teamwork skills are the competencies that enable individuals to function effectively as part of a team.</p>
+
+        <div class="sub-heading">Key Teamwork Skills</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Communication:</strong> Clearly expressing ideas and actively listening to teammates.</li>
+          <li><span class="li-bullet"></span><strong>Collaboration:</strong> Working cooperatively, sharing resources and knowledge.</li>
+          <li><span class="li-bullet"></span><strong>Conflict Resolution:</strong> Managing disagreements constructively without disrupting group harmony.</li>
+          <li><span class="li-bullet"></span><strong>Reliability:</strong> Meeting deadlines and fulfilling commitments consistently.</li>
+          <li><span class="li-bullet"></span><strong>Adaptability:</strong> Adjusting to changing roles and group dynamics.</li>
+          <li><span class="li-bullet"></span><strong>Empathy:</strong> Understanding and respecting teammates' perspectives and strengths.</li>
+        </ul>
+
+        <div class="sub-heading">Importance of Teamwork in Organizations</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Increased Productivity:</strong> Tasks are distributed based on individual strengths, allowing faster and better-quality output than solo effort.</li>
+          <li><span class="li-bullet"></span><strong>Innovation:</strong> Diverse minds working together generate more creative solutions than any individual could produce.</li>
+          <li><span class="li-bullet"></span><strong>Improved Morale:</strong> A positive team culture reduces loneliness, builds trust, and increases job satisfaction and employee retention.</li>
+          <li><span class="li-bullet"></span><strong>Risk Sharing:</strong> Mistakes are caught early when multiple perspectives are involved, reducing costly errors.</li>
+          <li><span class="li-bullet"></span><strong>Skill Development:</strong> Team members learn from each other's expertise, fostering continuous professional growth.</li>
+          <li><span class="li-bullet"></span><strong>Goal Achievement:</strong> Complex organizational objectives that are impossible for one person to achieve become attainable through coordinated team effort.</li>
+        </ul>
+
+        <div class="sub-heading">Stages of Team Formation (Tuckman's Model)</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Forming</strong> → <strong>Storming</strong> → <strong>Norming</strong> → <strong>Performing</strong> → <strong>Adjourning</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- U2Q3 -->
+  <div class="q-card" id="u2q3">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q10</span>
+      <div style="flex:1">
+        <div class="q-text">Classify and elaborate the different types and techniques of GDs, mentioning the various skills assessed.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 All Papers</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">CIE-II Q3a | Assignment Q9</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p><strong>Group Discussion (GD)</strong> is a structured form of communication where a group of 8–12 people discuss a given topic within a time limit. It assesses both knowledge and interpersonal skills.</p>
+
+        <div class="sub-heading">Types of GD Topics</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Factual Topics:</strong> Based on real-world facts and current events. E.g., "Climate Change and its Global Impact."</li>
+          <li><span class="li-bullet"></span><strong>Controversial / Argumentative Topics:</strong> Topics with two opposing sides requiring debate. E.g., "Social Media does more harm than good."</li>
+          <li><span class="li-bullet"></span><strong>Abstract Topics:</strong> Conceptual and open-ended topics that test creativity. E.g., "A Blank Page."</li>
+          <li><span class="li-bullet"></span><strong>Case-Based Topics:</strong> A real-world scenario is presented; participants must analyze and solve it as a team.</li>
+        </ul>
+
+        <div class="sub-heading">Techniques for Success in GD</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Initiation:</strong> Starting the GD with a relevant point, quote, or fact to establish confidence.</li>
+          <li><span class="li-bullet"></span><strong>Summarization:</strong> Effectively summarizing the key points at the end of the discussion.</li>
+          <li><span class="li-bullet"></span><strong>Turn-Taking:</strong> Respectfully waiting for others to finish before adding your point.</li>
+          <li><span class="li-bullet"></span><strong>Building on Ideas:</strong> Adding value to other participants' points rather than simply agreeing or dismissing.</li>
+          <li><span class="li-bullet"></span><strong>Using Data/Examples:</strong> Supporting your argument with statistics, case studies, or current examples.</li>
+        </ul>
+
+        <div class="sub-heading">Skills Assessed in GD</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span>Communication and articulation ability</li>
+          <li><span class="li-bullet"></span>Subject knowledge and general awareness</li>
+          <li><span class="li-bullet"></span>Leadership and initiative</li>
+          <li><span class="li-bullet"></span>Listening skills and team cooperation</li>
+          <li><span class="li-bullet"></span>Analytical and critical thinking</li>
+          <li><span class="li-bullet"></span>Confidence, body language, and attitude</li>
+        </ul>
+
+        <div class="sub-heading">Organizational GD Techniques (Decision-Making)</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Brainstorming:</strong> A method of generating ideas as uncritically as possible — no criticism is allowed and all alternatives are recorded for later analysis. Two types: (a) <em>Story Boarding</em> — participants identify major issues and brainstorm each; (b) <em>Lotus Blossom</em> — a core thought is presented and participants provide 8 surrounding ideas like petals of a lotus.</li>
+          <li><span class="li-bullet"></span><strong>Nominal Group Technique (NGT):</strong> Restricts discussion during decision-making. Members silently write down ideas first, then present them one by one without group discussion until all ideas are recorded. Prevents domination by a few individuals.</li>
+          <li><span class="li-bullet"></span><strong>Delphi Technique:</strong> Similar to NGT but does not require the physical presence of group members. More complex and time-consuming; uses questionnaires circulated among experts in multiple rounds until consensus is reached.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- U2Q4 -->
+  <div class="q-card" id="u2q4">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q11</span>
+      <div style="flex:1">
+        <div class="q-text">Explain the Do's and Don'ts of a Group Discussion.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 CIE-I Paper</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">Assignment Q10</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <table class="diff-table">
+          <tr>
+            <th>Do's in a GD ✅</th>
+            <th>Don'ts in a GD ❌</th>
+          </tr>
+          <tr>
+            <td>Speak clearly, confidently, and at a moderate pace</td>
+            <td>Don't shout, mumble, or speak too fast</td>
+          </tr>
+          <tr>
+            <td>Listen actively when others speak</td>
+            <td>Don't interrupt while others are speaking</td>
+          </tr>
+          <tr>
+            <td>Use facts, examples, and data to support your points</td>
+            <td>Don't make empty statements without evidence</td>
+          </tr>
+          <tr>
+            <td>Make eye contact with all group members</td>
+            <td>Don't focus only on the evaluator</td>
+          </tr>
+          <tr>
+            <td>Respect differing opinions politely</td>
+            <td>Don't be aggressive or disrespectful to others</td>
+          </tr>
+          <tr>
+            <td>Take initiative to start if you are well-prepared</td>
+            <td>Don't remain silent throughout the discussion</td>
+          </tr>
+          <tr>
+            <td>Maintain positive body language (sit upright, nod)</td>
+            <td>Don't fidget, slouch, or show nervousness</td>
+          </tr>
+          <tr>
+            <td>Summarize the discussion if given the opportunity</td>
+            <td>Don't go off-topic or bring up irrelevant points</td>
+          </tr>
+          <tr>
+            <td>Build constructively on others' points</td>
+            <td>Don't repeat the same point multiple times</td>
+          </tr>
+          <tr>
+            <td>Dress formally and maintain professional demeanor</td>
+            <td>Don't use slang, informal language, or humor inappropriately</td>
+          </tr>
+        </table>
+
+        <div class="highlight-box">The key principle of a GD is that it is a discussion, not a debate. The goal is collaborative exploration of a topic, not "winning" an argument.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U2Q5 -->
+  <div class="q-card" id="u2q5">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q12</span>
+      <div style="flex:1">
+        <div class="q-text">Define an Interview and write its objectives. Prepare a checklist for interview preparation.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 CIE-I & 2024 Paper</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">Assignment Q12</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p><strong>Definition:</strong> An interview is a formal, structured conversation between an interviewer (employer/evaluator) and an interviewee (candidate), conducted to assess the candidate's suitability for a job, academic program, or other opportunity.</p>
+
+        <div class="sub-heading">Objectives of an Interview</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span>To assess the candidate's technical knowledge and professional competence.</li>
+          <li><span class="li-bullet"></span>To evaluate soft skills — communication, confidence, and interpersonal ability.</li>
+          <li><span class="li-bullet"></span>To understand the candidate's personality, values, and career goals.</li>
+          <li><span class="li-bullet"></span>To verify the information provided in the resume/application.</li>
+          <li><span class="li-bullet"></span>To determine cultural fit with the organization.</li>
+          <li><span class="li-bullet"></span>To give the candidate information about the role and organization.</li>
+        </ul>
+
+        <div class="sub-heading">Interview Preparation Checklist</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span>✅ Research the company — mission, products, recent news, work culture</li>
+          <li><span class="li-bullet"></span>✅ Thoroughly review your resume and be prepared to discuss every point</li>
+          <li><span class="li-bullet"></span>✅ Prepare answers to common questions (Tell me about yourself, strengths/weaknesses)</li>
+          <li><span class="li-bullet"></span>✅ Practice out loud — solo or with a partner — to improve fluency and confidence</li>
+          <li><span class="li-bullet"></span>✅ Dress appropriately (formal attire, neat appearance)</li>
+          <li><span class="li-bullet"></span>✅ Carry all documents: certificates, ID, extra copies of resume</li>
+          <li><span class="li-bullet"></span>✅ Arrive 10–15 minutes early</li>
+          <li><span class="li-bullet"></span>✅ Prepare 2–3 questions to ask the interviewer at the end</li>
+          <li><span class="li-bullet"></span>✅ Maintain confident body language: firm handshake, eye contact, upright posture</li>
+        </ul>
+
+        <div class="sub-heading">Types of Interviews</div>
+        <p>One-on-one, Panel, Telephonic, Video, Stress, Behavioral, and Group Interviews.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- U2Q6 -->
+  <div class="q-card" id="u2q6">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q13</span>
+      <div style="flex:1">
+        <div class="q-text">What are the different types of Leadership? What are the characteristics of an effective leader?</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 All Papers</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">CIE-II Q3b</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p>Leadership is the ability to guide, inspire, and influence a group of people toward achieving a common goal. Different situations call for different leadership approaches.</p>
+
+        <div class="sub-heading">Types/Styles of Leadership</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>1. Authoritarian/Autocratic:</strong> The leader imposes expectations and defines outcomes independently. Effective in time-constrained situations or when the leader is most knowledgeable. Advantage: reduces decision time, creates consistent results. Disadvantage: kills creativity, can lead to employee rebellion.</li>
+          <li><span class="li-bullet"></span><strong>2. Participative/Democratic:</strong> Rooted in democratic theory — team members are involved in decision-making, increasing motivation and creativity. The leader typically has the final word. Advantage: high productivity, encourages creativity. Disadvantage: time-consuming, security issues due to information sharing.</li>
+          <li><span class="li-bullet"></span><strong>3. Delegative/Laissez-Faire:</strong> The leader delegates initiative entirely to team members. Effective when team members are competent and self-motivated. Advantage: values innovation, creates positive work environment. Disadvantage: command responsibility not clearly defined, difficult to adapt to change.</li>
+          <li><span class="li-bullet"></span><strong>4. Transactional:</strong> Based on "transactions" — rewards and punishments. The leader sets clear goals; team members know how they'll be rewarded for compliance. Focused on following established routines efficiently. Advantage: clear goals, easy system to follow. Disadvantage: minimizes innovation and empathy.</li>
+          <li><span class="li-bullet"></span><strong>5. Transformational:</strong> The leader inspires followers with a compelling vision and empowers them to achieve it, serving as a role model. Advantage: high employee morale, motivation-driven, values relationships. Disadvantage: may lead to deviation from protocols; requires constant feedback.</li>
+        </ul>
+
+        <div class="sub-heading">Characteristics of an Effective Leader</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Vision:</strong> Ability to see the big picture and communicate a compelling direction.</li>
+          <li><span class="li-bullet"></span><strong>Integrity:</strong> Consistent honesty and ethical behavior that earns trust.</li>
+          <li><span class="li-bullet"></span><strong>Communication:</strong> Clearly articulates goals, listens actively, and gives constructive feedback.</li>
+          <li><span class="li-bullet"></span><strong>Empathy:</strong> Understands team members' concerns and creates a psychologically safe environment.</li>
+          <li><span class="li-bullet"></span><strong>Decision-Making:</strong> Makes timely, well-informed decisions under pressure.</li>
+          <li><span class="li-bullet"></span><strong>Adaptability:</strong> Adjusts strategy based on changing circumstances.</li>
+          <li><span class="li-bullet"></span><strong>Accountability:</strong> Takes responsibility for team outcomes — successes and failures.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- U2Q7 -->
+  <div class="q-card" id="u2q7">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q14</span>
+      <div style="flex:1">
+        <div class="q-text">Elaborate on the importance of the four P's in making effective presentations.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 2023 & 2024 Papers</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p>Effective presentations are built on four core pillars known as the <strong>Four P's</strong>: Planning, Preparation, Practice, and Performance.</p>
+
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>1. Planning:</strong> The foundation of any great presentation. Planning involves:
+            <br>• Defining the objective — what should the audience learn or do after?
+            <br>• Analyzing the audience — their background, expectations, and knowledge level.
+            <br>• Selecting content — relevant data, examples, stories, and visuals.
+            <br>• Structuring the presentation — Introduction → Body → Conclusion.
+            <br>Poor planning leads to unfocused, ineffective presentations.</li>
+          <li><span class="li-bullet"></span><strong>2. Preparation:</strong> Once the plan is clear, preparation involves creating the actual content:
+            <br>• Designing slides (clean, visual, not text-heavy)
+            <br>• Preparing speaker notes and key talking points
+            <br>• Gathering supporting data, charts, and examples
+            <br>• Setting up equipment (projector, microphone, laptop) in advance
+            <br>Good preparation prevents last-minute chaos and builds confidence.</li>
+          <li><span class="li-bullet"></span><strong>3. Practice:</strong> Rehearsing the presentation multiple times is critical:
+            <br>• Practice aloud — not just in your head
+            <br>• Time yourself to fit within the allotted duration
+            <br>• Practice with the actual slides to ensure smooth transitions
+            <br>• Rehearse in front of a mirror or small audience for feedback
+            <br>Practice transforms preparation into natural, confident delivery.</li>
+          <li><span class="li-bullet"></span><strong>4. Performance:</strong> The actual delivery of the presentation:
+            <br>• Confident posture, appropriate gestures, and natural eye contact
+            <br>• Clear voice modulation — vary pace, pitch, and volume
+            <br>• Engage the audience with questions or pauses for reflection
+            <br>• Handle Q&A sessions calmly and professionally
+            <br>Performance is where all planning, preparation, and practice come alive.</li>
+        </ul>
+
+        <div class="highlight-box">The Four P's work as a chain — weakness in any one link weakens the entire presentation. A presenter who plans well but doesn't practice will stumble; one who practices but doesn't plan will lack direction.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ UNIT 5 ═══════════ -->
+  <div class="unit-header">
+    <span class="unit-pill pill-u5">Unit 5</span>
+    <h2 class="unit-title">Specific Soft Skills ⭐ Recommended</h2>
+  </div>
+
+  <!-- U5Q1 -->
+  <div class="q-card" id="u5q1">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q15</span>
+      <div style="flex:1">
+        <div class="q-text">What is Emotional Intelligence (EI/EQ)? Distinguish the relationship between EQ and mental health.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 All Papers</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">CIE-II Q4a | 2021 Q16a | Assignment Q8</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p><strong>Emotional Intelligence (EI/EQ)</strong> refers to the ability to perceive, control, and evaluate emotions. Daniel Goleman popularized the concept in his 1995 book "Emotional Intelligence: Why It Can Matter More Than IQ." Some researchers suggest EI can be learned and strengthened, while others claim it is an inborn characteristic.</p>
+
+        <div class="sub-heading">Four Levels/Components of EI (Salovey & Mayer Model)</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>1. Perceiving Emotions:</strong> The first step — accurately perceiving emotions in oneself and others, including nonverbal signals like body language and facial expressions.</li>
+          <li><span class="li-bullet"></span><strong>2. Reasoning with Emotions:</strong> Using emotions to promote thinking. Emotions help prioritize what we pay attention to and react to.</li>
+          <li><span class="li-bullet"></span><strong>3. Understanding Emotions:</strong> Interpreting the cause and meaning of emotions. E.g., understanding why a boss is acting angry — is it dissatisfaction with your work or a personal issue?</li>
+          <li><span class="li-bullet"></span><strong>4. Managing Emotions:</strong> The highest level — regulating one's own emotions and responding appropriately to others' emotions in different situations.</li>
+        </ul>
+
+        <div class="sub-heading">Goleman's Five Key Elements of EI</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>1. Self-Awareness:</strong> The ability to recognize one's own emotions, strengths, weaknesses, and their impact on others. A self-aware person does not let emotions control their decisions.</li>
+          <li><span class="li-bullet"></span><strong>2. Self-Regulation:</strong> The ability to control impulsive feelings and behaviors. This includes managing stress, thinking before acting, and maintaining composure under pressure.</li>
+          <li><span class="li-bullet"></span><strong>3. Motivation:</strong> Intrinsic drive to pursue goals with energy and persistence. Emotionally intelligent people are motivated not just by external rewards but by internal satisfaction and purpose.</li>
+          <li><span class="li-bullet"></span><strong>4. Empathy:</strong> Understanding and sharing the feelings of others. This enables better relationship management, conflict resolution, and leadership.</li>
+          <li><span class="li-bullet"></span><strong>5. Social Skills:</strong> The ability to manage relationships, communicate clearly, inspire others, and work effectively in teams.</li>
+        </ul>
+
+        <div class="sub-heading">Relationship between EQ and Mental Health</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>High EQ → Better Mental Health:</strong> People with high EQ are better at coping with stress, anxiety, and adversity. They process difficult emotions constructively rather than suppressing them.</li>
+          <li><span class="li-bullet"></span><strong>Self-Regulation reduces mental illness risk:</strong> Emotional regulation prevents emotional outbursts, rumination, and chronic stress — major risk factors for depression and anxiety disorders.</li>
+          <li><span class="li-bullet"></span><strong>Empathy builds support networks:</strong> Empathetic individuals form stronger social connections, which are proven protective factors against mental health decline.</li>
+          <li><span class="li-bullet"></span><strong>Low EQ is linked to poor mental health:</strong> Individuals who cannot manage emotions often experience chronic stress, social isolation, impulsive behavior, and emotional instability.</li>
+          <li><span class="li-bullet"></span><strong>EQ as a coping skill:</strong> EQ helps individuals interpret setbacks as learning experiences rather than catastrophes, promoting psychological resilience.</li>
+        </ul>
+
+        <div class="highlight-box">EQ is considered even more important than IQ in predicting professional success and personal well-being. According to research, 90% of top performers in any field have high emotional intelligence.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U5Q2 -->
+  <div class="q-card" id="u5q2">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q16</span>
+      <div style="flex:1">
+        <div class="q-text">What are short-term and long-term goals? Relate the importance of motivation in Goal Setting.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 CIE-II & 2024 Paper</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">Assignment Q9</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p><strong>Goal Setting</strong> is the process of identifying specific, measurable objectives and creating a plan to achieve them. Goals provide direction, focus, and a benchmark for measuring progress.</p>
+
+        <div class="sub-heading">Short-Term Goals</div>
+        <p>Short-term goals are objectives intended to be achieved within a brief period — days, weeks, or months (typically within 1 year). They are concrete, specific, and actionable steps toward a larger vision.</p>
+        <p><strong>Examples:</strong> Completing a chapter before exams, finishing a project by Friday, exercising 3 times a week, learning a new programming language in 30 days.</p>
+        <p><strong>Benefits:</strong> Provide immediate motivation, build momentum, create a sense of achievement, and maintain focus.</p>
+
+        <div class="sub-heading">Long-Term Goals</div>
+        <p>Long-term goals are broader, larger aspirations that take years to achieve (typically 3–10 years). They define the overall direction and purpose of one's efforts.</p>
+        <p><strong>Examples:</strong> Becoming a software engineer, completing a PhD, starting a business, buying a house.</p>
+        <p><strong>Benefits:</strong> Provide life direction, align daily decisions with values, build resilience through a larger perspective on setbacks.</p>
+
+        <div class="sub-heading">Relationship Between Motivation and Goal Setting</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Goals create motivation:</strong> A clear goal gives a person a reason to act. Without a goal, there is no direction and therefore no sustained motivation.</li>
+          <li><span class="li-bullet"></span><strong>Progress fuels motivation:</strong> As short-term milestones are achieved on the way to a long-term goal, the sense of progress itself becomes motivating.</li>
+          <li><span class="li-bullet"></span><strong>SMART Goals enhance motivation:</strong> Goals that are Specific, Measurable, Achievable, Relevant, and Time-bound are far more motivating than vague aspirations.</li>
+          <li><span class="li-bullet"></span><strong>Intrinsic motivation + aligned goals:</strong> When goals align with personal values and passions, motivation becomes self-sustaining rather than dependent on external rewards.</li>
+          <li><span class="li-bullet"></span><strong>Setback resilience:</strong> Clear goals help individuals view obstacles as temporary, maintaining motivation even after failures.</li>
+        </ul>
+
+        <div class="exam-tip">Mention SMART goals framework (Specific, Measurable, Achievable, Relevant, Time-bound) — it always impresses examiners.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U5Q3 -->
+  <div class="q-card" id="u5q3">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q17</span>
+      <div style="flex:1">
+        <div class="q-text">What is intrinsic and extrinsic motivation? Differentiate between them and explain the importance of motivation.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 2023 & 2024 Papers</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p><strong>Motivation</strong> is the internal or external driving force that initiates, guides, and maintains behavior toward achieving a goal. It answers the question: "Why do we do what we do?"</p>
+
+        <table class="diff-table">
+          <tr>
+            <th>Basis</th>
+            <th>Intrinsic Motivation</th>
+            <th>Extrinsic Motivation</th>
+          </tr>
+          <tr>
+            <td>Source</td>
+            <td>Comes from within the individual</td>
+            <td>Comes from external rewards or pressures</td>
+          </tr>
+          <tr>
+            <td>Drive</td>
+            <td>Personal satisfaction, curiosity, passion</td>
+            <td>Grades, salary, praise, awards, fear of punishment</td>
+          </tr>
+          <tr>
+            <td>Durability</td>
+            <td>Long-lasting and self-sustaining</td>
+            <td>Temporary; fades when rewards are removed</td>
+          </tr>
+          <tr>
+            <td>Quality of Output</td>
+            <td>Higher creativity and deep engagement</td>
+            <td>Focus on completing task; may lack creativity</td>
+          </tr>
+          <tr>
+            <td>Example</td>
+            <td>Learning to code because you love it</td>
+            <td>Learning to code to get a job offer</td>
+          </tr>
+          <tr>
+            <td>Ideal Use</td>
+            <td>Creative, long-term, passion-driven work</td>
+            <td>Routine tasks requiring external accountability</td>
+          </tr>
+        </table>
+
+        <div class="sub-heading">Importance of Motivation</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Goal Achievement:</strong> Motivated individuals set ambitious goals and persist through challenges to achieve them.</li>
+          <li><span class="li-bullet"></span><strong>Higher Productivity:</strong> Motivated students and employees perform at a consistently higher level.</li>
+          <li><span class="li-bullet"></span><strong>Resilience:</strong> Motivation helps people bounce back from failure by providing a reason to continue.</li>
+          <li><span class="li-bullet"></span><strong>Positive Attitude:</strong> Motivated individuals approach problems as opportunities, maintaining an optimistic mindset.</li>
+          <li><span class="li-bullet"></span><strong>Personal Growth:</strong> Motivation drives continuous learning, skill development, and self-improvement.</li>
+        </ul>
+
+        <div class="sub-heading">Theories of Motivation</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>1. Maslow's Hierarchy of Needs:</strong> Abraham Maslow (1954) arranged human needs as a pyramid from basic to complex: (1) Physiological → (2) Safety/Security → (3) Social/Love/Belonging → (4) Self-Esteem/Recognition → (5) Self-Actualization. Lower needs must be satisfied before moving up. People are motivated by their unsatisfied needs.</li>
+          <li><span class="li-bullet"></span><strong>2. Herzberg's Two-Factor Theory:</strong> Certain factors cause job satisfaction (motivators: achievement, recognition, responsibility, growth) while others (hygiene factors: salary, company policy, working conditions) if absent lead to dissatisfaction — but their presence alone doesn't create satisfaction.</li>
+          <li><span class="li-bullet"></span><strong>3. Alderfer's ERG Theory:</strong> Builds on Maslow — groups needs into three: Existence (basic material needs), Relatedness (social relationships), and Growth (personal development). All three should be fulfilled for wholeness.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- U5Q4 -->
+  <div class="q-card" id="u5q4">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q18</span>
+      <div style="flex:1">
+        <div class="q-text">Discuss a few techniques of Stress Management. How does effective stress management lead to a balanced life?</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 All Papers</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p><strong>Stress</strong> is the body's physical and psychological response to overwhelming demands, pressure, or perceived threats. While short-term stress can be motivating, chronic stress is harmful to health, relationships, and performance.</p>
+
+        <div class="sub-heading">Techniques of Stress Management</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>1. Physical Exercise:</strong> Regular physical activity (walking, yoga, gym) releases endorphins — the body's natural mood elevators. Exercise reduces cortisol (stress hormone) levels significantly.</li>
+          <li><span class="li-bullet"></span><strong>2. Deep Breathing and Meditation:</strong> Techniques like diaphragmatic breathing, progressive muscle relaxation, and mindfulness meditation calm the nervous system and reduce anxiety.</li>
+          <li><span class="li-bullet"></span><strong>3. Time Management:</strong> Breaking large tasks into smaller segments, prioritizing using tools like the Eisenhower Matrix, and avoiding procrastination reduces the overwhelm that causes stress.</li>
+          <li><span class="li-bullet"></span><strong>4. Social Support:</strong> Talking to friends, family, or a counselor provides emotional release and perspective. Social connection is a natural stress buffer.</li>
+          <li><span class="li-bullet"></span><strong>5. Positive Thinking and Cognitive Reframing:</strong> Changing how you interpret a stressful situation (seeing it as a challenge rather than a threat) reduces its psychological impact.</li>
+          <li><span class="li-bullet"></span><strong>6. Healthy Lifestyle:</strong> Adequate sleep (7–8 hours), balanced nutrition, limiting caffeine/alcohol, and regular routines stabilize mood and reduce vulnerability to stress.</li>
+          <li><span class="li-bullet"></span><strong>7. Hobbies and Leisure:</strong> Engaging in creative or enjoyable activities provides mental recovery and restores energy.</li>
+          <li><span class="li-bullet"></span><strong>8. Setting Boundaries:</strong> Learning to say "no" and managing commitments prevents overload.</li>
+        </ul>
+
+        <div class="sub-heading">Path to a Balanced Life</div>
+        <p>Effective stress management creates a positive cycle: reduced stress → better sleep → clearer thinking → improved performance → higher confidence → less stress. A person who manages stress well maintains physical health, emotional stability, productive relationships, and career success simultaneously — the definition of a balanced life.</p>
+
+        <div class="highlight-box">"Unproductive use of time leads to unmanageable stress." — Managing time = managing stress = achieving balance.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U5Q5 -->
+  <div class="q-card" id="u5q5">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q19</span>
+      <div style="flex:1">
+        <div class="q-text">"Unproductive use of time leads to unmanageable stress." Justify. Explain Time Management.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 2021 Paper Q15a</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p><strong>Time Management</strong> is the process of planning, organizing, and controlling how much time is spent on specific activities to maximize productivity and effectiveness.</p>
+
+        <div class="sub-heading">Justification: Unproductive Time → Stress</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Task Accumulation:</strong> When time is wasted on unimportant activities, essential tasks pile up. The resulting backlog creates panic, anxiety, and a feeling of being overwhelmed.</li>
+          <li><span class="li-bullet"></span><strong>Missed Deadlines:</strong> Poor time use leads to late submissions and incomplete work, which triggers worry about consequences — a direct stress response.</li>
+          <li><span class="li-bullet"></span><strong>Loss of Control:</strong> Feeling that there is "not enough time" creates helplessness — a major psychological stressor.</li>
+          <li><span class="li-bullet"></span><strong>Procrastination Cycle:</strong> Wasting time leads to procrastination → guilt and anxiety → more avoidance → greater stress in a destructive loop.</li>
+        </ul>
+
+        <div class="sub-heading">Time Management Techniques (from your notes)</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>1. ABC Analysis:</strong> Categorize tasks into three groups: A = Urgent and Important (do immediately), B = Important but not urgent (schedule personally), C = Unimportant (drop or delegate). Each group is then rank-ordered by priority.</li>
+          <li><span class="li-bullet"></span><strong>2. Pareto Analysis (80-20 Rule):</strong> 80% of tasks can be completed in 20% of available time, while the remaining 20% of tasks take 80% of the time. Similarly, 80% of results come from 20% of activities. Focus energy on the high-impact 20%.</li>
+          <li><span class="li-bullet"></span><strong>3. Eisenhower Method (Decision Matrix):</strong> Based on Eisenhower's quote: "The urgent are not important, and the important are never urgent." Tasks are placed in four quadrants:
+            <br>• Important + Urgent → Do immediately (crises, deadlines)
+            <br>• Important + Not Urgent → Schedule personally (planning, relationships)
+            <br>• Not Important + Urgent → Delegate (meetings, interruptions)
+            <br>• Not Important + Not Urgent → Drop (time wasters, trivia)</li>
+          <li><span class="li-bullet"></span><strong>4. POSEC Method:</strong> Prioritize → Organize → Streamline → Economize → Contribute. Mirrors Maslow's hierarchy — attend to personal responsibilities first to better shoulder collective ones.</li>
+          <li><span class="li-bullet"></span><strong>5. SMART Goals:</strong> Goals should be Specific, Measurable, Achievable, Relevant, and Time-bound. Clear goals eliminate vagueness and focus effort productively.</li>
+          <li><span class="li-bullet"></span><strong>6. Task Lists / To-Do Lists:</strong> Written inventory of tasks to be completed. Crossing off items builds momentum. Prevents forgetting and provides a sense of achievement.</li>
+        </ul>
+
+        <div class="highlight-box"><strong>Conclusion:</strong> Productive use of time creates a sense of accomplishment, control, and confidence — the opposite of stress. Time management is not about working more; it's about working smarter.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U5Q6 -->
+  <div class="q-card" id="u5q6">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q20</span>
+      <div style="flex:1">
+        <div class="q-text">Differentiate between Creative Thinking and Critical Thinking. How does critical thinking help in solving problems?</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 2021 Paper Q15b | Assignment</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <table class="diff-table">
+          <tr>
+            <th>Critical Thinking</th>
+            <th>Creative Thinking</th>
+          </tr>
+          <tr><td>Analytic</td><td>Generative</td></tr>
+          <tr><td>Convergent (narrows down)</td><td>Divergent (expands possibilities)</td></tr>
+          <tr><td>Vertical (logical, structured)</td><td>Lateral (out-of-the-box)</td></tr>
+          <tr><td>Focused on probability</td><td>Focused on possibility</td></tr>
+          <tr><td>Makes judgments</td><td>Suspends judgment</td></tr>
+          <tr><td>Objective</td><td>Subjective</td></tr>
+          <tr><td>Seeks THE answer</td><td>Seeks AN answer (multiple options)</td></tr>
+          <tr><td>Left-brain dominant</td><td>Right-brain dominant</td></tr>
+          <tr><td>Verbal, linear, reasoning</td><td>Visual, associative, richness & novelty</td></tr>
+          <tr><td>"Yes, but..." approach</td><td>"Yes, and..." approach</td></tr>
+        </table>
+
+        <div class="sub-heading">How Critical Thinking Helps in Problem Solving</div>
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>Problem Identification:</strong> Critical thinkers separate symptoms from root causes, ensuring the real problem is addressed.</li>
+          <li><span class="li-bullet"></span><strong>Evidence-Based Solutions:</strong> Solutions are chosen based on facts and logic, not assumptions or emotions, leading to more reliable outcomes.</li>
+          <li><span class="li-bullet"></span><strong>Bias Detection:</strong> Critical thinking helps recognize personal biases that may cloud judgment and lead to poor decisions.</li>
+          <li><span class="li-bullet"></span><strong>Evaluating Alternatives:</strong> All possible solutions are systematically examined for pros and cons before choosing the best option.</li>
+          <li><span class="li-bullet"></span><strong>Anticipating Consequences:</strong> Critical thinkers consider short and long-term implications of each solution, preventing unintended consequences.</li>
+        </ul>
+
+        <div class="highlight-box"><strong>Together, creative and critical thinking form the ideal problem-solving pair:</strong> Creative thinking generates the options; critical thinking selects the best one.</div>
+      </div>
+    </div>
+  </div>
+  <!-- U5Q7 - VARK -->
+  <div class="q-card" id="u5q7">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q21</span>
+      <div style="flex:1">
+        <div class="q-text">Elaborate VARK Learning Styles.</div>
+        <div class="q-tags">
+          <span class="tag tag-hot">🔥 2023 Paper Q6a</span>
+          <span class="tag tag-marks">6–7 Marks</span>
+          <span class="tag tag-internal">Unit 5 Notes</span>
+        </div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-intro">Answer</div>
+      <div class="ans-text">
+        <p>The acronym <strong>VARK</strong> describes four modalities of student learning, identified in a 1992 study by <strong>Neil D. Fleming and Coleen E. Mills</strong> after thousands of hours of classroom observation. VARK stands for Visual, Auditory, Reading/Writing, and Kinesthetic.</p>
+
+        <ul class="points-list">
+          <li><span class="li-bullet"></span><strong>V – Visual Learners:</strong> Students who best internalize information when it is presented graphically — through arrows, charts, diagrams, and other visualizations. They are holistic learners who process information best when presented as a complete whole rather than piecemeal. They prefer summarizing charts and diagrams over sequential slides. <em>Strategy: Mind maps, flowcharts, concept diagrams.</em></li>
+          <li><span class="li-bullet"></span><strong>A – Auditory (Aural) Learners:</strong> Most successful when information is presented vocally. These students may opt not to take notes to maintain unbroken auditory attention — this does not mean they are disengaged. They benefit from group discussions, reading work aloud, and verbal explanations. <em>Strategy: Lectures, debates, recordings, reading aloud.</em></li>
+          <li><span class="li-bullet"></span><strong>R – Reading/Writing Learners:</strong> Demonstrate a strong preference for the written word. They learn best from handouts, PowerPoint presentations, textbooks, and written assignments. They benefit from taking copious notes during lectures and conducting research through text-heavy sources. <em>Strategy: Note-taking, essays, reports, reading.</em></li>
+          <li><span class="li-bullet"></span><strong>K – Kinesthetic Learners:</strong> Hands-on, participatory learners who need to take a physically active role in learning. They engage all senses in the learning process. They often struggle in conventional classroom settings but thrive in lab components, fieldwork, and skills-based training. Flashcards and interactive exercises work well. <em>Strategy: Experiments, role play, simulations, field trips.</em></li>
+        </ul>
+
+        <div class="sub-heading">Multimodal Learners</div>
+        <p>Studies estimate that 50–70% of the population have affinities to several different styles of learning. These people are called <strong>multimodal learners</strong> and succeed in settings that engage multiple learning styles. While multimodal learning is effective, multimedia should be used thoughtfully as a means to a specific goal rather than an end in itself.</p>
+
+        <div class="exam-tip">Remember the acronym VARK = Visual, Auditory, Reading/Writing, Kinesthetic. Mention Neil Fleming (1992) for extra marks.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end container -->
+
+<div class="footer">
+  <strong>SSIS Exam Guide</strong> · VI Semester · All questions sourced from previous OU papers (2021, 2023, 2024), NSAKCET CIE-I & II internals, and assignment questions.<br>
+  <span style="color:var(--muted);font-size:12px;margin-top:8px;display:block;">Best of luck tomorrow, Farhana! You've got this 🌟</span>
+</div>
+
+<script>
+function toggle(header) {
+  const card = header.parentElement;
+  card.classList.toggle('open');
+}
+// Open first card of each unit by default
+document.addEventListener('DOMContentLoaded', () => {
+  ['u1q1','u2q1','u5q1'].forEach(id => {
+    const card = document.getElementById(id);
+    if(card) card.classList.add('open');
+  });
+});
+</script>
+
+</body>
+</html>
